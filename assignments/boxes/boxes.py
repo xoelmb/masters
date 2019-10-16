@@ -49,13 +49,14 @@ try:
 
 except:
     print("You need to provide two numbers to build the grid.")
+    exit(1)
 
 if box_size < 2:  # Checks if box dimensions are big enough
-    print("Box dimensions are too small.")
-    exit()
+    print("Box size is too small. It must be at least 2.")
+    exit(1)
 
 if grid_size < 1:  # Checks if grid dimensions are valid
-    print("Grid size must be 1 at least.")
-    exit()
+    print("Grid size must be at least 1.")
+    exit(1)
 
 build_boxes(box_size, grid_size)  # Uses the previously defined function to print the boxes
