@@ -15,18 +15,18 @@ def get_par(args):
 
 def check_par(parameters):
     tag_input, tag_output, tag_operation, tag_left, tag_right, tag_adaptor = False, False, False, False, False, False
-    pos_operations = ["rc", "trim", "adaptor_removal"]
     for k, v in parameters.items():
         if k == "input":
             try:
                 f = open(v,"rt")
                 f.close()
+                tag_input=True
             except:
                 print("Input file was not found.")
         elif k == "output":
             tag_output = True
         elif k == "operation":
-            if v in pos_operations:
+            if v in ["rc", "trim", "adaptor_removal"]:
                 tag_operation = True
             else:
                 print("Invalid operation:", v + ".\n\trc, trim or adaptor_removal is expected.")
@@ -60,7 +60,8 @@ def check_par(parameters):
             return True
         else:
             return True
-    return False
+    else:
+        return False
 
 
 def get_format(input_file):
