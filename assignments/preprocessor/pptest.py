@@ -103,8 +103,28 @@ def revcomp(input_file, output_file, file_format):
 
 
 def trim(input_file, output_file, file_format, left, right):
-    print("haha")
-    return "okay"
+    new_file = open(output_file, "wt")
+    with open(input_file, "r") as fp:
+        while True:
+            tag = fp.readline().rstrip()
+            if not tag:
+                break
+            sequence = fp.readline().rstrip()
+            try:
+                trimseq = sequence[left:-right:]
+                new_file.write(tag + "\n" + trimseq + "\n")
+                if file_format == "FASTQ":
+                    fp.readline()
+                    qual = fp.readline().rstrip()
+                    trimqual = qual[left:-right:]
+                    new_file.write("+\n" + trimqual + "\n")
+            except:
+                print(tag, "could not be processed.")
+                if file_format == "FASTQ":
+                    fp.readline()
+                    fp.readline()
+    summary="All okay?"
+    return summary
 
 
 def adaptor_removal(file, tag):
@@ -129,4 +149,19 @@ if file_format == False:
 
 if parameters["operation"] == "rc":
     revcomp(parameters["input"], parameters["output"], file_format)
+    print("File processed successfuly.")
+    exit(0)
 
+elif parameters["operation"] == "trim":
+    if not "trim-left" in parameters.keys():
+        parameters["trim-left"]=0
+    if not "trim-right" in parameters.keys():
+        parameters["trim-right"] = 1
+    trim(parameters["input"], parameters["output"], file_format, parameters["trim-left"], parameters["trim-right"])
+    print("File processed successfuly.")
+    exit(0)
+
+# else parameters["operation"] == "rc":
+#     revcomp(parameters["input"], parameters["output"], file_format)
+#     print("File processed successfuly.")
+#     exit(0)

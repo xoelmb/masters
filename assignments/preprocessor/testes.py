@@ -1,5 +1,4 @@
-a,b,c = True, True, True
-
-if (a,b,c) == True:
-    print("Works")
-
+a="123456789"
+L=2
+R=0
+print(a[L::])
