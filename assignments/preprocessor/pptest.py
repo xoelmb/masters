@@ -156,7 +156,7 @@ elif parameters["operation"] == "trim":
     if not "trim-left" in parameters.keys():
         parameters["trim-left"]=0
     if not "trim-right" in parameters.keys():
-        parameters["trim-right"] = 1
+        parameters["trim-right"] = None
     trim(parameters["input"], parameters["output"], file_format, parameters["trim-left"], parameters["trim-right"])
     print("File processed successfuly.")
     exit(0)
