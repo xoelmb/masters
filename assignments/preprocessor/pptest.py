@@ -178,14 +178,14 @@ if check_par(parameters) == False:
     print("Invalid arguments used. Exiting.")
     exit(1)
 
-file_format = get_format(parameters["input"])
+parameters["format"] = get_format(parameters["input"])
 
-if file_format == False:
+if parameters["format"] == False:
     print("Invalid file format. Exiting.")
     exit(1)
 
 if parameters["operation"] == "rc":
-    revcomp(parameters["input"], parameters["output"], file_format)
+    revcomp(parameters["input"], parameters["output"], parameters["format"])
     print("File processed successfuly.")
     exit(0)
 
@@ -194,9 +194,10 @@ elif parameters["operation"] == "trim":
         parameters["trim-left"] = 0
     if not "trim-right" in parameters.keys():
         parameters["trim-right"] = None
-    trim(parameters["input"], parameters["output"], file_format, parameters["trim-left"], parameters["trim-right"])
+    trim(parameters["input"], parameters["output"], parameters["format"], parameters["trim-left"], parameters["trim-right"])
     print("File processed successfully.")
     exit(0)
 
 else:
-    adaptor_removal(parameters["input"], parameters["output"], file_format, parameters["adaptor"])
+    adaptor_removal(parameters["input"], parameters["output"], parameters["format"], parameters["adaptor"])
+    exit(0)
