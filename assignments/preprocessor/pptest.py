@@ -18,9 +18,9 @@ def check_par(parameters):
     for k, v in parameters.items():
         if k == "input":
             try:
-                f = open(v,"rt")
+                f = open(v, "rt")
                 f.close()
-                tag_input=True
+                tag_input = True
             except:
                 print("Input file was not found.")
         elif k == "output":
@@ -35,7 +35,7 @@ def check_par(parameters):
                 if int(v) > 0:
                     tag_left = True
                 else:
-                    raise()
+                    raise ()
             except:
                 print("Invalid trim-left value. A >0 value is expected.")
         elif k == "trim-right":
@@ -43,7 +43,7 @@ def check_par(parameters):
                 if int(v) > 0:
                     tag_right = True
                 else:
-                    raise()
+                    raise ()
             except:
                 print("Invalid trim-right value. A >0 value is expected.")
         elif k == "adaptor":
@@ -66,13 +66,12 @@ def check_par(parameters):
 
 def get_format(input_file):
     fp = open(input_file, "r")
+    file_format = False
     for line in fp:
         if line[0] == ">":
             file_format = "FASTA"
         elif line[0] == "@":
             file_format = "FASTQ"
-        else:
-            file_format = False
         break
     fp.close()
     return file_format
@@ -100,6 +99,7 @@ def revcomp(input_file, output_file, file_format):
                 if file_format == "FASTQ":
                     fp.readline()
                     fp.readline()
+    new_file.close()
 
 
 def trim(input_file, output_file, file_format, left, right):
@@ -123,17 +123,54 @@ def trim(input_file, output_file, file_format, left, right):
                 if file_format == "FASTQ":
                     fp.readline()
                     fp.readline()
-    summary="All okay?"
+    new_file.close()
+    summary = "All okay?"
     return summary
 
 
-def adaptor_removal(file, tag):
-    print("hihi")
-    return "okay"
+def adaptor_removal(input_file, output_file, file_format, adaptor):
+    adaptor_up = adaptor.upper()
+    new_file = open(output_file, "wt")
+    with open(input_file, "r") as fp:
+        while True:
+            tag = fp.readline().rstrip()
+            if not tag:
+                break
+            sequence = fp.readline().rstrip()
+            try:
+                seq_up = sequence[:len(adaptor_up):].upper()
+                match = True
+                for i in range(len(adaptor_up)):
+                    if adaptor_up[i] != "N" and seq_up[i] != "N" and adaptor_up[i] != seq_up[i]:
+                        match = False
+                        break
+                if match is True:
+                    new_seq = sequence[len(adaptor)::]
+                    new_file.write(tag + "\n" + new_seq + "\n")
+                    if file_format == "FASTQ":
+                        fp.readline()
+                        qual = fp.readline().rstrip()
+                        new_qual = qual[len(adaptor)::]
+                        new_file.write("+\n" + new_qual + "\n")
+                else:
+                    new_file.write(tag + "\n" + sequence + "\n")
+                    if file_format == "FASTQ":
+                        fp.readline()
+                        qual = fp.readline().rstrip()
+                        new_file.write("+\n" + qual + "\n")
+            except:
+                print(tag, "could not be processed.")
+                if file_format == "FASTQ":
+                    fp.readline()
+                    fp.readline()
+    new_file.close()
+    summary = "All okay?"
+    return summary
 
 
-test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation", "trim",
-                  "jeje", "--probe", "wrong", "--adaptor", "ACGTT", "--trim-left", "2", "--trim-right", "5"]
+test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation",
+                  "adaptor_removal",
+                  "jeje", "--probe", "wrong", "--adaptor", "GGGTTT", "--trim-left", "2", "--trim-right", "5"]
 
 parameters = get_par(test_arguments)
 
@@ -154,14 +191,12 @@ if parameters["operation"] == "rc":
 
 elif parameters["operation"] == "trim":
     if not "trim-left" in parameters.keys():
-        parameters["trim-left"]=0
+        parameters["trim-left"] = 0
     if not "trim-right" in parameters.keys():
         parameters["trim-right"] = None
     trim(parameters["input"], parameters["output"], file_format, parameters["trim-left"], parameters["trim-right"])
-    print("File processed successfuly.")
+    print("File processed successfully.")
     exit(0)
 
-# else parameters["operation"] == "rc":
-#     revcomp(parameters["input"], parameters["output"], file_format)
-#     print("File processed successfuly.")
-#     exit(0)
+else:
+    adaptor_removal(parameters["input"], parameters["output"], file_format, parameters["adaptor"])
