@@ -1,6 +1,58 @@
 import sys, re
 
 
+class Summary:
+    def __init__(self):
+        self.bases_dic = {"A": 0, "C": 0, "G": 0, "T": 0, "N": 0}
+        self.bases_total = 0
+        self.seqs = 0
+        self.adaptors = 0
+        self.trim_dic = {"A": 0, "C": 0, "G": 0, "T": 0, "N": 0}
+        self.trim_total = 0
+
+    def add_seq(self, sequence):
+        self.seqs += 1
+        for base in sequence[::].upper():
+            self.bases_dic[base] += 1
+            self.bases_total += 1
+
+    def add_trim(self, sequence, left, right):
+        self.seqs += 1
+        seq_left = ""
+        seq_right = ""
+        if left != 0:
+            seq_left = sequence[:left:]
+        if right is not None:
+            seq_right = sequence[right::]
+        removed = seq_left + seq_right
+        for base in removed[::].upper():
+            self.trim_dic[base] += 1
+            self.trim_total += 1
+
+    def report(self, mode):
+        print("\n\nSummary:")
+        print("\t" + str(self.seqs), "reads processed")
+        print("\t" + str(self.bases_total), "bases processed (", end="")
+        for base in ["A", "C", "G", "T", "N"]:
+            print(str(int(self.bases_dic[base] / self.bases_total * 100))+"%", base, end="")
+            if base != "N":
+                print(", ", end="")
+            else:
+                print(")")
+
+        if mode == "trim":
+            print("\t" + str(self.trim_total), "bases trimmed (", end="")
+            for base in ["A", "C", "G", "T", "N"]:
+                print(str(int(self.trim_dic[base] / self.trim_total * 100))+"%", base, end="")
+                if base != "N":
+                    print(", ", end="")
+                else:
+                    print(")")
+
+        elif mode == "adaptor_removal":
+            print("\t" + str(self.adaptors) + " adaptors found")
+
+
 def get_par(args):
     parameters = {}
     last = ""
@@ -78,8 +130,10 @@ def get_format(input_file):
 
 
 def revcomp(input_file, output_file, file_format):
-    comp_dic = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "a": "t", "c": "g", "g": "c", "t": "a", "n": "n"}
+    comp_dic = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "a": "t", "c": "g", "g": "c", "t": "a",
+                "n": "n"}
     new_file = open(output_file, "wt")
+    content = Summary()
     with open(input_file, "r") as fp:
         while True:
             tag = fp.readline().rstrip()
@@ -89,6 +143,7 @@ def revcomp(input_file, output_file, file_format):
             try:
                 revcomp = "".join(comp_dic[base] for base in sequence[::-1])
                 new_file.write(tag + "\n" + revcomp + "\n")
+                content.add_seq(sequence)
                 if file_format == "FASTQ":
                     fp.readline()
                     qual = fp.readline().rstrip()
@@ -99,11 +154,13 @@ def revcomp(input_file, output_file, file_format):
                 if file_format == "FASTQ":
                     fp.readline()
                     fp.readline()
+    content.report("rc")
     new_file.close()
 
 
 def trim(input_file, output_file, file_format, left, right):
     new_file = open(output_file, "wt")
+    content = Summary()
     with open(input_file, "r") as fp:
         while True:
             tag = fp.readline().rstrip()
@@ -111,8 +168,10 @@ def trim(input_file, output_file, file_format, left, right):
                 break
             sequence = fp.readline().rstrip()
             try:
-                trimseq = sequence[left:-right:]
+                trimseq = sequence[left:right:]
                 new_file.write(tag + "\n" + trimseq + "\n")
+                content.add_seq(sequence)
+                content.add_trim(sequence, left, right)
                 if file_format == "FASTQ":
                     fp.readline()
                     qual = fp.readline().rstrip()
@@ -124,13 +183,13 @@ def trim(input_file, output_file, file_format, left, right):
                     fp.readline()
                     fp.readline()
     new_file.close()
-    summary = "All okay?"
-    return summary
+    content.report("trim")
 
 
 def adaptor_removal(input_file, output_file, file_format, adaptor):
     adaptor_up = adaptor.upper()
     new_file = open(output_file, "wt")
+    content = Summary()
     with open(input_file, "r") as fp:
         while True:
             tag = fp.readline().rstrip()
@@ -147,6 +206,7 @@ def adaptor_removal(input_file, output_file, file_format, adaptor):
                 if match is True:
                     new_seq = sequence[len(adaptor)::]
                     new_file.write(tag + "\n" + new_seq + "\n")
+                    content.adaptors += 1
                     if file_format == "FASTQ":
                         fp.readline()
                         qual = fp.readline().rstrip()
@@ -158,19 +218,18 @@ def adaptor_removal(input_file, output_file, file_format, adaptor):
                         fp.readline()
                         qual = fp.readline().rstrip()
                         new_file.write("+\n" + qual + "\n")
+                content.add_seq(sequence)
             except:
                 print(tag, "could not be processed.")
                 if file_format == "FASTQ":
                     fp.readline()
                     fp.readline()
     new_file.close()
-    summary = "All okay?"
-    return summary
+    content.report("adaptor_removal")
 
 
 test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation",
-                  "adaptor_removal",
-                  "jeje", "--probe", "wrong", "--adaptor", "GGGTTT", "--trim-left", "2", "--trim-right", "5"]
+                  "adaptor_removal", "jeje", "--probe", "wrong", "--adaptor", "GGGTTT", "--trim-left", "10", "--trim-right", "6"]
 
 parameters = get_par(test_arguments)
 
@@ -186,18 +245,23 @@ if parameters["format"] == False:
 
 if parameters["operation"] == "rc":
     revcomp(parameters["input"], parameters["output"], parameters["format"])
-    print("File processed successfuly.")
-    exit(0)
 
 elif parameters["operation"] == "trim":
     if not "trim-left" in parameters.keys():
         parameters["trim-left"] = 0
+    else:
+        parameters["trim-left"] = int(parameters["trim-left"])
+
     if not "trim-right" in parameters.keys():
         parameters["trim-right"] = None
-    trim(parameters["input"], parameters["output"], parameters["format"], parameters["trim-left"], parameters["trim-right"])
-    print("File processed successfully.")
-    exit(0)
+    else:
+        parameters["trim-right"] = int(parameters["trim-right"]) * -1
+
+    trim(parameters["input"], parameters["output"], parameters["format"], parameters["trim-left"],
+         parameters["trim-right"])
 
 else:
     adaptor_removal(parameters["input"], parameters["output"], parameters["format"], parameters["adaptor"])
-    exit(0)
+
+print("\nFile processed successfully.")
+exit(0)
