@@ -1,3 +1,5 @@
-x="abcd"
-y="efgh"
-print(str(x+y))
+with open("input.fasta", "rt") as fp:
+    sequence = fp.readline()
+    print(sequence)
+    second = sequence
+    print(second)

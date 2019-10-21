@@ -34,7 +34,7 @@ class Summary:
         print("\t" + str(self.seqs), "reads processed")
         print("\t" + str(self.bases_total), "bases processed (", end="")
         for base in ["A", "C", "G", "T", "N"]:
-            print(str(int(self.bases_dic[base] / self.bases_total * 100))+"%", base, end="")
+            print(str(int(self.bases_dic[base] / self.bases_total * 100)) + "%", base, end="")
             if base != "N":
                 print(", ", end="")
             else:
@@ -43,7 +43,7 @@ class Summary:
         if mode == "trim":
             print("\t" + str(self.trim_total), "bases trimmed (", end="")
             for base in ["A", "C", "G", "T", "N"]:
-                print(str(int(self.trim_dic[base] / self.trim_total * 100))+"%", base, end="")
+                print(str(int(self.trim_dic[base] / self.trim_total * 100)) + "%", base, end="")
                 if base != "N":
                     print(", ", end="")
                 else:
@@ -140,6 +140,7 @@ def revcomp(input_file, output_file, file_format):
             if not tag:
                 break
             sequence = fp.readline().rstrip()
+            print("It's a new seq.")
             try:
                 revcomp = "".join(comp_dic[base] for base in sequence[::-1])
                 new_file.write(tag + "\n" + revcomp + "\n")
@@ -167,6 +168,7 @@ def trim(input_file, output_file, file_format, left, right):
             if not tag:
                 break
             sequence = fp.readline().rstrip()
+            print("It's a new seq.")
             try:
                 trimseq = sequence[left:right:]
                 new_file.write(tag + "\n" + trimseq + "\n")
@@ -196,6 +198,7 @@ def adaptor_removal(input_file, output_file, file_format, adaptor):
             if not tag:
                 break
             sequence = fp.readline().rstrip()
+            print("It's a new seq.")
             try:
                 seq_up = sequence[:len(adaptor_up):].upper()
                 match = True
@@ -229,17 +232,18 @@ def adaptor_removal(input_file, output_file, file_format, adaptor):
 
 
 test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation",
-                  "adaptor_removal", "jeje", "--probe", "wrong", "--adaptor", "GGGTTT", "--trim-left", "10", "--trim-right", "6"]
+                  "adaptor_removal", "jeje", "--probe", "wrong", "--adaptor", "GGGTTT", "--trim-left", "10",
+                  "--trim-right", "6"]
 
 parameters = get_par(test_arguments)
 
-if check_par(parameters) == False:
+if check_par(parameters) is False:
     print("Invalid arguments used. Exiting.")
     exit(1)
 
 parameters["format"] = get_format(parameters["input"])
 
-if parameters["format"] == False:
+if parameters["format"] is False:
     print("Invalid file format. Exiting.")
     exit(1)
 
