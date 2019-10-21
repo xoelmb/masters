@@ -17,7 +17,6 @@ class Summary:
             self.bases_total += 1
 
     def add_trim(self, sequence, left, right):
-        self.seqs += 1
         seq_left = ""
         seq_right = ""
         if left != 0:
