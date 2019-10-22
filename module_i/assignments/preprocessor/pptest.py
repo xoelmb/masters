@@ -73,61 +73,52 @@ def get_par(args):  # Function to parse the arguments used by the user
     return parameters  # Returns the whole dictionary of parameters
 
 
-def check_par(parameters):  # Function that checks the validity of the parsed arguments. Returns True or False.
-    # The tags are used to check if a parameter has been properly added
-    tag_input, tag_output, tag_operation, tag_left, tag_right, tag_adaptor = False, False, False, False, False, False
-    for k, v in parameters.items():  # Iterate over the parameters
-        if k == "input":
-            try:  # Checks if input file can be opened
-                f = open(v, "rt")
-                f.close()
-                tag_input = True
-            except:
-                print("Input file was not found.")
-        elif k == "output":  # Checks if an output file name has been provided
-            tag_output = True
-        elif k == "operation":  # Checks if an operation parameter has been provided and if it's valid
-            if v in ["rc", "trim", "adaptor_removal"]:
-                tag_operation = True
-            else:
-                print("Invalid operation:", v + ".\n\trc, trim or adaptor_removal is expected.")
-        elif k == "trim-left":  # Checks if the left-trim parameter is a valid number
-            try:
-                if int(v) > 0:
-                    tag_left = True
-                else:
-                    raise ()
-            except:
-                print("Invalid trim-left value. A >0 value is expected.")
-        elif k == "trim-right":  # Checks if the right-trim parameter is a valid number
-            try:
-                if int(v) > 0:
-                    tag_right = True
-                else:
-                    raise ()
-            except:
-                print("Invalid trim-right value. A >0 value is expected.")
-        elif k == "adaptor":  # Checks if the adaptor string is valid.
-            if re.search(r'\A[ACGTNacgtn]*\Z', v):
-                tag_adaptor = True
-            else:
-                print("The provided adaptor sequence is not valid. Only [ACGTNacgtn] bases are allowed.")
-        else:  # If any other argument is provided, it will be ignored.
-            print("Ignored argument:", k, v)
-    if (tag_input, tag_output, tag_operation) == (True, True, True):  # Checks if the minimum parameters are provided
-        if parameters["operation"] == "adaptor_removal":  # If adaptor_removal, checks if there's a valid adaptor
-            if tag_adaptor is True:
-                return True
-            else:
-                print("A valid adaptor sequence is needed.")
-        elif parameters["operation"] == "trim":  # If trim, checks if there are any valid trimming parameter
-            if tag_left is True or tag_right is True:
-                return True
-            else:
-                print("A valid trimming value is needed.")
-        elif parameters["operation"] == "rc":
+def check_par(parameters):  # Checks if the provided arguments are valid and converts trimming values if necessary
+    # Checks if the minimum arguments are present
+    if "input" not in parameters.keys() or "output" not in parameters.keys() or "operation" not in parameters.keys():
+        print("The minimum parameters are --input, --output and --operation.")
+        return False
+    try:  # Checks if the input file can be opened
+        f = open(parameters["input"], "rt")
+        f.close()
+    except:
+        print("Input file was not found.")
+        return False
+    if parameters["operation"] == "rc":  # If reverse-complement has been selected, no further checks are required
+        return True
+    elif parameters["operation"] == "adaptor_removal":  # If adaptor_removal, checks if there's a valid adaptor
+        if "adaptor" not in parameters.keys():
+            print("adaptor_removal requires an adaptor sequence.")
+            return False
+        if re.search(r'\A[ACGTNacgtn]*\Z', parameters["adaptor"]):
             return True
-    return False  # Returns False if the previous checks are not fulfilled
+        else:
+            print("The adaptor sequence provided is not valid (only ACGTN/acgtn strings).")
+            return False
+    elif parameters["operation"] == "trim":  # If trim, checks and converts to integers the values
+        defaults = {"trim-left": 0, "trim-right": None}  # Default values if a trim value has not been provided
+        multiplier = {"trim-left": 1, "trim-right": -1}  # Allows to convert the value to a valid index for slicing
+        checks = {}  # Stores whether the user has provided a valid trimming value or not
+        for side in ["trim-left", "trim-right"]:  # Checks both left and right
+            if side not in parameters.keys():  # If the parameter has not been provided
+                parameters[side] = defaults[side]  # Sets that parameter to its default
+                checks[side] = False  # Sets the input check to False
+            else:  # If the argument has been provided
+                if parameters[side].isdigit():  # Checks if it's a positive integer
+                    parameters[side] = int(parameters[side])*multiplier[side]  # Adapts it to a valid integer index
+                    checks[side] = True  # Mark the input check as True
+                else:  # When an invalid value is provided, it returns False (the operation will be aborted)
+                    print("Invalid", side, "argument. Only positive integers can be used.")
+                    return False
+        if checks["trim-right"] is True or checks["trim-left"] is True:
+            # Only if the user provides at least one valid and no invalid trimming values, it returns True
+            return True
+        else:  # When the user provides no trimming values and trim is selected
+            print("Missing trimming arguments.")
+            return False
+    else:  # If the operation is not one of those three, it returns False
+        print("Invalid operation:", parameters["operation"] + ".\n\trc, trim or adaptor_removal is expected.")
+        return False
 
 
 def get_format(input_file):  # Function to get the format of the input file
@@ -195,16 +186,6 @@ parameters["format"] = get_format(parameters["input"])  # Establishes the format
 if parameters["format"] is False:  # If an invalid format is used, it aborts the operation
     print("Invalid file format. Exiting.")
     exit(1)
-
-if parameters["operation"] == "trim":  # When trimming, checks if a right and left parameter has been provided
-    if "trim-left" not in parameters.keys():
-        parameters["trim-left"] = 0  # Sets the default value for left-trimming
-    else:
-        parameters["trim-left"] = int(parameters["trim-left"])  # Converts the parameter to an integer
-    if "trim-right" not in parameters.keys():  # Same as before
-        parameters["trim-right"] = None
-    else:
-        parameters["trim-right"] = int(parameters["trim-right"]) * -1
 
 new_file = open(parameters["output"], "wt")  # Creates the output file
 content = Summary()  # Initializes the statistics summary of the operation
