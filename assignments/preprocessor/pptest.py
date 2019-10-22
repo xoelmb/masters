@@ -134,111 +134,105 @@ def get_format(input_file):
     return file_format
 
 
-def revcomp(input_file, output_file, file_format):
-    comp_dic = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "a": "t", "c": "g", "g": "c", "t": "a",
-                "n": "n"}
-    new_file = open(output_file, "wt")
-    content = Summary()
-    with open(input_file, "r") as fp:
-        while True:
-            tag = fp.readline().rstrip()
-            if not tag:
-                break
-            sequence = fp.readline().rstrip()
-            print("It's a new seq.")
-            try:
-                revcomp = "".join(comp_dic[base] for base in sequence[::-1])
-                new_file.write(tag + "\n" + revcomp + "\n")
-                content.add_seq(sequence)
-                if file_format == "FASTQ":
-                    fp.readline()
-                    qual = fp.readline().rstrip()
-                    revqual = "".join(qual[::-1])
-                    new_file.write("+\n" + revqual + "\n")
-            except:
-                print(tag, "could not be processed.")
-                if file_format == "FASTQ":
-                    fp.readline()
-                    fp.readline()
-    content.report("rc")
-    new_file.close()
+def revcomp(unprocessed_read, content):
+    comp_dic = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "a": "t", "c": "g", "g": "c", "t": "a", "n": "n"}
+    processed_read = Read()
+    try:
+        processed_read.sequence = "".join(comp_dic[base] for base in unprocessed_read.sequence[::-1])
+        if unprocessed_read.quality:
+            processed_read.quality = "".join(unprocessed_read.quality[::-1])
+        content.add_seq(unprocessed_read.sequence)
+        return processed_read
+    except:
+        return None
+
+# def trim(input_file, output_file, file_format, left, right):
+#     new_file = open(output_file, "wt")
+#     content = Summary()
+#     with open(input_file, "r") as fp:
+#         while True:
+#             tag = fp.readline().rstrip()
+#             if not tag:
+#                 break
+#             sequence = fp.readline().rstrip()
+#             print("It's a new seq.")
+#             try:
+#                 trimseq = sequence[left:right:]
+#                 new_file.write(tag + "\n" + trimseq + "\n")
+#                 content.add_seq(sequence)
+#                 content.add_trim(sequence, left, right)
+#                 if file_format == "FASTQ":
+#                     fp.readline()
+#                     qual = fp.readline().rstrip()
+#                     trimqual = qual[left:right:]
+#                     new_file.write("+\n" + trimqual + "\n")
+#             except:
+#                 print(tag, "could not be processed.")
+#                 if file_format == "FASTQ":
+#                     fp.readline()
+#                     fp.readline()
+#     new_file.close()
+#     content.report("trim")
 
 
-def trim(input_file, output_file, file_format, left, right):
-    new_file = open(output_file, "wt")
-    content = Summary()
-    with open(input_file, "r") as fp:
-        while True:
-            tag = fp.readline().rstrip()
-            if not tag:
-                break
-            sequence = fp.readline().rstrip()
-            print("It's a new seq.")
-            try:
-                trimseq = sequence[left:right:]
-                new_file.write(tag + "\n" + trimseq + "\n")
-                content.add_seq(sequence)
-                content.add_trim(sequence, left, right)
-                if file_format == "FASTQ":
-                    fp.readline()
-                    qual = fp.readline().rstrip()
-                    trimqual = qual[left:-right:]
-                    new_file.write("+\n" + trimqual + "\n")
-            except:
-                print(tag, "could not be processed.")
-                if file_format == "FASTQ":
-                    fp.readline()
-                    fp.readline()
-    new_file.close()
-    content.report("trim")
+def trim(unprocessed_read, left, right, content):
+    processed_read = Read()
+    try:
+        processed_read.sequence = unprocessed_read.sequence[left:right:]
+        if unprocessed_read.quality:
+            processed_read.quality = unprocessed_read.quality[left:right:]
+        content.add_seq(unprocessed_read.sequence)
+        content.add_trim(unprocessed_read.sequence, left, right)
+        return processed_read
+    except:
+        return None
 
 
-def adaptor_removal(input_file, output_file, file_format, adaptor):
-    adaptor_up = adaptor.upper()
-    new_file = open(output_file, "wt")
-    content = Summary()
-    with open(input_file, "r") as fp:
-        while True:
-            tag = fp.readline().rstrip()
-            if not tag:
-                break
-            sequence = fp.readline().rstrip()
-            print("It's a new seq.")
-            try:
-                seq_up = sequence[:len(adaptor_up):].upper()
-                match = True
-                for i in range(len(adaptor_up)):
-                    if adaptor_up[i] != "N" and seq_up[i] != "N" and adaptor_up[i] != seq_up[i]:
-                        match = False
-                        break
-                if match is True:
-                    new_seq = sequence[len(adaptor)::]
-                    new_file.write(tag + "\n" + new_seq + "\n")
-                    content.adaptors += 1
-                    if file_format == "FASTQ":
-                        fp.readline()
-                        qual = fp.readline().rstrip()
-                        new_qual = qual[len(adaptor)::]
-                        new_file.write("+\n" + new_qual + "\n")
-                else:
-                    new_file.write(tag + "\n" + sequence + "\n")
-                    if file_format == "FASTQ":
-                        fp.readline()
-                        qual = fp.readline().rstrip()
-                        new_file.write("+\n" + qual + "\n")
-                content.add_seq(sequence)
-            except:
-                print(tag, "could not be processed.")
-                if file_format == "FASTQ":
-                    fp.readline()
-                    fp.readline()
-    new_file.close()
-    content.report("adaptor_removal")
+
+# def adaptor_removal(input_file, output_file, file_format, adaptor):
+#     adaptor_up = adaptor.upper()
+#     new_file = open(output_file, "wt")
+#     content = Summary()
+#     with open(input_file, "r") as fp:
+#         while True:
+#             tag = fp.readline().rstrip()
+#             if not tag:
+#                 break
+#             sequence = fp.readline().rstrip()
+#             print("It's a new seq.")
+#             try:
+#                 seq_up = sequence[:len(adaptor_up):].upper()
+#                 match = True
+#                 for i in range(len(adaptor_up)):
+#                     if adaptor_up[i] != "N" and seq_up[i] != "N" and adaptor_up[i] != seq_up[i]:
+#                         match = False
+#                         break
+#                 if match is True:
+#                     new_seq = sequence[len(adaptor)::]
+#                     new_file.write(tag + "\n" + new_seq + "\n")
+#                     content.adaptors += 1
+#                     if file_format == "FASTQ":
+#                         fp.readline()
+#                         qual = fp.readline().rstrip()
+#                         new_qual = qual[len(adaptor)::]
+#                         new_file.write("+\n" + new_qual + "\n")
+#                 else:
+#                     new_file.write(tag + "\n" + sequence + "\n")
+#                     if file_format == "FASTQ":
+#                         fp.readline()
+#                         qual = fp.readline().rstrip()
+#                         new_file.write("+\n" + qual + "\n")
+#                 content.add_seq(sequence)
+#             except:
+#                 print(tag, "could not be processed.")
+#                 if file_format == "FASTQ":
+#                     fp.readline()
+#                     fp.readline()
+#     new_file.close()
+#     content.report("adaptor_removal")
 
 
-test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation",
-                  "adaptor_removal", "jeje", "--probe", "wrong", "--adaptor", "GGGTTT", "--trim-left", "10",
-                  "--trim-right", "6"]
+test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation", "trim", "--trim-left", "5", "--trim-right", "4"]
 
 parameters = get_par(test_arguments)
 
@@ -246,31 +240,54 @@ if check_par(parameters) is False:
     print("Invalid arguments used. Exiting.")
     exit(1)
 
+if parameters["operation"] == "trim":
+    if not "trim-left" in parameters.keys():
+        parameters["trim-left"] = 0
+    else:
+        parameters["trim-left"] = int(parameters["trim-left"])
+    if not "trim-right" in parameters.keys():
+        parameters["trim-right"] = None
+    else:
+        parameters["trim-right"] = int(parameters["trim-right"]) * -1
+
 parameters["format"] = get_format(parameters["input"])
 
 if parameters["format"] is False:
     print("Invalid file format. Exiting.")
     exit(1)
 
-if parameters["operation"] == "rc":
-    revcomp(parameters["input"], parameters["output"], parameters["format"])
+new_file = open(parameters["output"], "wt")
+content = Summary()
 
-elif parameters["operation"] == "trim":
-    if not "trim-left" in parameters.keys():
-        parameters["trim-left"] = 0
-    else:
-        parameters["trim-left"] = int(parameters["trim-left"])
+with open(parameters["input"], "rt") as fp:
+    while True:
+        tag = fp.readline().rstrip()
+        if not tag:
+            break
+        sequence = fp.readline().rstrip()
+        current_read = Read(sequence)
+        if parameters["format"] == "FASTQ":
+            fp.readline()
+            quality = fp.readline().rstrip()
+            current_read.quality = quality
 
-    if not "trim-right" in parameters.keys():
-        parameters["trim-right"] = None
-    else:
-        parameters["trim-right"] = int(parameters["trim-right"]) * -1
+        if parameters["operation"] == "rc":
+            processed_read = revcomp(current_read, content)
+        elif parameters["operation"] == "trim":
+            processed_read = trim(current_read, parameters["trim-left"], parameters["trim-right"], content)
+        else:
+            processed_read = adaptor_removal(current_read, parameters["adaptor"], content)
 
-    trim(parameters["input"], parameters["output"], parameters["format"], parameters["trim-left"],
-         parameters["trim-right"])
+        if processed_read:
+            new_file.write(tag + "\n" + processed_read.sequence + "\n")
+            if processed_read.quality:
+                new_file.write("+\n" + processed_read.quality + "\n")
+        else:
+            print(tag, "could not be processed.")
 
-else:
-    adaptor_removal(parameters["input"], parameters["output"], parameters["format"], parameters["adaptor"])
+new_file.close()
+
+content.report(parameters["operation"])
 
 print("\nFile processed successfully.")
 exit(0)
