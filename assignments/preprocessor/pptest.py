@@ -19,7 +19,8 @@ class Summary:
     def add_seq(self, sequence):
         self.seqs += 1
         for base in sequence[::].upper():
-            self.bases_dic[base] += 1
+            if base in self.bases_dic.keys():
+                self.bases_dic[base] += 1
             self.bases_total += 1
 
     def add_trim(self, sequence, left, right):
@@ -31,11 +32,12 @@ class Summary:
             seq_right = sequence[right::]
         removed = seq_left + seq_right
         for base in removed[::].upper():
-            self.trim_dic[base] += 1
+            if base in self.trim_dic.keys():
+                self.trim_dic[base] += 1
             self.trim_total += 1
 
     def add_adaptor(self):
-        self.adaptors+=1
+        self.adaptors += 1
 
     def report(self, mode):
         print("\n\nSummary:")
@@ -180,7 +182,8 @@ def adaptor_removal(unprocessed_read, adaptor, content):
         return None
 
 
-test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation", "adaptor_removal", "--adaptor", "AGT"]
+test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation",
+                  "adaptor_removal", "--adaptor", "AGT"]
 
 parameters = get_par(test_arguments)
 
