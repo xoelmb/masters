@@ -182,8 +182,10 @@ def adaptor_removal(unprocessed_read, adaptor, content):
         return None
 
 
-# test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation", "adaptor_removal", "--adaptor", "AGT"]
-parameters = get_par(sys.argv)
+test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation",
+                  "adaptor_removal", "--adaptor", "AGT"]
+
+parameters = get_par(test_arguments)
 
 if check_par(parameters) is False:
     print("Invalid arguments used. Exiting.")

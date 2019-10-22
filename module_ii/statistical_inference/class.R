@@ -34,3 +34,19 @@ plot(vector_mean, type="l", main="Large number Law", xlab="Throw number", ylab="
 # The variance is smaller as higher is the number of replicates.
 # We can create a function that replicates this. It's on the slides.
 
+
+#3. DISTRIBUTIONS
+
+dpois(16, lambda=12);
+
+ppois(16,lambda=12)+ppois(16,lambda=12, lower=FALSE); #16 is not included in one of them (lower=FALSE, most likely)
+
+# Poisson is not that good for small chromosomes since at least 1 crossover is needed, and that distribution would assume lots of 0 events.
+  
+# One of those exercises: número de hijos para que la prob de tener esos o menos sea 94.5%
+qpois(.945,2);
+
+# Continuous:
+  sort(round(runif(10, min=1, max=1345234)));
+
+
