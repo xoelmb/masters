@@ -1,6 +1,12 @@
 import sys, re
 
 
+class Read:
+    def __init__(self, seq=None, qual=None):
+        self.sequence = seq
+        self.quality = qual
+
+
 class Summary:
     def __init__(self):
         self.bases_dic = {"A": 0, "C": 0, "G": 0, "T": 0, "N": 0}
