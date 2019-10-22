@@ -1,4 +1,5 @@
-import sys, re
+import re
+import sys
 
 
 class Read:
@@ -129,25 +130,25 @@ def check_par(parameters):
 
 
 def get_format(input_file):
-    fp = open(input_file, "r")
+    file = open(input_file, "r")
     file_format = False
-    line = fp.readline()
+    line = file.readline()
     if line[0] == ">":
         file_format = "FASTA"
     elif line[0] == "@":
         file_format = "FASTQ"
-    fp.close()
+    file.close()
     return file_format
 
 
-def revcomp(unprocessed_read, content):
+def revcomp(unprocessed, content):
     comp_dic = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "a": "t", "c": "g", "g": "c", "t": "a", "n": "n"}
     processed = Read()
     try:
-        processed.sequence = "".join(comp_dic[base] for base in unprocessed_read.sequence[::-1])
-        if unprocessed_read.quality:
-            processed.quality = "".join(unprocessed_read.quality[::-1])
-        content.add_seq(unprocessed_read.sequence)
+        processed.sequence = "".join(comp_dic[base] for base in unprocessed.sequence[::-1])
+        if unprocessed.quality:
+            processed.quality = "".join(unprocessed.quality[::-1])
+        content.add_seq(unprocessed.sequence)
         return processed
     except:
         return None
@@ -189,21 +190,20 @@ if check_par(parameters) is False:
     print("Invalid arguments used. Exiting.")
     exit(1)
 
-if parameters["operation"] == "trim":
-    if not "trim-left" in parameters.keys():
-        parameters["trim-left"] = 0
-    else:
-        parameters["trim-left"] = int(parameters["trim-left"])
-    if not "trim-right" in parameters.keys():
-        parameters["trim-right"] = None
-    else:
-        parameters["trim-right"] = int(parameters["trim-right"]) * -1
-
 parameters["format"] = get_format(parameters["input"])
-
 if parameters["format"] is False:
     print("Invalid file format. Exiting.")
     exit(1)
+
+if parameters["operation"] == "trim":
+    if "trim-left" not in parameters.keys():
+        parameters["trim-left"] = 0
+    else:
+        parameters["trim-left"] = int(parameters["trim-left"])
+    if "trim-right" not in parameters.keys():
+        parameters["trim-right"] = None
+    else:
+        parameters["trim-right"] = int(parameters["trim-right"]) * -1
 
 new_file = open(parameters["output"], "wt")
 content = Summary()
@@ -235,8 +235,5 @@ with open(parameters["input"], "rt") as fp:
             print(tag, "could not be processed.")
 
 new_file.close()
-
 content.report(parameters["operation"])
-
-print("\nFile processed successfully.")
 exit(0)
