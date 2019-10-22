@@ -40,16 +40,13 @@ class Summary:
         self.adaptors += 1
 
     def report(self, mode):
-        print("\n\nSummary:")
-        print("\t" + str(self.seqs), "reads processed")
-        print("\t" + str(self.bases_total), "bases processed (", end="")
+        print("\n\nSummary:\n\t" + str(self.seqs), "reads processed\n\t" + str(self.bases_total), "bases processed (", end="")
         for base in ["A", "C", "G", "T", "N"]:
             print(str(int(self.bases_dic[base] / self.bases_total * 100)) + "%", base, end="")
             if base != "N":
                 print(", ", end="")
             else:
                 print(")")
-
         if mode == "trim":
             print("\t" + str(self.trim_total), "bases trimmed (", end="")
             for base in ["A", "C", "G", "T", "N"]:
@@ -58,7 +55,6 @@ class Summary:
                     print(", ", end="")
                 else:
                     print(")")
-
         elif mode == "adaptor_removal":
             print("\t" + str(self.adaptors) + " adaptors found")
 
@@ -92,7 +88,7 @@ def check_par(parameters):
                 tag_operation = True
             else:
                 print("Invalid operation:", v + ".\n\trc, trim or adaptor_removal is expected.")
-        elif k == "trim-left":
+        elif k == "trim-left" and parameters["operation"] == "trim":
             try:
                 if int(v) > 0:
                     tag_left = True
@@ -100,7 +96,7 @@ def check_par(parameters):
                     raise ()
             except:
                 print("Invalid trim-left value. A >0 value is expected.")
-        elif k == "trim-right":
+        elif k == "trim-right" and parameters["operation"] == "trim":
             try:
                 if int(v) > 0:
                     tag_right = True
@@ -108,7 +104,7 @@ def check_par(parameters):
                     raise ()
             except:
                 print("Invalid trim-right value. A >0 value is expected.")
-        elif k == "adaptor":
+        elif k == "adaptor" and parameters["operation"] == "adaptor_removal":
             if re.search(r'\A[ACGTNacgtn]*\Z', v):
                 tag_adaptor = True
             else:
@@ -116,73 +112,76 @@ def check_par(parameters):
         else:
             print("Ignored argument:", k, v)
     if (tag_input, tag_output, tag_operation) == (True, True, True):
-        if parameters["operation"] == "adaptor" and tag_adaptor is True:
+        if parameters["operation"] == "adaptor_removal":
+            if tag_adaptor is True:
+                return True
+            else:
+                print("A valid adaptor sequence is needed.")
+        elif parameters["operation"] == "trim":
+            if tag_left is True or tag_right is True:
+                return True
+            else:
+                print("A valid trimming value is needed.")
+        elif parameters["operation"] == "rc":
             return True
-        elif parameters["operation"] == "trim" and (tag_left is True or tag_right is True):
-            return True
-        else:
-            return True
-    else:
-        return False
+    return False
 
 
 def get_format(input_file):
     fp = open(input_file, "r")
     file_format = False
-    for line in fp:
-        if line[0] == ">":
-            file_format = "FASTA"
-        elif line[0] == "@":
-            file_format = "FASTQ"
-        break
+    line=fp.readline()
+    if line[0] == ">":
+        file_format = "FASTA"
+    elif line[0] == "@":
+        file_format = "FASTQ"
     fp.close()
     return file_format
 
 
 def revcomp(unprocessed_read, content):
     comp_dic = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "a": "t", "c": "g", "g": "c", "t": "a", "n": "n"}
-    processed_read = Read()
+    processed = Read()
     try:
-        processed_read.sequence = "".join(comp_dic[base] for base in unprocessed_read.sequence[::-1])
+        processed.sequence = "".join(comp_dic[base] for base in unprocessed_read.sequence[::-1])
         if unprocessed_read.quality:
-            processed_read.quality = "".join(unprocessed_read.quality[::-1])
+            processed.quality = "".join(unprocessed_read.quality[::-1])
         content.add_seq(unprocessed_read.sequence)
-        return processed_read
+        return processed
     except:
         return None
 
 
-def trim(unprocessed_read, left, right, content):
-    processed_read = Read()
+def trim(unprocessed, left, right, content):
+    processed = Read()
     try:
-        processed_read.sequence = unprocessed_read.sequence[left:right:]
-        if unprocessed_read.quality:
-            processed_read.quality = unprocessed_read.quality[left:right:]
-        content.add_seq(unprocessed_read.sequence)
-        content.add_trim(unprocessed_read.sequence, left, right)
-        return processed_read
+        processed.sequence = unprocessed.sequence[left:right:]
+        if unprocessed.quality:
+            processed.quality = unprocessed.quality[left:right:]
+        content.add_seq(unprocessed.sequence)
+        content.add_trim(unprocessed.sequence, left, right)
+        return processed
     except:
         return None
 
 
-def adaptor_removal(unprocessed_read, adaptor, content):
-    processed_read = Read()
+def adaptor_removal(unprocessed, adaptor, content):
+    processed = Read()
     try:
-        if unprocessed_read.sequence[:len(adaptor):].upper() == adaptor.upper():
-            processed_read.sequence = unprocessed_read.sequence[len(adaptor)::]
-            if unprocessed_read.quality:
-                processed_read.quality = unprocessed_read.quality[len(adaptor)::]
+        if unprocessed.sequence[:len(adaptor):].upper() == adaptor.upper():
+            processed.sequence = unprocessed.sequence[len(adaptor)::]
+            if unprocessed.quality:
+                processed.quality = unprocessed.quality[len(adaptor)::]
             content.add_adaptor()
         else:
-            processed_read.sequence = unprocessed_read.sequence
-            processed_read.quality = unprocessed_read.quality
-        content.add_seq(unprocessed_read.sequence)
-        return processed_read
+            processed.sequence = unprocessed.sequence
+            processed.quality = unprocessed.quality
+        content.add_seq(unprocessed.sequence)
+        return processed
     except:
         return None
 
 
-# test_arguments = ["name.py", "--input", "mbio.sample.fastq", "--output", "output_file.fastq", "--operation", "adaptor_removal", "--adaptor", "AGT"]
 parameters = get_par(sys.argv)
 
 if check_par(parameters) is False:
