@@ -40,7 +40,8 @@ class Summary:
         self.adaptors += 1
 
     def report(self, mode):
-        print("\n\nSummary:\n\t" + str(self.seqs), "reads processed\n\t" + str(self.bases_total), "bases processed (", end="")
+        print("\n\nSummary:\n\t" + str(self.seqs), "reads processed\n\t" + str(self.bases_total), "bases processed (",
+              end="")
         for base in ["A", "C", "G", "T", "N"]:
             print(str(int(self.bases_dic[base] / self.bases_total * 100)) + "%", base, end="")
             if base != "N":
@@ -108,7 +109,7 @@ def check_par(parameters):
             if re.search(r'\A[ACGTNacgtn]*\Z', v):
                 tag_adaptor = True
             else:
-                print("Adaptor sequence is not valid. Only [ACGTNacgtn] bases are allowed.")
+                print("The provided adaptor sequence is not valid. Only [ACGTNacgtn] bases are allowed.")
         else:
             print("Ignored argument:", k, v)
     if (tag_input, tag_output, tag_operation) == (True, True, True):
@@ -130,7 +131,7 @@ def check_par(parameters):
 def get_format(input_file):
     fp = open(input_file, "r")
     file_format = False
-    line=fp.readline()
+    line = fp.readline()
     if line[0] == ">":
         file_format = "FASTA"
     elif line[0] == "@":
