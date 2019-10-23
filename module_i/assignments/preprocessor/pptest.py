@@ -41,7 +41,7 @@ class Summary:  # Class used to store different data of the whole operation
         self.adaptors += 1
 
     def report(self, mode):  # Function to print statistics depending on the operation performed
-        print("\n\nSummary:\n\t" + str(self.seqs), "reads processed\n\t" + str(self.bases_total), "bases processed (",
+        print("Summary:\n\t" + str(self.seqs), "reads processed\n\t" + str(self.bases_total), "bases processed (",
               end="")
         for base in ["A", "C", "G", "T", "N"]:
             print(str(int(self.bases_dic[base] / self.bases_total * 100)) + "%", base, end="")
@@ -212,5 +212,7 @@ with open(parameters["input"], "rt") as fp:  # Opens the input file
             print(tag, "could not be processed.")
 
 new_file.close()  # Closes the new file
+final_print = {"rc": "reversed-complemented", "adaptor_removal": "processed", "trim": "hard-trimmed"}
+print("\nFile '" + parameters["input"] + "' has been successfully %s " % final_print[parameters["operation"]] + "('" + parameters["output"] + "')" )
 content.report(parameters["operation"])  # Prints the summary of the operation
 exit(0)
