@@ -17,20 +17,20 @@ class Summary:  # Class used to store different data of the whole operation
         self.trim_dic = {"A": 0, "C": 0, "G": 0, "T": 0, "N": 0}
         self.trim_total = 0
 
-    def add_seq(self, sequence):  # Function to update statistics on the analysis when a sequence is processed
+    def add_seq(self, seq):  # Function to update statistics on the analysis when a sequence is processed
         self.seqs += 1
-        for base in sequence[::].upper():
+        for base in seq[::].upper():
             if base in self.bases_dic.keys():
                 self.bases_dic[base] += 1
             self.bases_total += 1
 
-    def add_trim(self, sequence, left, right):  # Update statistics when a trim operation is performed
+    def add_trim(self, seq, left, right):  # Update statistics when a trim operation is performed
         seq_left = ""
         seq_right = ""
         if left != 0:
-            seq_left = sequence[:left:]
+            seq_left = seq[:left:]
         if right is not None:
-            seq_right = sequence[right::]
+            seq_right = seq[right::]
         removed = seq_left + seq_right
         for base in removed[::].upper():
             if base in self.trim_dic.keys():
@@ -62,73 +62,72 @@ class Summary:  # Class used to store different data of the whole operation
 
 
 def get_par(args):  # Function to parse the arguments used by the user
-    parameters = {}  # Dictionary used to store the parameters
+    pars = {}  # Dictionary used to store the parameters
     last = ""  # Initialize a variable that stores the last value added to the dictionary
     for i in range(1, len(args)):  # Iterate over arguments, except for the first one (name of file)
         if args[i][0:2:] == "--" and i != len(args) - 1:  # Checks if the argument is a parameter and not the last one
-            parameters[args[i][2::]] = args[i + 1]  # Stores the next argument as the value of a given parameter
+            pars[args[i][2::]] = args[i + 1]  # Stores the next argument as the value of a given parameter
             last = args[i + 1]  # Updates the last value stored
         elif args[i] != last:  # If an argument has not been preceded by a "--parameter", it's ignored
-            print("Ignored argument:", args[i])
-    return parameters  # Returns the whole dictionary of parameters
+            print(args[i]+": missing operator")
+    return pars  # Returns the whole dictionary of parameters
 
 
-def check_par(parameters):  # Checks if the provided arguments are valid and converts trimming values if necessary
+def check_par(pars):  # Checks if the provided arguments are valid and converts trimming values if necessary
     # Checks if the minimum arguments are present
-    if "input" not in parameters.keys() or "output" not in parameters.keys() or "operation" not in parameters.keys():
+    if "input" not in pars.keys() or "output" not in pars.keys() or "operation" not in pars.keys():
         print("The minimum parameters are --input, --output and --operation.")
         return False
     try:  # Checks if the input file can be opened
-        f = open(parameters["input"], "rt")
+        f = open(pars["input"], "rt")
         f.close()
     except FileNotFoundError:
         print("Input file was not found.")
         return False
-    if parameters["operation"] == "rc":  # If reverse-complement has been selected, no further checks are required
+    if pars["operation"] == "rc":  # If reverse-complement has been selected, no further checks are required
         return True
-    elif parameters["operation"] == "adaptor_removal":  # If adaptor_removal, checks if there's a valid adaptor
-        if "adaptor" not in parameters.keys():
+    elif pars["operation"] == "adaptor_removal":  # If adaptor_removal, checks if there's a valid adaptor
+        if "adaptor" not in pars.keys():
             print("adaptor_removal requires an adaptor sequence.")
             return False
-        if re.search(r'\A[ACGTNacgtn]*\Z', parameters["adaptor"]):
+        if re.search(r'\A[ACGTNacgtn]*\Z', pars["adaptor"]):
             return True
         else:
             print("The adaptor sequence provided is not valid (only ACGTN/acgtn strings).")
             return False
-    elif parameters["operation"] == "trim":  # If trim, checks and converts the values to integers
+    elif pars["operation"] == "trim":  # If trim, checks and converts the values to integers
         defaults = {"trim-left": 0, "trim-right": None}  # Default values if a trim value has not been provided
         multiplier = {"trim-left": 1, "trim-right": -1}  # Allows to convert the value to a valid index for slicing
-        parameters["trim-total"] = 0  # Stores the total number of bases to be trimmed
+        pars["trim-total"] = 0  # Stores the total number of bases to be trimmed
         for side in ["trim-left", "trim-right"]:  # Checks both left and right
-            if side not in parameters.keys():  # If the parameter has not been provided
-                parameters[side] = defaults[side]  # Sets that parameter to its default
+            if side not in pars.keys():  # If the parameter has not been provided
+                pars[side] = defaults[side]  # Sets that parameter to its default
             else:  # If the argument has been provided
-                if parameters[side].isdigit():  # Checks if it's a positive integer
-                    parameters["trim-total"] += int(parameters[side])  # Adds the parameter to the count of bases
-                    parameters[side] = int(parameters[side]) * multiplier[side]  # Adapts it to a valid integer index
+                if pars[side].isdigit():  # Checks if it's a positive integer
+                    pars["trim-total"] += int(pars[side])  # Adds the parameter to the count of bases
+                    pars[side] = int(pars[side]) * multiplier[side]  # Adapts it to a valid integer index
                 else:  # When an invalid value is provided, it returns False (the operation will be aborted)
                     print("Invalid", side, "argument. Only positive integers can be used.")
                     return False
-        if parameters["trim-total"] > 0:
+        if pars["trim-total"] > 0:
             # Only if the user provides at least one valid and no invalid trimming values, it returns True
             return True
         else:  # When the user provides no trimming values and trim is selected
             print("Missing trimming arguments.")
             return False
     else:  # If the operation is not one of those three, it returns False
-        print("Invalid operation:", parameters["operation"] + ".\n\trc, trim or adaptor_removal is expected.")
+        print("Invalid operation:", pars["operation"] + ".\n\trc, trim or adaptor_removal is expected.")
         return False
 
 
 def get_format(input_file):  # Function to get the format of the input file
     file_format = False
-    file = open(input_file, "r")
-    line = file.readline()
-    if line[0] == ">":
-        file_format = "FASTA"
-    elif line[0] == "@":
-        file_format = "FASTQ"
-    file.close()
+    with open(input_file, "r") as file:
+        line = file.readline()
+        if line[0] == ">":
+            file_format = "FASTA"
+        elif line[0] == "@":
+            file_format = "FASTQ"
     return file_format
 
 

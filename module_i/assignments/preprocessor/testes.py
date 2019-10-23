@@ -1,3 +1,7 @@
-dic = {"A" : 1, "B": 2}
-s="ABC"
-print("".join(dic[base] for base in s[::]))
+def add_one_par(pars):
+    pars["hey"] = 1
+    return True
+
+parameters= {}
+add_one_par(parameters)
+print(parameters["hey"])
