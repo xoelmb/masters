@@ -41,7 +41,7 @@ class Summary:  # Class used to store different data of the whole operation
         self.adaptors += 1
 
     def report(self, mode):  # Function to print statistics depending on the operation performed
-        print("Summary:\n\t" + str(self.seqs), "reads processed\n\t" + str(self.bases_total), "bases processed (",
+        print("Summary:\n" + (len(str(self.bases_total))-len(str(self.seqs)))*" " + str(self.seqs), "reads processed\n" + str(self.bases_total), "bases processed (",
               end="")
         for base in ["A", "C", "G", "T", "N"]:
             print(str(int(self.bases_dic[base] / self.bases_total * 100)) + "%", base, end="")
@@ -50,7 +50,7 @@ class Summary:  # Class used to store different data of the whole operation
             else:
                 print(")")
         if mode == "trim":
-            print("\t" + str(self.trim_total), "bases trimmed (", end="")
+            print((len(str(self.bases_total))-len(str(self.trim_total)))*" " + str(self.trim_total), "bases trimmed (", end="")
             for base in ["A", "C", "G", "T", "N"]:
                 print(str(int(self.trim_dic[base] / self.trim_total * 100)) + "%", base, end="")
                 if base != "N":
@@ -58,7 +58,7 @@ class Summary:  # Class used to store different data of the whole operation
                 else:
                     print(")")
         elif mode == "adaptor_removal":
-            print("\t" + str(self.adaptors) + " adaptors found")
+            print((len(str(self.bases_total))-len(str(self.adaptors)))*" " + str(self.adaptors) + " adaptors found")
 
 
 def get_par(args):  # Function to parse the arguments used by the user
