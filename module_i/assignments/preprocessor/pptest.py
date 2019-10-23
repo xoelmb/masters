@@ -81,7 +81,7 @@ def check_par(parameters):  # Checks if the provided arguments are valid and con
     try:  # Checks if the input file can be opened
         f = open(parameters["input"], "rt")
         f.close()
-    except:
+    except FileNotFoundError:
         print("Input file was not found.")
         return False
     if parameters["operation"] == "rc":  # If reverse-complement has been selected, no further checks are required
@@ -95,22 +95,21 @@ def check_par(parameters):  # Checks if the provided arguments are valid and con
         else:
             print("The adaptor sequence provided is not valid (only ACGTN/acgtn strings).")
             return False
-    elif parameters["operation"] == "trim":  # If trim, checks and converts to integers the values
+    elif parameters["operation"] == "trim":  # If trim, checks and converts the values to integers
         defaults = {"trim-left": 0, "trim-right": None}  # Default values if a trim value has not been provided
         multiplier = {"trim-left": 1, "trim-right": -1}  # Allows to convert the value to a valid index for slicing
-        checks = {}  # Stores whether the user has provided a valid trimming value or not
+        parameters["trim-total"] = 0  # Stores the total number of bases to be trimmed
         for side in ["trim-left", "trim-right"]:  # Checks both left and right
             if side not in parameters.keys():  # If the parameter has not been provided
                 parameters[side] = defaults[side]  # Sets that parameter to its default
-                checks[side] = False  # Sets the input check to False
             else:  # If the argument has been provided
                 if parameters[side].isdigit():  # Checks if it's a positive integer
-                    parameters[side] = int(parameters[side])*multiplier[side]  # Adapts it to a valid integer index
-                    checks[side] = True  # Mark the input check as True
+                    parameters["trim-total"] += int(parameters[side])  # Adds the parameter to the count of bases
+                    parameters[side] = int(parameters[side]) * multiplier[side]  # Adapts it to a valid integer index
                 else:  # When an invalid value is provided, it returns False (the operation will be aborted)
                     print("Invalid", side, "argument. Only positive integers can be used.")
                     return False
-        if checks["trim-right"] is True or checks["trim-left"] is True:
+        if parameters["trim-total"] > 0:
             # Only if the user provides at least one valid and no invalid trimming values, it returns True
             return True
         else:  # When the user provides no trimming values and trim is selected
@@ -122,8 +121,8 @@ def check_par(parameters):  # Checks if the provided arguments are valid and con
 
 
 def get_format(input_file):  # Function to get the format of the input file
-    file = open(input_file, "r")
     file_format = False
+    file = open(input_file, "r")
     line = file.readline()
     if line[0] == ">":
         file_format = "FASTA"
@@ -142,38 +141,31 @@ def revcomp(unprocessed, content):  # Performs reverse-complement on a given seq
             processed.quality = "".join(unprocessed.quality[::-1])
         content.add_seq(unprocessed.sequence)  # Updates the statistics
         return processed  # Returns a processed read
-    except:  # If the read cannot be processed, a None is returned
+    except KeyError:  # If the read cannot be processed (e.g. invalid characters used), a None is returned
         return None
 
 
 def trim(unprocessed, left, right, content):  # Performs trimming on a given sequence and quality if needed
     processed = Read()  # Initializes the resulting read
-    try:
-        processed.sequence = unprocessed.sequence[left:right:]  # Trims the sequence
-        if unprocessed.quality:  # Trims the qualities if the read contains any
-            processed.quality = unprocessed.quality[left:right:]
-        content.add_seq(unprocessed.sequence)  # Updates statistics
-        content.add_trim(unprocessed.sequence, left, right)  # Updates trimming statistics
-        return processed  # Returns a processed read
-    except:  # If the read cannot be processed, a None is returned
-        return None
+    processed.sequence = unprocessed.sequence[left:right:]  # Trims the sequence
+    if unprocessed.quality:  # Trims the qualities if the read contains any
+        processed.quality = unprocessed.quality[left:right:]
+    content.add_seq(unprocessed.sequence)  # Updates statistics
+    content.add_trim(unprocessed.sequence, left, right)  # Updates trimming statistics
+    return processed  # Returns a processed read
 
 
 def adaptor_removal(unprocessed, adaptor, content):  # Performs adaptor_removal on a given sequence and/or quality
     processed = Read()  # Initializes the resulting read
-    try:
-        if unprocessed.sequence[:len(adaptor):].upper() == adaptor.upper():  # Checks if the adaptor is present
-            processed.sequence = unprocessed.sequence[len(adaptor)::]  # Removes the adaptor from the sequence
-            if unprocessed.quality:  # Removes the corresponding qualities if there's an adaptor
-                processed.quality = unprocessed.quality[len(adaptor)::]
-            content.add_adaptor()  # Updates the adaptor statistics
-        else:  # If there's no adaptor, the resulting read is the input read
-            processed.sequence = unprocessed.sequence
-            processed.quality = unprocessed.quality
-        content.add_seq(unprocessed.sequence)  # Updates the statistics
-        return processed  # Returns the processed read
-    except:  # If the read cannot be processed, a None is returned
-        return None
+    if unprocessed.sequence[:len(adaptor):].upper() == adaptor.upper():  # Checks if the adaptor is present
+        processed.sequence = unprocessed.sequence[len(adaptor)::]  # Stores the sequence without the adaptor
+        if unprocessed.quality:  # Removes the corresponding qualities if there's an adaptor
+            processed.quality = unprocessed.quality[len(adaptor)::]
+        content.add_adaptor()  # Updates the adaptor statistics
+    else:  # If there's no adaptor, the resulting read is the input read
+        processed = unprocessed
+    content.add_seq(unprocessed.sequence)  # Updates the statistics
+    return processed  # Returns the processed read
 
 
 parameters = get_par(sys.argv)  # Cast the arguments to the parsing function
@@ -195,19 +187,23 @@ with open(parameters["input"], "rt") as fp:  # Opens the input file
         tag = fp.readline().rstrip()  # First line is the tag
         if not tag:  # If the tag is empty, the end of the file has been reached and the processing has been completed
             break
+
         sequence = fp.readline().rstrip()  # Next line is the sequence
         current_read = Read(sequence)  # Initializes a Read object with the given sequence
         if parameters["format"] == "FASTQ":  # If it's a FASTQ file, it also stores the qualities in the Read object
             fp.readline()  # Skips the "+" line
             quality = fp.readline().rstrip()
             current_read.quality = quality
+
         # The following lines perform the necessary operation on the read and stores the result
         if parameters["operation"] == "rc":
             processed_read = revcomp(current_read, content)
-        elif parameters["operation"] == "trim":
+        elif parameters["operation"] == "trim" and len(sequence) > parameters["trim-total"]:
             processed_read = trim(current_read, parameters["trim-left"], parameters["trim-right"], content)
-        else:
+        elif parameters["operation"] == "adaptor_removal" and len(sequence) > len(parameters["adaptor"]):
             processed_read = adaptor_removal(current_read, parameters["adaptor"], content)
+        else:
+            processed_read = None
 
         if processed_read:  # If the read has been processed, it writes the result on the new file
             new_file.write(tag + "\n" + processed_read.sequence + "\n")
