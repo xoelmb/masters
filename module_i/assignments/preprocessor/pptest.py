@@ -131,39 +131,39 @@ def get_format(input_file):  # Function to get the format of the input file
     return file_format
 
 
-def revcomp(unprocessed, content):  # Performs reverse-complement on a given sequence and quality if needed
+def revcomp(unprocessed, stats):  # Performs reverse-complement on a given sequence and quality if needed
     comp_dic = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "a": "t", "c": "g", "g": "c", "t": "a", "n": "n"}
     processed = Read()  # Initializes the resulting read
     try:
         processed.sequence = "".join(comp_dic[base] for base in unprocessed.sequence[::-1])  # Revcom the sequence
         if unprocessed.quality:  # Reverses the qualities if the read contains any
             processed.quality = "".join(unprocessed.quality[::-1])
-        content.add_seq(unprocessed.sequence)  # Updates the statistics
+        stats.add_seq(unprocessed.sequence)  # Updates the statistics
         return processed  # Returns a processed read
     except KeyError:  # If the read cannot be processed (e.g. invalid characters used), a None is returned
         return None
 
 
-def trim(unprocessed, left, right, content):  # Performs trimming on a given sequence and quality if needed
+def trim(unprocessed, left, right, stats):  # Performs trimming on a given sequence and quality if needed
     processed = Read()  # Initializes the resulting read
     processed.sequence = unprocessed.sequence[left:right:]  # Trims the sequence
     if unprocessed.quality:  # Trims the qualities if the read contains any
         processed.quality = unprocessed.quality[left:right:]
-    content.add_seq(unprocessed.sequence)  # Updates statistics
-    content.add_trim(unprocessed.sequence, left, right)  # Updates trimming statistics
+    stats.add_seq(unprocessed.sequence)  # Updates statistics
+    stats.add_trim(unprocessed.sequence, left, right)  # Updates trimming statistics
     return processed  # Returns a processed read
 
 
-def adaptor_removal(unprocessed, adaptor, content):  # Performs adaptor_removal on a given sequence and/or quality
+def adaptor_removal(unprocessed, adaptor, stats):  # Performs adaptor_removal on a given sequence and/or quality
     processed = Read()  # Initializes the resulting read
     if unprocessed.sequence[:len(adaptor):].upper() == adaptor.upper():  # Checks if the adaptor is present
         processed.sequence = unprocessed.sequence[len(adaptor)::]  # Stores the sequence without the adaptor
         if unprocessed.quality:  # Removes the corresponding qualities if there's an adaptor
             processed.quality = unprocessed.quality[len(adaptor)::]
-        content.add_adaptor()  # Updates the adaptor statistics
+        stats.add_adaptor()  # Updates the adaptor statistics
     else:  # If there's no adaptor, the resulting read is the input read
         processed = unprocessed
-    content.add_seq(unprocessed.sequence)  # Updates the statistics
+    stats.add_seq(unprocessed.sequence)  # Updates the statistics
     return processed  # Returns the processed read
 
 
