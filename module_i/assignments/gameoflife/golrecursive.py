@@ -54,10 +54,10 @@ def iterate(matrix):  # Runs the code below continuously until user stops it
     if check_alive(matrix) is False:
         print("Extinction has occurred. Thanks for playing.\nExiting...")
         exit(0)
-    print("Do you want to continue? (y/n)")  # Asks the user to continue the simulation
+    print("Continue simulation (y/n)?", end="")  # Asks the user to continue the simulation
     answer = input()
     while answer != "n" and answer != "y":
-        print("Please, enter a valid answer (y/n)\nDo you want to continue?")
+        print("Please, enter a valid answer (y/n)\nContinue simulation (y/n)? ", end="")
         answer = input()
     if answer == "y":
         iterate(next_field(matrix))  # Recursively call the same function to keeo the simulation running
@@ -66,5 +66,6 @@ def iterate(matrix):  # Runs the code below continuously until user stops it
         exit(0)
 
 
+print("Welcome to the Game Of Life\n")
 field = init_matrix(10, 10)  # Initializes a random matrix of [0,1] values using given dimensions
 iterate(field)  # Starts running the simulation
