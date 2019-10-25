@@ -90,7 +90,7 @@ def check_par(pars):  # Checks if the provided arguments are valid and converts 
         if "adaptor" not in pars.keys():
             print("adaptor_removal requires an adaptor sequence.")
             return False
-        if re.search(r'\A[ACGTNacgtn]*\Z', pars["adaptor"]):
+        if re.search(r'\A[ACGTNacgtn]+\Z', pars["adaptor"]):
             return True
         else:
             print("The adaptor sequence provided is not valid (only ACGTN/acgtn strings).")
