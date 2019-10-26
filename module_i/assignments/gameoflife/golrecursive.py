@@ -1,8 +1,33 @@
+# This script runs a Game of Life simulation for as long as the user wants (unless there's no more cells alive).
+# I first used a while True loop to run the simulation, but this final version relays on recursion. I did this to have
+# some extra practice on recursion and it was easy to apply to this scenario.
+# Some of the loops that are used in the script are somehow redundant, but I purposely did so to gain modularity and
+# to have short, well-defined functions.
+# Even tough it was not needed, the script raises a warning if the simulation gets "stuck" (i.e. it does not change over
+# iterations.
+
 import random
 
 
 def init_matrix(h, w):  # Creates a matrix of given dimensions containing only 0 or 1 randomly
     return [[random.choice([0, 1]) for _ in range(w)] for _ in range(h)]
+
+
+def iterate(matrix):  # Runs the code below continuously until user stops it
+    print_field(matrix)  # Prints the matrix
+    if check_alive(matrix) is False:
+        print("Extinction has occurred. Thanks for playing.\nExiting...")
+        exit(0)
+    print("Continue simulation (y/n)?", end="")  # Asks the user to continue the simulation
+    answer = input()
+    while answer != "n" and answer != "y":
+        print("Please, enter a valid answer (y/n)\nContinue simulation (y/n)? ", end="")
+        answer = input()
+    if answer == "y":
+        iterate(next_field(matrix))  # Recursively call the same function to keeo the simulation running
+    else:
+        print("Thanks for playing!")
+        exit(0)
 
 
 def print_field(matrix):  # Prints a 0/1 matrix as a field (" "/"X" and borders)
@@ -47,23 +72,6 @@ def next_state(state, neighbours):  # Computes if the cell should be alive or de
         return 1
     else:
         return 0
-
-
-def iterate(matrix):  # Runs the code below continuously until user stops it
-    print_field(matrix)  # Prints the matrix
-    if check_alive(matrix) is False:
-        print("Extinction has occurred. Thanks for playing.\nExiting...")
-        exit(0)
-    print("Continue simulation (y/n)?", end="")  # Asks the user to continue the simulation
-    answer = input()
-    while answer != "n" and answer != "y":
-        print("Please, enter a valid answer (y/n)\nContinue simulation (y/n)? ", end="")
-        answer = input()
-    if answer == "y":
-        iterate(next_field(matrix))  # Recursively call the same function to keeo the simulation running
-    else:
-        print("Thanks for playing!")
-        exit(0)
 
 
 print("Welcome to the Game Of Life\n")
