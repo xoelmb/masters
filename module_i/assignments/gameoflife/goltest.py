@@ -9,7 +9,7 @@ import random
 
 
 def init_matrix(h, w):  # Creates a matrix of given dimensions containing only 0 or 1 randomly
-    return [[random.choice([0,1]) for _ in range(w)] for _ in range(h)]
+    return [[random.choice([0, 1]) for _ in range(w)] for _ in range(h)]
 
 
 def print_field(matrix):  # Prints a 0/1 matrix as a field (" "/"X" and borders)
