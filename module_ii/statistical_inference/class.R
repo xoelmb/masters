@@ -50,3 +50,68 @@ qpois(.945,2);
   sort(round(runif(10, min=1, max=1345234)));
 
 
+
+# 29.10
+
+dnorm(-1.1)
+x<-seq(-4,4,0.1)
+plot(x,dnorm(x),type="l")
+x<-seq(0,4,0.1)
+plot(x,dnorm(x,2,0.25),type="l")
+pnorm(84,mean=72,sd=15.2,lower.tail = FALSE)
+pnorm(65,72,15.2, lower.tail = FALSE) - pnorm(89,72,15.2, lower.tail = FALSE) 
+
+
+#
+qnorm(.975)
+
+samplenorm = rnorm(100)
+samplenorm
+mean(samplenorm)
+sd(samplenorm)
+normalmean2s3 = rnorm(300,2,3)
+mean(normalmean2s3)
+#you have to put lower tail FALSE with pnorm
+#Or you could use qnorm...¿? no me estoy enterando y es importante
+1.17
+
+
+##Two ways of making the same question
+#       ¿?¿?¿?¿?
+pnorm(65,72,15.2, lower.tail = FALSE) - pnorm(89,72,15.2, lower.tail = FALSE) 
+
+
+
+
+######## De los ejemplos, no podemos decir el color del sweater, wiene que ser el numero de veces que cojo un color.    
+
+z = (74-79)/(sqrt(225/42));
+z
+pnorm(z);
+qnorm(.975);
+
+  
+  z.test <- function(a, mu, sd){
+    zeta = (mean(a) - mu) / (sd/sqrt(length(a)));
+    prob = pnorm(abs(zeta),lower=FALSE); #one tail
+    result = c("z = ",round(zeta,4),", prob. =",round(prob,4));
+    return(result);
+  }
+  a = c(65, 78, 88, 55, 48, 95, 66, 57, 79, 81);
+  z.test(a, 75, 18) ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
