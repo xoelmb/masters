@@ -1,6 +1,7 @@
 library(seqinr)
 setwd("/home/xoel/github/masters/module_ii/stochastic_processes/")
 
+#### First exercise: still uncommented, need to make it look nice.
 ###ZIKA
 #1
 zika <- read.fasta(file="./zika.fasta")
@@ -110,3 +111,4 @@ for (mdengue in msdengue){
   
 }
 
+###This is only the first exercise
