@@ -1,0 +1,19 @@
+Assignment: EXPLORATORY DATA ANALYSIS AND HYPOTHESIS TESTING
+Exercise of exploratory data analysis and hypothesis testing. You can choose between the following two data sets: 
+
+1. Table of RefSeq annotation of the human reference genome assembly
+
+In this link you will find a summary table of RefSeq annotation of the human reference genome assembly (NCBI), the GRCh38 reference. Perform an exploratory data analysis as explained in the class session and try to raise original hypotheses about the figures (numbers) of the measured human genome variables and test statistically them. A way to do that is by defining new variables or indexes from the measured ones and even by incorporating new data from other sources (i.e., other genome variables or the same variables of other species). In this first task we expect you show the appropriate use of the concepts and tools explained in the class and the teaching material. Remember that original, well defined and scientifically relevant hypotheses and sound interpretations of results score higher. 
+
+2. Beak Depth Measurements in a Sample of Medium Ground Finches from Daphne Major (data were provided by scientists Peter and Rosemary Grant) 
+
+Finches_dataset
+Perform a data explanatory analysis and test hypothesis. For example, try to find which beak measure undergo stronger selection the year of the drought (1977).  Find here the explanation of each variable and a brief explanation of this study about the evolution of Darwin's finches on the Galapagos Islands by Peter and Rosemary Grant. 
+
+Summarize the work in four or less pages excluding graphs and tables which can be put together in a final appendix.
+
+Steps:
+
+1. Exploratory data analysis (apply descriptive statistics and graphs for one o more variables) of non-trivial variables. 
+2. Ask interesting questions (or hypotheses) about these variables or new variables (indexes...) derived from them, and try to answer appropriately the questions using the proper statistical tests 
+3. Summarize your exploration and analysis in a clear scientific writing.
