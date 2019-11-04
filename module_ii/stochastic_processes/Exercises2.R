@@ -27,3 +27,8 @@ poisson<-glm(cacc~gcc,family=poisson)
 summary(poisson)
 plot(gcc,cacc)
 lines(gcc,poisson$fitted.values,type="p",col="red")
+
+##Black dots: original values, the counts related to GC content, and in red, the expected or predicted values.
+##poisson model: predicted are counts given gcc. In the logistic, we have the expectancy of presence, prob of presence
+# It is not the same
+### :))))))))))))))))))))))))))))))))))))))))))))))))))))))) only the slope is interesting, not the intercept. If the slope is positive: more gc content, more prob of cacc. for both models 
