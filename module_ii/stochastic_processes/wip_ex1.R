@@ -2,7 +2,8 @@
 # MSc Bioinformatics
 # Module II: Stochastic processes for sequence analysis. Homework exercises.
 
-setwd("/home/masterbio/Escritorio/Xoel/git/masters/module_ii/stochastic_processes/")
+#setwd("/home/masterbio/Escritorio/Xoel/git/masters/module_ii/stochastic_processes/")
+#setwd("/home/xoel/github/masters/module_ii/stochastic_processes/")
 
 # EXERCISE 1. Comparing Zika and Dengue virus genomes.
 
@@ -12,7 +13,6 @@ zika <- read.fasta(file="./zika.fasta")
 zika <- zika[[1]]
 dengue <- read.fasta(file="./dengue.fasta")
 dengue <- dengue[[1]]
-print(zika)
 
 # a. Nucleotide and dinucleotide frequencies
 
@@ -32,6 +32,7 @@ barplot(dinuc_freq, beside=TRUE, ylim=c(0,0.12), xlab="Dinucleotide", ylab="Freq
 
 
 # b. Under/Overrepresentation of dinculeotides
+
 
 #install.packages("formattable")
 #install.packages("dplyr")
@@ -70,37 +71,45 @@ colnames(comparison_GC) <- c("GC", "AT")
 barplot(comparison_GC, beside=TRUE, main="GC/AT content", legend=rownames(comparison_GC), col=c("#606C38","#BC6C25"), ylim=c(0,0.75), ylab="Relative content")
 
 
+# ii. Sliding-windows for GC content
+win_lengths <- c(50,100,200,400,800)
 
-
-
-#######LEFT TO CLEAN 
-#4
-nzika <- length(zika)
-mzika <- 200
-kzika <- nzika%/%mzika
-gcczika <- numeric(kzika)
-
-for (i in 1:kzika){
-  a<-(i-1)*mzika+1; b <- a+mzika-1
-  gcczika[i] <- GC(zika[a:b])
-}
-
-hist(gcczika)
-ts.plot(gcczika)
-
-#9 Sliding window of GC overrepresentation
-nzika <- length(zika)
-mszika <- c(50,100,200,400,800)
-
-for (mzika in mszika){
-  kzika <- nzika%/%mzika
-  rhozika <- numeric(kzika)
-  for (i in 1:kzika){
-    a<-(i-1)*mzika+1; b <- a+mzika-1
-    rhozika[i] <- rho(zika[a:b])["gc"]
+# Zika
+for (window in win_lengths){
+  chunks <- length(zika)%/%window
+  zika_gcs <- numeric(chunks)
+  for (i in 1:chunks){
+    a<-(i-1)*window+1; b <- a+window-1
+    zika_gcs[i] <- GC(zika[a:b])
     
   }
-  jpeg(paste(mzika,"rhocg_zika.jpg"))
-  ts.plot(rhozika, main=paste("Window:", mzika), ylim=c(0,2), ylab="rho(GC)", xlab="# Window")
+  png(paste("Zika", window, "GC.png"))
+  ts.plot(zika_gcs, main=paste("Window:", window), ylim=c(0.25,0.75), ylab="GC content", xlab="# Window")
   dev.off()
 }
+
+# Dengue
+for (window in win_lengths){
+  chunks <- length(dengue)%/%window
+  dengue_gcs <- numeric(chunks)
+  for (i in 1:chunks){
+    a<-(i-1)*window+1; b <- a+window-1
+    dengue_gcs[i] <- GC(zika[a:b])
+    
+  }
+  png(paste("Dengue", window, "GC.png"))
+  ts.plot(dengue_gcs, main=paste("Window:", window), ylim=c(0.25,0.75), ylab="GC content", xlab="# Window")
+  dev.off()
+}
+
+
+
+### SOME THOUGHTS ON THE CODE ABOVE:
+# Would it be better to merge both overrepresentation tables in section b?
+#
+# So I tried to create a list with the organism and use a for loop to run the sliding windows code (see c.ii). It didn't work,
+# I really don't get why, but I don't see the point in shrinking the code for this assignment.
+# 
+# So we're computing the GC content of all the sequence with different window sizes. The thing is that I am not sure if it's 
+# better to check the overrepresentation (rho value or zscore) of gc dinucleotide. At class, we used the GC content, but
+# the exercise 9 in class exercises asks for the rho(GC) with sliding windows.
