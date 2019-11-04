@@ -13,7 +13,9 @@ zika <- zika[[1]]
 dengue <- read.fasta(file="./dengue.fasta")
 dengue <- dengue[[1]]
 
+
 # a. Nucleotide and dinucleotide frequencies
+
 # Computing the frequency of each nucleotide in both organisms and plotting the results
 z_nuc_freq <- table(zika)/length(zika)
 d_nuc_freq <- table(dengue)/length(dengue)
@@ -27,6 +29,7 @@ d_dinuc_freq <- count(dengue,2,freq=TRUE)
 dinuc_freq <- rbind(z_dinuc_freq, d_dinuc_freq)
 rownames(dinuc_freq) <- c("Zika","Dengue")
 barplot(dinuc_freq, beside=TRUE, ylim=c(0,0.12), xlab="Dinucleotide", ylab="Frequency", main="Dinucleotide frequencies", legend=rownames(nuc_freq), col=c("gold","pink"))
+
 
 # b. Under/Overrepresentation of dinculeotides
 
@@ -52,3 +55,48 @@ dengue_representation <- cbind(dengue_rho, dengue_zscore)
 colnames(dengue_representation) <- c("rho value","Z score")
 dengue_representation <- as.data.frame(dengue_representation)
 formattable(dengue_representation, list(`Z score` = formatter("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black"))))))
+
+
+
+
+
+
+
+
+
+#######LEFT TO CLEAN 
+#3
+GCzika <- GC(zika)
+ATzika <- 1-GC(zika)
+
+
+#4
+nzika <- length(zika)
+mzika <- 200
+kzika <- nzika%/%mzika
+gcczika <- numeric(kzika)
+
+for (i in 1:kzika){
+  a<-(i-1)*mzika+1; b <- a+mzika-1
+  gcczika[i] <- GC(zika[a:b])
+}
+
+hist(gcczika)
+ts.plot(gcczika)
+
+#9 Sliding window of GC overrepresentation
+nzika <- length(zika)
+mszika <- c(50,100,200,400,800)
+
+for (mzika in mszika){
+  kzika <- nzika%/%mzika
+  rhozika <- numeric(kzika)
+  for (i in 1:kzika){
+    a<-(i-1)*mzika+1; b <- a+mzika-1
+    rhozika[i] <- rho(zika[a:b])["gc"]
+    
+  }
+  jpeg(paste(mzika,"rhocg_zika.jpg"))
+  ts.plot(rhozika, main=paste("Window:", mzika), ylim=c(0,2), ylab="rho(GC)", xlab="# Window")
+  dev.off()
+}
