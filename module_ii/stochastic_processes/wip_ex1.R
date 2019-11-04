@@ -33,7 +33,6 @@ barplot(dinuc_freq, beside=TRUE, ylim=c(0,0.12), xlab="Dinucleotide", ylab="Freq
 
 # b. Under/Overrepresentation of dinculeotides
 
-
 #install.packages("formattable")
 #install.packages("dplyr")
 library(formattable)
@@ -107,9 +106,12 @@ for (window in win_lengths){
 ### SOME THOUGHTS ON THE CODE ABOVE:
 # Would it be better to merge both overrepresentation tables in section b?
 #
-# So I tried to create a list with the organism and use a for loop to run the sliding windows code (see c.ii). It didn't work,
+# So I tried to create a list with the organism and use a for loop to run the code that is repeated. It didn't work,
 # I really don't get why, but I don't see the point in shrinking the code for this assignment.
 # 
 # So we're computing the GC content of all the sequence with different window sizes. The thing is that I am not sure if it's 
 # better to check the overrepresentation (rho value or zscore) of gc dinucleotide. At class, we used the GC content, but
-# the exercise 9 in class exercises asks for the rho(GC) with sliding windows.
+# the exercise 9 in class exercises asks for the rho(GC) with sliding windows. I already have that code ready in another file
+# just in case.
+
+###FOLLOWING EXERCISES...
