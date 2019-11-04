@@ -12,7 +12,7 @@ zika <- read.fasta(file="./zika.fasta")
 zika <- zika[[1]]
 dengue <- read.fasta(file="./dengue.fasta")
 dengue <- dengue[[1]]
-
+print(zika)
 
 # a. Nucleotide and dinucleotide frequencies
 
@@ -21,14 +21,14 @@ z_nuc_freq <- table(zika)/length(zika)
 d_nuc_freq <- table(dengue)/length(dengue)
 nuc_freq <- rbind(z_nuc_freq,d_nuc_freq)
 rownames(nuc_freq) <- c("Zika", "Dengue")
-barplot(nuc_freq, beside=TRUE, ylim=c(0,0.45), xlab="Nucleotide", ylab="Frequency", main="Nucleotide frequencies", legend=rownames(nuc_freq), col=c("gold","pink"))
+barplot(nuc_freq, beside=TRUE, ylim=c(0,0.45), xlab="Nucleotide", ylab="Frequency", main="Nucleotide frequencies", legend=rownames(nuc_freq), col=c("#606C38","#BC6C25"))
 
 # Doing the same, but counting dinucleotides in this case
 z_dinuc_freq <- count(zika,2,freq=TRUE)
 d_dinuc_freq <- count(dengue,2,freq=TRUE)
 dinuc_freq <- rbind(z_dinuc_freq, d_dinuc_freq)
 rownames(dinuc_freq) <- c("Zika","Dengue")
-barplot(dinuc_freq, beside=TRUE, ylim=c(0,0.12), xlab="Dinucleotide", ylab="Frequency", main="Dinucleotide frequencies", legend=rownames(nuc_freq), col=c("gold","pink"))
+barplot(dinuc_freq, beside=TRUE, ylim=c(0,0.12), xlab="Dinucleotide", ylab="Frequency", main="Dinucleotide frequencies", legend=rownames(nuc_freq), col=c("#606C38","#BC6C25"))
 
 
 # b. Under/Overrepresentation of dinculeotides
@@ -57,19 +57,23 @@ dengue_representation <- as.data.frame(dengue_representation)
 formattable(dengue_representation, list(`Z score` = formatter("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black"))))))
 
 
+# c. GC content
 
-
+#  i. Genome-wide
+zika_GC <- GC(zika)
+zika_AT <- 1 - zika_GC
+dengue_GC <- GC(dengue)
+dengue_AT <- 1 - dengue_GC
+comparison_GC <- matrix(c(zika_GC,zika_AT, dengue_GC, dengue_AT),nrow=2, ncol=2, byrow=TRUE)
+rownames(comparison_GC) <- c("Zika", "Dengue")
+colnames(comparison_GC) <- c("GC", "AT")
+barplot(comparison_GC, beside=TRUE, main="GC/AT content", legend=rownames(comparison_GC), col=c("#606C38","#BC6C25"), ylim=c(0,0.75), ylab="Relative content")
 
 
 
 
 
 #######LEFT TO CLEAN 
-#3
-GCzika <- GC(zika)
-ATzika <- 1-GC(zika)
-
-
 #4
 nzika <- length(zika)
 mzika <- 200
