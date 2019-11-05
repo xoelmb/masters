@@ -5,6 +5,8 @@
 #setwd("/home/masterbio/Escritorio/Xoel/git/masters/module_ii/stochastic_processes/")
 #setwd("/home/xoel/github/masters/module_ii/stochastic_processes/")
 
+
+
 # EXERCISE 1. Comparing Zika and Dengue virus genomes.
 
 # Loading the sequences of both viruses
@@ -13,6 +15,7 @@ zika <- read.fasta(file="./zika.fasta")
 zika <- zika[[1]]
 dengue <- read.fasta(file="./dengue.fasta")
 dengue <- dengue[[1]]
+
 
 # a. Nucleotide frequencies
 # i. Nucleotides
@@ -39,6 +42,7 @@ trinuc_freq <- rbind(z_trinuc_freq, d_trinuc_freq)
 rownames(trinuc_freq) <- c("Zika","Dengue")
 barplot(trinuc_freq, beside=TRUE, ylim=c(0,0.12), xlab="Trinucleotide", ylab="Frequency", main="Trinucleotide frequencies", legend=rownames(trinuc_freq), col=c("#606C38","#BC6C25"))
 
+
 # b. Under/Overrepresentation
 
 #install.packages("formattable")
@@ -48,39 +52,34 @@ library(dplyr)
 
 # i. Dinucleotides
 # Computing rho and zscores, and creating a data frame with the results for zika and dengue viruses
+zika_dinuc_rho <- rho(zika, 2)
+zika_dinuc_zscore <- zscore(zika, modele="base")
+dengue_dinuc_rho <- rho(dengue, 2)
+dengue_dinuc_zscore <- zscore(dengue, modele="base")
 
-# Zika
-zika_rho <- rho(zika, 2)
-zika_zscore <- zscore(zika, modele="base")
-zika_representation <- cbind(zika_rho, zika_zscore)
-colnames(zika_representation) <- c("rho value","Z score")
-zika_representation <- as.data.frame(zika_representation)
-formattable(zika_representation, list(`Z score` = formatter("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black"))))))
+dinuc_representation <- cbind(zika_dinuc_rho, dengue_dinuc_rho, zika_dinuc_zscore, dengue_dinuc_zscore)
+colnames(dinuc_representation) <- c("Zika rho", "Dengue rho", "Zika Z score", "Dengue Z score")
+dinuc_representation <- as.data.frame(dinuc_representation)
 
-# Dengue
-dengue_rho <- rho(dengue, 2)
-dengue_zscore <- zscore(dengue, modele="base")
-dengue_representation <- cbind(dengue_rho, dengue_zscore)
-colnames(dengue_representation) <- c("rho value","Z score")
-dengue_representation <- as.data.frame(dengue_representation)
-formattable(dengue_representation, list(`Z score` = formatter("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black"))))))
+formattable(dinuc_representation, list(`Zika Z score` = formatter
+                                       ("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black")))),
+                                       `Dengue Z score` = formatter
+                                       ("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black"))))))
 
 # ii. Trinucleotides
-# Zika
-zika_rho <- rho(zika, 3)
-zika_zscore <- zscore(zika, modele="base")
-zika_representation <- cbind(zika_rho, zika_zscore)
-colnames(zika_representation) <- c("rho value","Z score")
-zika_representation <- as.data.frame(zika_representation)
-formattable(zika_representation, list(`Z score` = formatter("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black"))))))
+zika_trinuc_rho <- rho(zika, 3)
+zika_trinuc_zscore <- zscore(zika, modele="base")
+dengue_trinuc_rho <- rho(dengue, 3)
+dengue_trinuc_zscore <- zscore(dengue, modele="base")
 
-# Dengue
-dengue_rho <- rho(dengue, 3)
-dengue_zscore <- zscore(dengue, modele="base")
-dengue_representation <- cbind(dengue_rho, dengue_zscore)
-colnames(dengue_representation) <- c("rho value","Z score")
-dengue_representation <- as.data.frame(dengue_representation)
-formattable(dengue_representation, list(`Z score` = formatter("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black"))))))
+trinuc_representation <- cbind(zika_trinuc_rho, dengue_trinuc_rho, zika_trinuc_zscore, dengue_trinuc_zscore)
+colnames(trinuc_representation) <- c("Zika rho", "Dengue rho", "Zika Z score", "Dengue Z score")
+trinuc_representation <- as.data.frame(trinuc_representation)
+
+formattable(trinuc_representation, list(`Zika Z score` = formatter
+                                       ("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black")))),
+                                       `Dengue Z score` = formatter
+                                       ("span",style = x ~ style(color = ifelse(x < -2, "red",ifelse(x >2, "green","black"))))))
 
 # c. GC content
 
