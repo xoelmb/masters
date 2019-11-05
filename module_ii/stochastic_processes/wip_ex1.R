@@ -35,12 +35,12 @@ rownames(dinuc_freq) <- c("Zika","Dengue")
 barplot(dinuc_freq, beside=TRUE, ylim=c(0,0.12), xlab="Dinucleotide", ylab="Frequency", main="Dinucleotide frequencies", legend=rownames(dinuc_freq), col=c("#606C38","#BC6C25"))
 
 # iii. Trinucleotides
-# Counting trinucleotides
+# Counting trinucleotides 
 z_trinuc_freq <- count(zika,3,freq=TRUE)
 d_trinuc_freq <- count(dengue,3,freq=TRUE)
 trinuc_freq <- rbind(z_trinuc_freq, d_trinuc_freq)
 rownames(trinuc_freq) <- c("Zika","Dengue")
-barplot(trinuc_freq, beside=TRUE, ylim=c(0,0.12), xlab="Trinucleotide", ylab="Frequency", main="Trinucleotide frequencies", legend=rownames(trinuc_freq), col=c("#606C38","#BC6C25"))
+barplot(trinuc_freq, beside=TRUE, ylim=c(0,0.045), xlab="Trinucleotide", ylab="Frequency", main="Trinucleotide frequencies", legend=rownames(trinuc_freq), col=c("#606C38","#BC6C25"))
 
 
 # b. Under/Overrepresentation
@@ -127,11 +127,9 @@ for (window in win_lengths){
 
 
 
-### SOME THOUGHTS ON THE CODE ABOVE:#########################################################################################
+### SOME THOUGHTS ON THE CODE ABOVE:##########################################################################################
 #
-# Would it be better to merge both overrepresentation tables in section b?
-#
-# So I tried to create a list with the organism and use a for loop to run the code that is repeated. It didn't work,
+# I tried to create a list with the organism and use a for loop to run the code that is repeated. It didn't work,
 # I really don't get why, but I don't see the point in shrinking the code for this assignment.
 # 
 # So we're computing the GC content of all the sequence with different window sizes. The thing is that I am not sure if it's 
