@@ -1,42 +1,40 @@
-def merge_sort(l):
+def merge_sort(numbers_list):
     # Checking that the length of the (split) list is grater than 1
-    if len(l) > 1:
+    if len(numbers_list) > 1:
         # Calculate the middle point
-        t = len(l) // 2
+        t = len(numbers_list) // 2
         # Dividing the list of numbers, recursively pass it to merge_sort and making it iterable
         # Instead of using pointers, iterate using iter/next
-        it1 = iter(merge_sort(l[:t]))
-        x1 = next(it1)
-        it2 = iter(merge_sort(l[t:]))
-        x2 = next(it2)
+        left_list = iter(merge_sort(numbers_list[:t]))
+        n1 = next(left_list)
+        right_list = iter(merge_sort(numbers_list[t:]))
+        n2 = next(right_list)
         # Define the ordered list as an empty list
-        l = []
+        numbers_list = []
         # Try will expand the list and iterate using next. When one of the list has been finished, it raises an error
         # so the except is called.
         try:
             while True:
-                if x1 <= x2:
-                    l.append(x1)
-                    x1 = next(it1)
+                if n1 <= n2:
+                    numbers_list.append(n1)
+                    n1 = next(left_list)
                 else:
-                    l.append(x2)
-                    x2 = next(it2)
+                    numbers_list.append(n2)
+                    n2 = next(right_list)
         # Except checks which of the list has been completed, and appends the other one with append/extend.
         except:
-            if x1 <= x2:
-                l.append(x2)
-                l.extend(it2)
+            if n1 <= n2:
+                numbers_list.append(n2)
+                numbers_list.extend(right_list)
             else:
-                l.append(x1)
-                l.extend(it1)
-    return l
+                numbers_list.append(n1)
+                numbers_list.extend(left_list)
+    return numbers_list
 
 
 import random, time
 
-numbers = []
-for _ in range(0, 1000000):
-    numbers.append(random.randint(1, 1000000))
+numbers = [random.randint(1, 1000000) for _ in range(0,1000000)]
 
 t0 = time.time()
 merge_sort(numbers)
