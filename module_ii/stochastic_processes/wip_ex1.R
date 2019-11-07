@@ -145,7 +145,7 @@ for (window in win_lengths){
     
   }
   png(paste("Zika", window, "zscore GC.png"))
-  ts.plot(zika_rhos, main=paste("GC representation\nWindow:", window), ylim=c(-4,4), ylab="GC zscore", xlab="# Window")
+  ts.plot(zika_zscores, main=paste("GC representation\nWindow:", window), ylim=c(-4,4), ylab="GC zscore", xlab="# Window")
   dev.off()
 }
 
@@ -159,7 +159,7 @@ for (window in win_lengths){
     
   }
   png(paste("Dengue", window, "zscore GC.png"))
-  ts.plot(dengue_rhos, main=paste("GC representation\nWindow:", window), ylim=c(-4,4), ylab="GC zscore", xlab="# Window")
+  ts.plot(dengue_zscores, main=paste("GC representation\nWindow:", window), ylim=c(-4,4), ylab="GC zscore", xlab="# Window")
   dev.off()
 }
 
