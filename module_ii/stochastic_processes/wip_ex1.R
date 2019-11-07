@@ -84,6 +84,8 @@ formattable(trinuc_representation, list(`Zika Z score` = formatter
 # c. GC content
 
 #  i. Genome-wide
+# GC content is known to be very variable between species. We can check if there's a difference between both viruses using the code below.
+
 zika_GC <- GC(zika)
 zika_AT <- 1 - zika_GC
 dengue_GC <- GC(dengue)
@@ -95,6 +97,9 @@ barplot(comparison_GC, beside=TRUE, main="GC/AT content", legend=rownames(compar
 
 
 # ii. Sliding-windows for GC content
+# The GC content within a species has also great variability. Coding sequences usually have a greater GC content than other 
+# sequences. Using sliding windows, we can infere which regions are more likely to be coding sequences.
+
 win_lengths <- c(50,100,200,400,800)
 
 # Zika
@@ -126,15 +131,45 @@ for (window in win_lengths){
 }
 
 
+# d. GpC overrepresentation
+# The dinculeotide CpG is partly responsible for the regulation of the gene expression in many organisms. This nucleotide is
+# usually underrepresented across the genome, except for those regions that are regulated by cytosine methylation.
+
+# Zika
+for (window in win_lengths){
+  chunks <- length(zika)%/%window
+  zika_zscores <- numeric(chunks)
+  for (i in 1:chunks){
+    a<-(i-1)*window+1; b <- a+window-1
+    zika_zscores[i] <- zscore(zika[a:b], modele="base")["gc"]
+    
+  }
+  png(paste("Zika", window, "zscore GC.png"))
+  ts.plot(zika_rhos, main=paste("GC representation\nWindow:", window), ylim=c(-4,4), ylab="GC zscore", xlab="# Window")
+  dev.off()
+}
+
+# Dengue
+for (window in win_lengths){
+  chunks <- length(dengue)%/%window
+  dengue_zscores <- numeric(chunks)
+  for (i in 1:chunks){
+    a<-(i-1)*window+1; b <- a+window-1
+    dengue_zscores[i] <- zscore(dengue[a:b], modele="base")["gc"]
+    
+  }
+  png(paste("Dengue", window, "zscore GC.png"))
+  ts.plot(dengue_rhos, main=paste("GC representation\nWindow:", window), ylim=c(-4,4), ylab="GC zscore", xlab="# Window")
+  dev.off()
+}
+
+
+
+
 
 ### SOME THOUGHTS ON THE CODE ABOVE:##########################################################################################
 #
 # I tried to create a list with the organism and use a for loop to run the code that is repeated. It didn't work,
 # I really don't get why, but I don't see the point in shrinking the code for this assignment.
 # 
-# So we're computing the GC content of all the sequence with different window sizes. The thing is that I am not sure if it's 
-# better to check the overrepresentation (rho value or zscore) of gc dinucleotide. At class, we used the GC content, but
-# the exercise 9 in class exercises asks for the rho(GC) with sliding windows. I already have that code ready in another file
-# just in case.
-#
 ###FOLLOWING EXERCISES...######################################################################################################
