@@ -4,9 +4,13 @@
 
 # BLOCK EXERCISES
 
+# Lo importante es sacar la fórmula de la complejidad (lineal, logarítmica o lo que sea). Luego es sustituir los valores
+# para hallar C, y podemos aplicar el dato que nos pide.
+
 # [E0] Compute the complexity of the following algorithms. Taking into
 # account that it has taken 50s to run for n=1000, calculate how long it
 # will take to run for n=100000.
+import copy
 
 
 def sum_list(my_list):
@@ -14,6 +18,8 @@ def sum_list(my_list):
     for elm in my_list:
         count += elm
     return count
+
+# lineal: ejecuta una orden por cada elemento de la lista: O(n) = n
 
 
 # [E1] Compute the complexity of the following algorithms. Taking into
@@ -27,6 +33,8 @@ def factorial(n):
         result *= i
     return result
 
+# lineal: ejecuta una orden por cada elemento hasta n: O(n) = n
+
 
 # [E2] Compute the complexity of the following algorithms. Taking into
 # account that it has taken 40s to run for n=10, calculate how long it
@@ -38,6 +46,10 @@ def remove_adaptor_list(sequence, adaptor_list):
         if sequence[0:len(adaptor)] == adaptor:
             return sequence[len(adaptor):]
     return sequence
+
+# exponencial: el loop se ejecuta n veces (cantidad de adaptadores), y cada vez tiene que hacer m comprobaciones (carac-
+# teres que tenga el adaptor). Como no nos dice nada sobre m, podemos asumir que es constante en todos los adaptadores
+# y extrapolarlo a que es LINEAL: O(n) = n
 
 
 # [E3] Compute the complexity of the following algorithms. Taking into
@@ -51,6 +63,7 @@ def reverse(sequence):
         sequence_rev += sequence[len(sequence) - i]
     return sequence_rev
 
+# lineal: siendo n la cantidad de caracteres, tiene que ejecutar n órdendes: O(n) = n
 
 # [E4] Compute the complexity of the following algorithms. Taking into
 # account that it has taken 30s to run for n=10, calculate how long it
@@ -60,6 +73,8 @@ def reverse(sequence):
 def reverse_complement(dna):
     complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
     return ''.join([complement[base] for base in dna[::-1]])
+
+# lineal: un join por cada caracter que hay en la secuencia
 
 
 # [E5] Compute the complexity of the following algorithms. Taking into
@@ -73,6 +88,7 @@ def factorial(n):
     else:
         return n * factorial(n - 1)
 
+# lineal, creo, porque solo hace una multiplicación y una comprobación por cada número hasta n
 
 # [E6] Compute the complexity of the following algorithms. Taking into
 # account that it has taken 4s to run for n=1000, calculate how long it
@@ -91,6 +107,8 @@ def binarysearch(sequence, value):
             return mid
     return None
 
+# no lo sé, pero creo que lineal, o 1/2 ^n pero ni idea.
+
 
 # [E7] Compute the complexity of the following algorithms. Taking into
 # account that it has taken 4s to run for n=1000, calculate how long it
@@ -105,6 +123,7 @@ def fib(n):
     else:
         return fib(n - 1) + fib(n - 2)
 
+# Exponencial: 2^n porque ejecuta dos operaciones por cada número que hay hasta n
 
 ########################################################################################################################
 #################                                    ALGORITHMS 2                                    ###################
@@ -121,7 +140,19 @@ def search(numbers, n):
     return False
 
 
-# Searching a number in a list. Recursively.
+# Searching a number in a list. Recursively & DAC:
+
+
+
+# Breve explicación del DAC con el siguiente ejercicio.
+# Excepto la última vez, entras siempre en el else, que te divide la lista, y entra en la función, en el else otra vez,
+# que divide la lista, y entra en la función... total, que te irá haciendo dos listas más pequeñas por cada paso. Al fi
+# nal te quedas con muchas listas que se habrán quedado con 1 o 0 elementos. Cuando son de 0 elemento, en esa lista obv
+# iamente no está el valor que estás buscando, así que devuelve false. En las que haya quedado 1 elemento, comprobará si
+# es el valor n que estás buscando. Si lo es, devuelve True, y al devolver True, esa lista returnea True a la función
+# que la llamó, y esta, al cumplirse el if donde la llama, returnea True a la que la llamó, y el True va "ascendiendo"
+# en las llamadas de funciones hasta que devuelve True a la original. Si ninguna lista de 1 elemento devuelve True,
+# llegas a la orden return False del final.
 
 
 def search(numbers, n):
@@ -137,7 +168,7 @@ def search(numbers, n):
 
 
 # Searching a number in a sorted list
-
+# Lo mismo, pero solo llamando a la recursión de la mitad de la lista que puede contener el elemento.
 
 def search(numbers, n):
     if len(numbers) == 0:
@@ -154,7 +185,7 @@ def search(numbers, n):
 
 # 2. Comparing VCF records
 
-
+# Primero comprueba el campo cromosoma, y si son iguales, el de posición.
 def compare_vcf(vcf1, vcf2):
     if vcf1[0] < vcf2[0]:
         return -1
@@ -179,6 +210,7 @@ print(compare_vcf(("Chr2", 793301, "GTGTGT", ""), ("Chr1", 45798901, "C", "T")))
 
 # 2. Searching for a variant
 
+# Te comprueba si un record vcf que le pases está contenido en una lista de records vcf, y te devuelve el índice.
 
 def search_vcf_list(nlist, number):
     idx = 0
@@ -216,6 +248,7 @@ def binary_search_vcf_list(vcf_list, vcf):
 
 # 3. Sort two VCF records
 
+# Usa la función de antes para comparar dos vcf y te los devuelve ordenados
 
 def sort_2vcf(vcf1, vcf2):
     if compare_vcf(vcf1, vcf2) <= 0:
@@ -231,6 +264,12 @@ print(sort_2vcf(("Chr1", 45798901, "C", "T"), ("Chr2", 793301, "GTGTGT", "")))
 
 
 # 3. Merge two lists of sorted VCF records
+
+# teniendo dos listas ordenadas, te las junta también dando una lista ordenada. Lo que hace es coger el elemento más pe-
+# queño de la primera lista y compararlo con el más pequeño de la segunda (LOS MÁS PEQUES SON LOS PRIMEROS PORQUE ESTÁN
+# ORDENADAS). Añade entonces el más pequeño a la lista merged y suma uno al pointer de esa lista para la siguiente vez
+# comprobar el siguiente elemento. Cuando has acabado con una de las listas, añade lo que queda de la otra a la lista
+# merged
 
 
 def merge_vcf_lists(list1, list2, merged):
@@ -270,6 +309,11 @@ print(merged)
 
 # 3. VCF MergeSort
 
+# DAC. Vas a entrar en el else las primeras veces. En el else, divides la lista en dos, izq y der, y las pasas a la fun-
+# ción de nuevo. Entras en el else y bueno, así hasta que las listas solo tienen un elemento! Cuando tienen un elemento
+# y se la pasas a la función, te devuelve un return sin nada, que para la recursión, es decir, la función que pasó esa
+# lista de un elemento puede continuar la siguiente línea, que es merge_vcf_lists, que lo que hace es devolverte una lis
+# ta ordenada de las dos anteriores.
 
 def merge_sort_vcf_lists(vcf_list):
     # Check list length
@@ -303,6 +347,7 @@ print(list_vcf)
 
 # 3. Sorting integers. MergeSort
 
+# Son los mismos principios que los explicados para vcf que era más complicado.
 
 def merge_lists(list1, list2, merged):
     p1 = 0
@@ -388,8 +433,10 @@ def merge_sort(numbers_list):
 
 # [E1] Implement a function that sorts a list of kmers (i.e. strings).
 
+# ...
+
 # Kmers
-kmers = ["CGT","TAG","AAA"]
+kmers = ["CGT", "TAG", "AAA"]
 # Sort kmers
 sort_kmers(kmers)
 # Prints "["AAA","CGT","TAG"]"
@@ -411,3 +458,425 @@ print(kmers)
 # [E5] Given a sorted list of integers, implement a ternary search that,
 # in the spirit of the binary search, divides the search space by 3 on
 # each step of the search
+
+
+########################################################################################################################
+#################                                    ALGORITHMS 4                                    ###################
+########################################################################################################################
+
+# 1. Constrained K-mer generation: For a given k, generate all k-mers, that don’t contain any “GC” repetition
+
+# A ver, aquí tienes la longitud k de tus kmers para empezar. como no es 0, entras en el else, que por cada letra te
+# llama una vez a la función, pero con k-1, y diciéndo qué base es la que estás escribiendo. Entonces, lo que haces es
+# ir llamando a la función con una k cada vez más pequeña y un kmer creado cada vez más largo! Cuando k = 0, has acabado
+# de crear el kmer, y entonces se comprueba que no haya GC en el kmer creado antes de imprimirlo.
+def enumerate_kmers_no_GC(k, base):
+    if k == 0:
+        if "GC" not in base:
+            print(base)
+    else:
+        for c in "ACGT":
+            enumerate_kmers_no_GC(k - 1, base + c)
+
+
+# Generate all combinations
+enumerate_kmers_no_GC(3, "")
+
+# 2. Solving a maze.
+import copy
+
+
+def search_maze(maze, position, end):
+    # Mark path with "*"
+    v = position[0]
+    h = position[1]
+    maze[v][h] = "*"
+    # Check position
+    if position == end:
+        print_maze(maze)
+        return
+    else:
+        if v > 0 and maze[v - 1][h] == " ":
+            maze_next = copy.deepcopy(maze)
+            search_maze(maze_next, (v - 1, h), end)
+        if v + 1 < len(maze) and maze[v + 1][h] == " ":
+            maze_next = copy.deepcopy(maze)
+            search_maze(maze_next, (v + 1, h), end)
+        if h > 0 and maze[v][h - 1] == " ":
+            maze_next = copy.deepcopy(maze)
+            search_maze(maze_next, (v, h - 1), end)
+        if h + 1 < len(maze[v]) and maze[v][h + 1] == " ":
+            maze_next = copy.deepcopy(maze)
+            search_maze(maze_next, (v, h + 1), end)
+
+
+def print_maze(maze):
+    for line in maze:
+        print("".join(line))
+
+
+maze = [
+    list("----------------------------"),
+    list("|  XXXX X  XX  XXX   XX  XX|"),
+    list("|X XXXX X XX X  X  XXXX X X|"),
+    list("|X XX    X X XX XXXX   XXX |"),
+    list("|X XX X X XX X  X  X X XX X|"),
+    list("|   X X XXX     XX X X  X X|"),
+    list("| X X X X X X X XX   XX XXX|"),
+    list("|XX   X   X X XXX  XXXX X  |"),
+    list("| X X X XXX X XXX XXXXX XXX|"),
+    list("|X  X X     X     XX       |"),
+    list("----------------------------")]
+start = (1, 1)
+end = (9, 26)
+# Search in the maze
+search_maze(maze, start, end)
+
+
+# 3. Sequence profile: Given a sequence and a k-mer length, compute the profile (or
+# histogram) with the frequencies of each k-mer appearing in the sequence.
+
+
+def kmer_profile(sequence, k):
+    profile = {}
+    for i in range(0, len(sequence) - k + 1):
+        kmer = sequence[i:i + k]
+        if kmer not in profile:
+            profile[kmer] = 0
+        profile[kmer] += 1
+    return profile
+
+
+# Declare sequence and k-mer length
+sequence = "ACAGACTACGACTACGACGGAAACTG"
+k = 2
+
+
+# 4. Solving a sudoku.
+
+
+def solve_sudoku(sudoku, x, y):
+    # Check sudoku solved
+    if y == 9:
+        print_sudoku(sudoku)
+    else:
+        # Compute next position
+        if x == 8:
+            x_next = 0
+            y_next = y + 1
+        else:
+            x_next = x + 1
+            y_next = y
+        # Check next position and solve
+        if sudoku[x][y] != "?":
+            solve_sudoku(sudoku, x_next, y_next)
+        else:
+            sudoku_next = copy.deepcopy(sudoku)
+            for n in range(1, 10):
+                sudoku_next[x][y] = n
+                if valid_sudoku(sudoku_next):
+                    solve_sudoku(sudoku_next, x_next, y_next)
+
+
+def valid_sudoku(sudoku):
+    # Check rows
+    for x in range(0, 9):
+        components = []
+        for y in range(0, 9):
+            components.append(sudoku[x][y])
+        if not valid_component(components):
+            return False
+    # Check columns
+    for y in range(0, 9):
+        components = []
+        for x in range(0, 9):
+            components.append(sudoku[x][y])
+        if not valid_component(components):
+            return False
+    # Check small squares
+    for n1 in [0, 3, 6]:
+        for n2 in [0, 3, 6]:
+            components = []
+            for x in range(n1, n1 + 3):
+                for y in range(n2, n2 + 3):
+                    components.append(sudoku[x][y])
+            if not valid_component(components):
+                return False
+    # All OK
+    return True
+
+
+def valid_component(components):
+    occurs = [False for _ in range(0, 9)]
+    for n in components:
+        # Check unknown
+        if n == "?": continue
+        # Check repeated
+        if occurs[n - 1] == True: return False
+        # Annotate
+        occurs[n - 1] = True
+    # All OK
+    return True
+
+
+sudoku = [
+    [5, "?", "?", "?", 8, "?", "?", 4, 9],
+    ["?", "?", "?", 5, "?", "?", "?", 3, "?"],
+    ["?", 6, 7, 3, "?", "?", "?", "?", 1],
+    [1, 5, "?", "?", "?", "?", "?", "?", "?"],
+    ["?", "?", "?", 2, "?", 8, "?", "?", "?"],
+    ["?", "?", "?", "?", "?", "?", "?", 1, 8],
+    [7, "?", "?", "?", "?", 4, 1, 5, "?"],
+    ["?", 3, "?", "?", "?", 2, "?", "?", "?"],
+    [4, 9, "?", "?", 5, "?", "?", "?", 3]]
+
+solve_sudoku(sudoku, 0, 0)
+
+
+########################################################################################################################
+#################                                    ALGORITHMS 5                                    ###################
+########################################################################################################################
+
+# 2. Edit Distance. Brute Force:
+
+
+def edit_distance(pattern, text):
+    if len(pattern) == 0:
+        # Insert all remaining chars
+        return len(text)
+    elif len(text) == 0:
+        # Delete all remaining chars
+        return len(pattern)
+    else:
+        # Find score for match/subtitution
+        if pattern[0] == text[0]:
+            m_cost = edit_distance(pattern[1:], text[1:])
+        else:
+            m_cost = edit_distance(pattern[1:], text[1:]) + 1
+        # Find score for insertion
+        i_cost = edit_distance(pattern[:], text[1:]) + 1
+        # Find score for deletion
+        d_cost = edit_distance(pattern[1:], text[:]) + 1
+        # Find the minimum combination
+        return min(m_cost, i_cost, d_cost)
+
+
+pattern = "TAC"
+text = "TC"
+distance = edit_distance(pattern, text)
+print(distance)  # Prints "1"
+
+
+# 2. Edit Distance. Brute Force. Exercise: Implement the function edit distance that computes the
+# actual set of edit operations that lead to the minimum distance
+
+
+def edit_distance(pattern, text):
+    if len(pattern) == 0:
+        return (len(text), ["I"] * len(text))
+    elif len(text) == 0:
+        return (len(pattern), ["D"] * len(pattern))
+    else:
+        (m_cost, m_cigar) = edit_distance(pattern[1:], text[1:])
+        (i_cost, i_cigar) = edit_distance(pattern[:], text[1:])
+        (d_cost, d_cigar) = edit_distance(pattern[1:], text[:])
+        minimum = min(m_cost, i_cost, d_cost)
+        if minimum == m_cost:
+            if (pattern[0] == text[0]):
+                return (m_cost, ["M"] + m_cigar)
+            else:
+                return (m_cost + 1, ["X"] + m_cigar)
+        elif minimum == i_cost:
+            return (i_cost + 1, ["I"] + i_cigar)
+        else:
+            return (d_cost + 1, ["D"] + d_cigar)
+
+
+# 2. Edit Distance. Pretty Print. Exercise: Given 2 sequence and a list of alignment operations (i.e.
+# alignment cigar), print formatted the alignment between the pattern and the text.
+
+
+def pretty_print_alignment(pattern, text, cigar):
+    (pattern_txt, i) = ("", 0)
+    operation_txt = ""
+    (text_txt, j) = ("", 0)
+    for op in cigar:
+        if op == "M":
+            pattern_txt += pattern[i]
+            i += 1
+            operation_txt += "/"
+            text_txt += text[j]
+            j += 1
+        elif op == "X":
+            pattern_txt += pattern[i]
+            i += 1
+            operation_txt += " "
+            text_txt += text[j]
+            j += 1
+        elif op == "I":
+            pattern_txt += " "
+            operation_txt += " "
+            text_txt += text[j]
+            j += 1
+        elif op == "D":
+            pattern_txt += pattern[i]
+            i += 1
+            operation_txt += " "
+            text_txt += " "
+
+    print(pattern_txt)
+    print(operation_txt)
+    print(text_txt)
+
+
+# Compute edit distance
+(distance, cigar) = edit_distance("GATTACA", "GGACTCA")
+# Prints "(2, ['I', 'M', 'M', 'M', 'M', 'D', 'M', 'M'])"
+print(distance, cigar)
+# Prints Pretty
+pretty_print_alignment("GATTACA", "GGACTCA", cigar)
+
+
+# GATTACA
+# || | ||
+# GGACT CA
+
+
+# 3. Dynamic Programming. Memoization. Use a dictionary to memorize calls to edit_distance
+
+
+def edit_distance(pattern, text, calls):
+    # Lookup call
+    key = pattern + ":" + text
+    if key in calls:
+        return calls[key]
+    # Regular algorithm
+    if len(pattern) == 0:
+        return len(text)
+    elif len(text) == 0:
+        return len(pattern)
+    else:
+        if pattern[0] == text[0]:
+            m_cost = edit_distance(pattern[1:], text[1:])
+        else:
+            m_cost = edit_distance(pattern[1:], text[1:]) + 1
+        i_cost = edit_distance(pattern[:], text[1:]) + 1
+        d_cost = edit_distance(pattern[1:], text[:]) + 1
+        minimum = min(m_cost, i_cost, d_cost)
+        # Store call
+        calls[pattern + ":" + text] = minimum
+        # Return
+        return minimum
+
+
+# 3. Dynamic Prgramming. Implement edit-distance computation using a dynamic programming table
+def edit_distance_dp(pattern, text):
+    # Init
+    dp_matrix = [[0 for _ in range(len(text) + 1)] for _ in range(len(pattern) + 1)]
+    for v in range(len(pattern) + 1):
+        dp_matrix[v][0] = v
+    for h in range(len(text) + 1):
+        dp_matrix[0][h] = h
+    # Compute DP Matrix
+    for h in range(1, len(text) + 1):
+        for v in range(1, len(pattern) + 1):
+            dp_matrix[v][h] = min(
+                dp_matrix[v - 1][h - 1] + (0 if pattern[v - 1] == text[h - 1] else 1),
+                dp_matrix[v][h - 1] + 1,
+                dp_matrix[v - 1][h] + 1)
+    return dp_matrix
+
+
+# 3. Dynamic Programming. Backtrace optimum CIGAR:
+
+
+def backtrace_matrix(pattern, text, dp_matrix):
+    v = len(pattern)
+    h = len(text)
+    cigar = []
+    while v > 0 and h > 0:
+        if dp_matrix[v][h] == dp_matrix[v - 1][h] + 1:
+            v -= 1
+            cigar.insert(0, "D")
+        elif dp_matrix[v][h] == dp_matrix[v][h - 1] + 1:
+            h -= 1
+            cigar.insert(0, "I")
+        else:
+            v -= 1
+            h -= 1
+            if pattern[v] == text[h]:
+                cigar.insert(0, "M")
+            else:
+                cigar.insert(0, "X")
+    if v > 0:
+        for _ in range(v): cigar.insert(0, "D")
+    if h > 0:
+        for _ in range(h): cigar.insert(0, "I")
+    return cigar
+
+
+# Compute edit distance
+dp_matrix = edit_distance_dp("GATTACA", "GGACTCA")
+# Print matrix
+# [0, 1, 2, 3, 4, 5, 6, 7]
+# [1, 0, 1, 2, 3, 4, 5, 6]
+# [2, 1, 1, 1, 2, 3, 4, 5]
+# [3, 2, 2, 2, 2, 2, 3, 4]
+# [4, 3, 3, 3, 3, 2, 3, 4]
+# [5, 4, 4, 3, 4, 3, 3, 3]
+# [6, 5, 5, 4, 3, 4, 3, 4]
+# [7, 6, 6, 5, 4, 4, 4, 3]
+print_dp_matrix(dp_matrix)
+# Prints "(2, ['I', 'M', 'M', 'M', 'M', 'D', 'M', 'M'])"
+print(backtrace_matrix("GATTACA", "GGACTCA", dp_matrix))
+
+
+# 4. Subset sum problem. Given a list of numbers, find out is a subset adds up to a given number
+# Combinatorial exploration
+
+def subset_sum(numbers, n, total):
+    # Basic Cases
+    if (total == 0): return True
+    if (n == 0 and total != 0): return False
+    # Last element is greater than sum
+    if (numbers[n - 1] > total):
+        return subset_sum(numbers, n - 1, total)
+    # (1) Include the last element
+    # (2) Exclude the last element
+    return subset_sum(numbers, n - 1, total) or subset_sum(numbers, n - 1, total - numbers[n - 1])
+
+
+numbers = [3, 14, 4, 12, 5, 3, 40]
+total = 10
+if (subset_sum(numbers, len(numbers), total)):
+    print("Found a subset with given sum")
+else:
+    print("No subset with given sum")
+
+
+# Dynamic
+def subset_sum(numbers, n, total):
+    subset = [[False for _ in range(total + 1)] for _ in range(n + 1)]
+    # If sum is 0, then answer is true
+    for i in range(n + 1):
+        # Sum is 0
+        subset[i][0] = True
+        # Sum is not 0 and set is empty
+        for i in range(1, total + 1):
+            subset[0][i] = False
+        # Fill the subset table (bottom up)
+        for i in range(1, n + 1):
+            for j in range(1, total + 1):
+                if j < numbers[i - 1]:
+                    subset[i][j] = subset[i - 1][j]
+                if j >= numbers[i - 1]:
+                    subset[i][j] = subset[i - 1][j] or subset[i - 1][j - numbers[i - 1]]
+    return subset[n][total]
+
+
+numbers = [3, 14, 4, 12, 5, 3, 40]
+total = 10
+if subset_sum(numbers, len(numbers), total):
+    print("Found a subset with given sum")
+else:
+    print("No subset with given sum")
