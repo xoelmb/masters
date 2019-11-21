@@ -19,6 +19,7 @@ def sum_list(my_list):
         count += elm
     return count
 
+
 # lineal: ejecuta una orden por cada elemento de la lista: O(n) = n
 
 
@@ -32,6 +33,7 @@ def factorial(n):
     for i in range(1, n):
         result *= i
     return result
+
 
 # lineal: ejecuta una orden por cada elemento hasta n: O(n) = n
 
@@ -47,9 +49,9 @@ def remove_adaptor_list(sequence, adaptor_list):
             return sequence[len(adaptor):]
     return sequence
 
+
 # exponencial: el loop se ejecuta n veces (cantidad de adaptadores), y cada vez tiene que hacer m comprobaciones (carac-
-# teres que tenga el adaptor). Como no nos dice nada sobre m, podemos asumir que es constante en todos los adaptadores
-# y extrapolarlo a que es LINEAL: O(n) = n
+# teres que tenga el adaptor). O(n*len(adaptor))
 
 
 # [E3] Compute the complexity of the following algorithms. Taking into
@@ -63,6 +65,7 @@ def reverse(sequence):
         sequence_rev += sequence[len(sequence) - i]
     return sequence_rev
 
+
 # lineal: siendo n la cantidad de caracteres, tiene que ejecutar n órdendes: O(n) = n
 
 # [E4] Compute the complexity of the following algorithms. Taking into
@@ -73,6 +76,7 @@ def reverse(sequence):
 def reverse_complement(dna):
     complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
     return ''.join([complement[base] for base in dna[::-1]])
+
 
 # lineal: un join por cada caracter que hay en la secuencia
 
@@ -88,7 +92,8 @@ def factorial(n):
     else:
         return n * factorial(n - 1)
 
-# lineal, creo, porque solo hace una multiplicación y una comprobación por cada número hasta n
+
+# lineal, porque solo hace una multiplicación y una comprobación por cada número hasta n
 
 # [E6] Compute the complexity of the following algorithms. Taking into
 # account that it has taken 4s to run for n=1000, calculate how long it
@@ -107,7 +112,8 @@ def binarysearch(sequence, value):
             return mid
     return None
 
-# no lo sé, pero creo que lineal, o 1/2 ^n pero ni idea.
+
+# logarítmico: ángel dice que base log2, las soluciones ponen solo log, pero tiene sentido base 2. O(log(n))
 
 
 # [E7] Compute the complexity of the following algorithms. Taking into
@@ -122,6 +128,7 @@ def fib(n):
         return 1
     else:
         return fib(n - 1) + fib(n - 2)
+
 
 # Exponencial: 2^n porque ejecuta dos operaciones por cada número que hay hasta n
 
@@ -141,7 +148,6 @@ def search(numbers, n):
 
 
 # Searching a number in a list. Recursively & DAC:
-
 
 
 # Breve explicación del DAC con el siguiente ejercicio.
@@ -433,7 +439,45 @@ def merge_sort(numbers_list):
 
 # [E1] Implement a function that sorts a list of kmers (i.e. strings).
 
-# ...
+def sort_kmers(kmers_list):
+    # Check list length
+    if len(kmers_list) == 1:
+        return
+    else:
+        middle_point = len(kmers_list) // 2
+        left_list = kmers_list[:middle_point]
+        right_list = kmers_list[middle_point:]
+        # Sort recursively the halves
+        sort_kmers(left_list)
+        sort_kmers(right_list)
+        # Merge both halves into the final sorted list
+        merge_lists(left_list, right_list, kmers_list)
+
+
+def merge_lists(list1, list2, merged):
+    p1 = 0
+    p2 = 0
+    pmerged = 0
+    # Merge both lists
+    while p1 < len(list1) and p2 < len(list2):
+        if list1[p1] <= list2[p2]:
+            merged[pmerged] = list1[p1]
+            p1 += 1
+        else:
+            merged[pmerged] = list2[p2]
+            p2 += 1
+        pmerged += 1
+    # Append the remaining elements of list1
+    while p1 < len(list1):
+        merged[pmerged] = list1[p1]
+        p1 += 1
+        pmerged += 1
+    # Append the remaining elements of list2
+    while p2 < len(list2):
+        merged[pmerged] = list2[p2]
+        p2 += 1
+        pmerged += 1
+
 
 # Kmers
 kmers = ["CGT", "TAG", "AAA"]
@@ -443,22 +487,171 @@ sort_kmers(kmers)
 print(kmers)
 
 
-# [E3] Given 3 sorted lists of kmers, implement a function that
-# produces the merged sorted list of the three.
-
-
 # [E2] Implement a function that binary searches a kmer within a
 # sorted list of kmers
+def binary_search(kmers_list, kmer):
+    first = 0
+    last = len(kmers_list) - 1
+    while first <= last:
+        midpoint = (first + last) // 2
+        if kmers_list[midpoint] == kmer:
+            return midpoint
+        elif kmers_list[midpoint] > kmer:
+            last = midpoint - 1
+        else:
+            first = midpoint + 1
+    return -1
+
+
+kmers = ['AAA', 'ACGT', 'CGT', 'CGTACG', 'GGTC', 'TAG']
+print(binary_search(kmers, 'GGTC'))  # Prints 4
+print(binary_search(kmers, 'A'))  # Prints -1
+print(binary_search(kmers, 'TTTTTTT'))  # Prints -1
+print(binary_search(kmers, 'AAA'))  # Prints 0
+print(binary_search(kmers, 'TAG'))  # Prints 5
+
+
+# Recursive implementation of the previous exercise.
+def binary_search(kmers_list, kmer):
+    if len(kmers_list) == 0:
+        return -1
+    elif len(kmers_list) == 1:
+        return kmer == kmers_list[0]
+    else:
+        midpoint = len(kmers_list) // 2
+        if kmer < kmers_list[midpoint]:
+            return binary_search(kmers_list[:midpoint], kmer)
+        else:
+            return binary_search(kmers_list[midpoint:], kmer)
+
+
+kmers = ['AAA', 'ACGT', 'CGT', 'CGTACG', 'GGTC', 'TAG']
+print(binary_search(kmers, 'GGTC'))  # Prints True
+print(binary_search(kmers, 'A'))  # Prints False
+print(binary_search(kmers, 'TTTTTTT'))  # Prints False
+print(binary_search(kmers, 'AAA'))  # Prints True
+print(binary_search(kmers, 'TAG'))  # Prints True
+
+
+# [E3] Given 3 sorted lists of kmers, implement a function that
+# produces the merged sorted list of the three.
+def merge_threeway(list1, list2, list3, merged):
+    pmerged = 0
+    p1, next_l1 = 0, -1
+    p2, next_l2 = 0, -1
+    p3, next_l3 = 0, -1
+    if len(list1) > 0: next_l1 = list1[0]
+    if len(list2) > 0: next_l2 = list2[0]
+    if len(list3) > 0: next_l3 = list3[0]
+    # Merge lists
+    while p1 < len(list1) or p2 < len(list2) or p3 < len(list3):
+        if next_l1 != -1 and (next_l2 == -1 or next_l1 <= next_l2) and (next_l3 == -1 or next_l1 <= next_l3):
+            merged[pmerged] = list1[p1]
+            p1 += 1
+            next_l1 = list1[p1] if p1 < len(list1) else -1
+        elif next_l2 != -1 and (next_l1 == -1 or next_l2 <= next_l1) and (next_l3 == -1 or next_l2 <= next_l3):
+            merged[pmerged] = list2[p2]
+            p2 += 1
+            next_l2 = list2[p2] if p2 < len(list2) else -1
+        else:
+            merged[pmerged] = list3[p3]
+            p3 += 1
+            next_l3 = list3[p3] if p3 < len(list3) else -1
+        pmerged += 1
+
+
+# Recursive implementation
+def merge_threeway(list1, list2, list3):
+    # Compose list with leading elements
+    head_elements = list()
+    if len(list1) > 0: head_elements.append((list1[0], 0))
+    if len(list2) > 0: head_elements.append((list2[0], 1))
+    if len(list3) > 0: head_elements.append((list3[0], 2))
+    # Check list length
+    if len(head_elements) == 0: return []
+    # Select minimum and merge
+    minimun = min(head_elements)
+    if minimun[1] == 0:
+        return [minimun[0]] + merge_threeway(list1[1:], list2, list3)
+    elif minimun[1] == 1:
+        return [minimun[0]] + merge_threeway(list1, list2[1:], list3)
+    elif minimun[1] == 2:
+        return [minimun[0]] + merge_threeway(list1, list2, list3[1:])
+
+
+list1 = ["AAA", "CGT", "TAG"]
+list2 = ["CGT", "GGT"]
+list3 = ["AA"]
+merged = merge_threeway(list1, list2, list3)
+print(merged)  # ['AA', 'AAA', 'CGT', 'CGT', 'GGT', 'TAG']
 
 
 # [E4] Given a list of sorted lists of kmers, implement a function that
 # produces the resulting merged sorted list of all.
+def merge_lists(list1,list2):
+    p1, p2 = 0, 0
+    merged = list()
+    # Merge both lists
+    while p1 < len(list1) and p2 < len(list2):
+        if list1[p1] <= list2[p2]:
+            merged.append(list1[p1]); p1 += 1
+        else:
+            merged.append(list2[p2]); p2 += 1
+    # Append the remaining elements of list1
+    while p1 < len(list1):
+        merged.append(list1[p1]); p1 += 1
+    # Append the remaining elements of list2
+    while p2 < len(list2):
+        merged.append(list2[p2]); p2 += 1
+    # Return
+    return merged
 
+
+def merge_nlists(nlist):
+    def merge_nlists_rec(merged,nlist):
+        if len(nlist) == 0:
+            return merged
+        else:
+            return merge_nlists_rec(merge_lists(merged,nlist[0]),nlist[1:])
+    return merge_nlists_rec([],nlist)
+
+
+kmer_lists = [["AAA","CGT","TAG"],["CGT","GGT"],["AA"]]
+merged = merge_nlists(kmer_lists)
+print(merged) # ['AA', 'AAA', 'CGT', 'CGT', 'GGT', 'TAG']
 
 # [E5] Given a sorted list of integers, implement a ternary search that,
 # in the spirit of the binary search, divides the search space by 3 on
 # each step of the search
+def ternary_search(nlist,number):
+    first = 0
+    last = len(nlist) - 1
+    while first <= last:
+        step = (last-first) // 3
+        centinel1 = first + step
+        centinel2 = centinel1 + step
+        # Check first third
+        if number < nlist[centinel1]:
+            last = centinel1 - 1
+        elif number == nlist[centinel1]: return centinel1
+        # Check second third
+        elif number < nlist[centinel2]:
+            first = centinel1 + 1
+            last = centinel2 - 1
+        elif nlist[centinel2] == number: return centinel2
+        # Check third third
+        else:
+            first = centinel2 + 1
+    return -1
 
+
+numbers = [1,2,5,12,34,55,67,234,444]
+print(ternary_search(numbers,12)) # Prints 3
+print(ternary_search(numbers,2)) # Prints 1
+print(ternary_search(numbers,0)) # Prints -1
+print(ternary_search(numbers,999)) # Prints -1
+print(ternary_search(numbers,1)) # Prints 0
+print(ternary_search(numbers,444)) # Prints 8
 
 ########################################################################################################################
 #################                                    ALGORITHMS 4                                    ###################
