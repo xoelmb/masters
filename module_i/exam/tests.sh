@@ -1,0 +1,1 @@
+awk '{print $10}' mbio.sample.sam | fold -w 1 | sort | uniq -c | grep -E "[a-z]" | sort -rn | head -n 1
