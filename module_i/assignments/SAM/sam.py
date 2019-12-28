@@ -5,6 +5,10 @@
 # “--from” and “--to” parameters. All searches have to be binary searches.
 
 
+import sys
+
+
+# Opens the sam file and returns headers as a list, and records as a nested list.
 def open_sam(input_file):
     heads = []
     recs = []
@@ -19,23 +23,19 @@ def open_sam(input_file):
                 recs.append(line.split("\t"))
     return heads, recs
 
+
 # Parse arguments.
-import sys
+if len(sys.argv) != 6:
+    print("Provide valid arguments")
+    exit(1)
 pars = {"input": sys.argv[1]}
 for i in range(2, len(sys.argv)):
     if sys.argv[i] == "--from":
-        try:
-            pars["from"] = int(sys.argv[i+1])
-        except:
-            print("Provide a valid --from value")
-            exit(1)
+        pars["from"] = sys.argv[i + 1]
     elif sys.argv[i] == "--to":
-        try:
-            pars["to"] == sys.argv[i+1]
-        except:
-            print("Provide a valid --to value")
-            exit(1)
+        pars["to"] = sys.argv[i + 1]
 
 # Open sam file, store headers in a list, and records in another list.
+headers, records = open_sam(pars["input"])
 
-
+print(headers)
