@@ -44,3 +44,4 @@ for _ in range(0, 1000000):
 t0 = time.time()
 merge_sort(numbers)
 print(time.time() - t0)
+print(numbers)
