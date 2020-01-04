@@ -30,14 +30,23 @@ def compare_records(first, second):
                  'chr18': 18, 'chr19': 19, 'chr20': 20, 'chr21': 21, 'chr22': 22, 'chrX': 23, 'chrY': 24, '*': 25}
 
     if chr_order[first[2]] < chr_order[second[2]]:
-        return True
+        return 1
     elif chr_order[first[2]] > chr_order[second[2]]:
-        return False
+        return 2
     else:
-        if first[3] <= second[3]:
-            return True
+        if first[3] == '*':
+            return 2
+        elif second[3] == '*':
+            return 1
+        elif first[3] == '*' and second[3] == '*':
+            return 0
         else:
-            return False
+            if int(first[3]) < int(second[3]):
+                return 1
+            elif int(first[3]) > int(second[3]):
+                return 2
+            else:
+                return 0
 
 
 def merge_sort(recordlist):
@@ -58,7 +67,7 @@ def merge_lists(list1, list2, merged):
     p2 = 0
     pmerged = 0
     while p1 < len(list1) and p2 < len(list2):
-        if compare_records(list1[p1], list2[p2]):
+        if compare_records(list1[p1], list2[p2]) < 2:
             merged[pmerged] = list1[p1]
             p1 += 1
         else:
@@ -77,16 +86,35 @@ def merge_lists(list1, list2, merged):
         pmerged += 1
 
 
+def bin_search(rec_list, item):
+    if len(rec_list) > 1:
+        middle = len(rec_list) // 2
+        comparison = compare_records(rec_list[middle], item)
+        if comparison == 0:
+            return middle
+        elif comparison == 1:
+            return middle + bin_search(rec_list[middle::], item)
+        else:
+            return bin_search(rec_list[:middle:], item)
+    elif len(rec_list) == 1:
+        if compare_records(rec_list[0], item) == 1:
+            return 1
+        else:
+            return 0
+    else:
+        return 0
+
+
 # Parse arguments.
 if len(sys.argv) != 6:
     print("Provide valid arguments")
     exit(1)
-pars = {"input": sys.argv[1]}
+pars = {"input": sys.argv[1], "from": ['', ''], "to": ['', '']}
 for i in range(2, len(sys.argv)):
     if sys.argv[i] == "--from":
-        pars["from"] = sys.argv[i + 1]
+        pars["from"].extend(sys.argv[i + 1].split(':'))
     elif sys.argv[i] == "--to":
-        pars["to"] = sys.argv[i + 1]
+        pars["to"].extend(sys.argv[i + 1].split(':'))
 
 # Open sam file, store headers in a list, and records in another list.
 headers, records = open_sam(pars["input"])
@@ -97,4 +125,13 @@ with open('sorted_'+pars["input"], 'wt') as op:
     for header in headers:
         op.write(header)
     for record in records:
+        op.write('\t'.join(record))
+
+start_idx = bin_search(records, pars['from'])
+end_idx = bin_search(records, pars['to'])
+
+with open('found_'+pars["input"], 'wt') as op:
+    for header in headers:
+        op.write(header)
+    for record in records[start_idx:end_idx]:
         op.write('\t'.join(record))
