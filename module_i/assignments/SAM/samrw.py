@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Implement a python script that, given a SAM file and two chromosome coordinates (i.e. chromosome:position),
 # prints all the sequences in the SAM file that overlap the specified range.
 # • The python script must implement a O(log(n)) merge sort algorithm to sort all SAM records read from the input file.
