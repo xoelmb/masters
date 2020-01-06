@@ -6,6 +6,7 @@
 
 
 import sys
+import re
 
 
 # Opens the sam file and returns headers as a list, and records as a nested list.
@@ -95,14 +96,27 @@ def bin_search(rec_list, item, pos_field=3):
         elif comparison == 1:
             return middle + bin_search(rec_list[middle::], item, pos_field)
         else:
-            return bin_search(rec_list[:middle:], item)
+            return bin_search(rec_list[:middle:], item, pos_field)
     elif len(rec_list) == 1:
-        if compare_records(rec_list[0], item) == 1:
+        if compare_records(rec_list[0], item, pos_field) == 1:
             return 1
         else:
             return 0
     else:
         return 0
+
+
+def compute_end(rec_list):
+    for record in rec_list:
+        if record[3].isdigit():
+            length = 0
+            cigar = record[5]
+            matches = re.compile(r'(\d+)[MDN=X]')
+            for match in matches.finditer(cigar):
+                length += int(match.group(1))
+            record.append(str(length+int(record[3])))
+        else:
+            record.append('*')
 
 
 # Parse arguments.
@@ -129,9 +143,16 @@ with open('sorted_' + pars["input"], 'wt') as op:
 
 start_idx = bin_search(records, pars['from'])
 end_idx = bin_search(records, pars['to'])
+found_records = records[start_idx:end_idx]
+records = records[:start_idx]
+compute_end(records)
+merge_sort(records, pos_field=-1)
+left_idx = bin_search(records, pars['from'], pos_field=-1)
+for rec in records[left_idx:]:
+    found_records.append(rec[:-1])
 
 with open('found_' + pars["input"], 'wt') as op:
     for header in headers:
         op.write(header)
-    for record in records[start_idx:end_idx]:
+    for record in found_records:
         op.write('\t'.join(record))
