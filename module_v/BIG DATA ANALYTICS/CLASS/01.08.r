@@ -46,6 +46,14 @@ m9 <- matrix(c(1,2,0,7,1,5), nrow=2)
 # Not all matrices are invertible
 # If the matrix is invertible, solve function will return the inverse:
 m10 <- matrix(c(1,0,0,2,1,0,-1,-1,-1), nrow=3)
-print(solve(m10))
-print(solve(m10)%*%m10)
-print(m10%*%solve(m10))
+# print(solve(m10))
+# print(solve(m10)%*%m10)
+# print(m10%*%solve(m10))
+
+# Finding eigenvalue/vector
+m11 <- matrix(c(1,2,-1,4), nrow=2)
+l <- eigen(m11)
+print(m11%*%l$vectors)
+# The result is the eigenvector columns multiplied by the eigenvalues. Each of the columns of the eigenvectors are one
+# eigenvector that correspond to each of the eigenvalues. Each eigenvector-eigenvalue is a solution that satisfies the
+# condition A*v = lambda*v
