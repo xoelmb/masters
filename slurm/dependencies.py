@@ -1,12 +1,14 @@
-#!/bin/bash
+#!/bin/python
 
-# print initial date and time
-echo "Start dependent job at $(date)"
+from datetime import datetime
+import subprocess
+print("Start dependent job at", datetime.today())
 
 # first job - no dependencies
 
-dia=$(date)
-echo $dia
+print(datetime.today())
+
+jid1 = subprocess.run("sbatch --partition=research.q job1.slurm | cut -f 4 -d' '".split(" "), capture_output=)
 
 jid1=$(sbatch --partition=research.q job1.slurm | cut -f 4 -d' ')
 
