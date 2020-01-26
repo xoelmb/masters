@@ -13,7 +13,7 @@ jid1 = ''.join([c for c in jid1 if c.isnumeric()])
 print(jid1)
 
 # multiple jobs can depend on a single job
-jid2 = str(subprocess.check_output(f"sbatch  --partition=research.q --dependency=afterok:{jid1}:job2.slurm".split()))
+jid2 = str(subprocess.check_output(f"sbatch  --partition=research.q --dependency=afterok:{jid1} job2.slurm".split()))
 jid2 = ''.join([c for c in jid2 if c.isnumeric()])
 jid3 = str(subprocess.check_output(f"sbatch  --partition=research.q --dependency=afterok:{jid1} job3.slurm".split()))
 jid3 = ''.join([c for c in jid3 if c.isnumeric()])
