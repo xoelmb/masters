@@ -27,7 +27,7 @@ jid5 = ''.join([c for c in jid5 if c.isnumeric()])
 # show dependencies in squeue output:
 user = str(subprocess.check_output(['whoami']))[2:-3]
 format_op = '"%.8A %.4C %.10m %.20E"'
-command = f'squeue -u {user} -o '.split()
+command = "f'squeue -u {user} -o '".split()
 command = command.append(format_op)
 print(command)
 print(subprocess.check_output(command).output)
