@@ -32,7 +32,7 @@ format_op = '"%.8A %.4C %.10m %.20E"'
 command = 'squeue -u ' + user + ' -o '
 command = command.split()
 command.append(format_op)
-print(subprocess.check_output(command).decode('utf-8'))
+print(subprocess.check_output(command).decode('utf-8').replace('"',''))
 
 # # print final date and time
 print(f"End dependent job at {datetime.today()}")
