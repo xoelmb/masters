@@ -33,7 +33,7 @@ command = 'squeue -u ' + user + ' -o '
 command = command.split()
 command.append(format_op)
 print(command)
-print(subprocess.check_output(command).output)
+print(str(subprocess.check_output(command))[2:-3])
 
 # # print final date and time
 print(f"End dependent job at {datetime.today()}")
