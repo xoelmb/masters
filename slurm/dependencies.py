@@ -25,7 +25,7 @@ jid5 = str(subprocess.check_output(f"sbatch --partition=research.q --dependency=
 jid5 = ''.join([c for c in jid5 if c.isnumeric()])
 
 # show dependencies in squeue output:
-print(subprocess.check_output('squeue -u $USER -o'.split().append("%.8A %.4C %.10m %.20E")).output)
+print(subprocess.check_output('squeue -u $USER -o "%.8A %.4C %.10m %.20E"'.split()).output)
 
 # # print final date and time
 print(f"End dependent job at {datetime.today()}")
