@@ -21,7 +21,7 @@ jid3 = ''.join([c for c in jid3 if c.isnumeric()])
 # a single job can depend on multiple jobs
 jid4 = subprocess.check_output(f"sbatch  --partition=research.q --dependency=afterany:{jid2}:{jid3} job4.slurm".split())
 jid4 = ''.join([c for c in jid4 if c.isnumeric()])
-jid5 = subprocess.check_output(f"sbatch --partition=research.q --dependency=afterany:{jid4} job5.slurm").split())
+jid5 = subprocess.check_output(f"sbatch --partition=research.q --dependency=afterany:{jid4} job5.slurm".split())
 jid5 = ''.join([c for c in jid5 if c.isnumeric()])
 
 # show dependencies in squeue output:
