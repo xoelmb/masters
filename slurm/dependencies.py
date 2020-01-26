@@ -31,7 +31,7 @@ user = str(subprocess.check_output(['whoami']))[2:-3]
 format_op = '"%.8A %.4C %.10m %.20E"'
 command = 'squeue -u ' + user + ' -o '
 command = command.split()
-command = command.append(format_op)
+command.append(format_op)
 print(command)
 print(subprocess.check_output(command).output)
 
