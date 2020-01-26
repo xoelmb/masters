@@ -27,7 +27,7 @@ jid5 = str(subprocess.check_output(f"sbatch --partition=research.q --dependency=
 jid5 = ''.join([c for c in jid5 if c.isnumeric()])
 
 # show dependencies in squeue output:
-user = str(subprocess.check_output(['whoami']))[2:-3]
+user = subprocess.check_output(['whoami']).decode('utf-8')
 format_op = '"%.8A %.4C %.10m %.20E"'
 command = 'squeue -u ' + user + ' -o '
 command = command.split()
