@@ -8,29 +8,22 @@ print("Start dependent job at", datetime.today())
 
 print(datetime.today())
 
-jid1 = subprocess.run("sbatch --partition=research.q job1.slurm".split(" "), capture_output=True).stdout()
-jid1 = [c for c in jid1 if c.isnumeric()]
+jid1 = subprocess.check_output("sbatch --partition=research.q job1.slurm".split())
+jid1 = ''.join([c for c in jid1 if c.isnumeric()])
 print(jid1)
-#
-#
-#
-#
-#
-# jid1=$(sbatch --partition=research.q job1.slurm | cut -f 4 -d' ')
-#
-# echo $jid1
-#
-# # multiple jobs can depend on a single job
-# jid2=$(sbatch  --partition=research.q --dependency=afterok:$jid1 job2.slurm | cut -f 4 -d' ')
-# jid3=$(sbatch  --partition=research.q --dependency=afterok:$jid1 job3.slurm | cut -f 4 -d' ')
-#
-# # a single job can depend on multiple jobs
-# jid4=$(sbatch  --partition=research.q --dependency=afterany:$jid2:$jid3 job4.slurm | cut -f 4 -d' ')
-#
-# jid5=$(sbatch --partition=research.q --dependency=afterany:$jid4 job5.slurm | cut -f 4 -d' ')
-#
-# # show dependencies in squeue output:
-# squeue -u $USER -o "%.8A %.4C %.10m %.20E"
-#
+
+# multiple jobs can depend on a single job
+jid2 = subprocess.check_output(f"sbatch  --partition=research.q --dependency=afterok:{jid1}:job2.slurm".split())
+jid2 = ''.join([c for c in jid2 if c.isnumeric()])
+jid3 = subprocess.check_output(f"sbatch  --partition=research.q --dependency=afterok:{jid1} job3.slurm".split())
+jid3 = ''.join([c for c in jid3 if c.isnumeric()])
+
+# a single job can depend on multiple jobs
+jid4 = subprocess.check_output(f"sbatch  --partition=research.q --dependency=afterany:{jid2}:{jid3} job4.slurm".split())
+jid5 = subprocess.check_output(f"sbatch --partition=research.q --dependency=afterany:{jid4} job5.slurm").split())
+
+# show dependencies in squeue output:
+print(subprocess.check_output('squeue -u $USER -o "%.8A %.4C %.10m %.20E"'.split()))
+
 # # print final date and time
-# echo "End dependent job at $(date)"
+print(f"End dependent job at {datetime.today()}")
