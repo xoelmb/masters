@@ -22,6 +22,7 @@ jid4=$(sbatch  --partition=research.q --dependency=afterany:$jid2:$jid3 job4.slu
 jid5=$(sbatch --partition=research.q --dependency=afterany:$jid4 job5.slurm | cut -f 4 -d' ')
 
 # show dependencies in squeue output:
+
 squeue -u $USER -o "%.8A %.4C %.10m %.20E"
 
 # print final date and time
