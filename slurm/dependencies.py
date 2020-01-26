@@ -8,7 +8,7 @@ print("Start dependent job at", datetime.today())
 
 print(datetime.today())
 
-jid1 = subprocess.check_output("sbatch --partition=research.q job1.slurm".split())
+jid1 = str(subprocess.check_output("sbatch --partition=research.q job1.slurm".split()))
 jid1 = ''.join([c for c in jid1 if c.isnumeric()])
 print(jid1)
 
