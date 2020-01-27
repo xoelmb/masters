@@ -186,6 +186,9 @@ The result shows that there is an **important decrease in the time spent when us
 *Output files: exercise_8-output*  
   
 # Exercise 9  
+  
+**Complete the SLURM script provided to run the MPI application that computes prime numbers. Execute it with different configurations regarding number of nodes, number of tasks and number of tasks per node and see the performance variations (you could also try out the --ntasks-per-node option)**  
+  
 
 
 
