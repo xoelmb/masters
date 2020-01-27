@@ -124,6 +124,66 @@ For a task like this one, I would rather use a bash script.
   
 **Write a SLURM script to run an example that uses xargs or parallel commands to parallelize a certain operation. Check that the total execution time is reduced when the operation is parallelized.**  
   
+I created the following slurm script that will use bwa to index 8 fastq files (they are exactly the same). It calls a script that runs the indexing one at a time, and it also runs it in parallel using xargs commands. It will also output the performance statistics for both operations:  
+```
+#!/bin/bash
+#SBATCH --job-name=exercise_8
+#SBATCH --output=exercise_8-output
+#SBATCH --partition=research.q
+#SBATCH --nodelist=aolin23,aolin24
+#SBATCH --exclusive
+#SBATCH --ntasks=8
+
+perf stat bash bwa_example.sh
+rm example*.fastq.*
+echo -e "1\n2\n3\n4\n5\n6\n7\n8" | perf stat xargs -n1 -P0 -I{} /usr/bin/bwa index example{}.fastq
+rm example*.fastq.*
+```
+The result shows that there is an **important decrease in the time spent when using parallelisation**: from 1,4s to 0,52s:
+```
+ Performance counter stats for 'bash bwa_example.sh':
+
+             39,20 msec task-clock:u              #    0,028 CPUs utilized          
+                 0      context-switches:u        #    0,000 K/sec                  
+                 0      cpu-migrations:u          #    0,000 K/sec                  
+              3212      page-faults:u             #    0,082 M/sec                  
+          12157129      cycles:u                  #    0,310 GHz                      (91,50%)
+          56208559      stalled-cycles-frontend:u #  462,35% frontend cycles idle     (93,77%)
+          52283613      stalled-cycles-backend:u  #  430,07% backend cycles idle      (55,40%)
+           7920348      instructions:u            #    0,65  insn per cycle         
+                                                  #    7,10  stalled cycles per insn  (78,90%)
+           1792566      branches:u                #   45,728 M/sec                    (73,74%)
+            119171      branch-misses:u           #    6,65% of all branches          (86,29%)
+
+       1,400822778 seconds time elapsed
+
+       0,005535000 seconds user
+       0,049577000 seconds sys
+
+
+ Performance counter stats for 'xargs -n1 -P0 -I{} /usr/bin/bwa index example{}.fastq':
+
+             37,63 msec task-clock:u              #    0,072 CPUs utilized          
+                 0      context-switches:u        #    0,000 K/sec                  
+                 0      cpu-migrations:u          #    0,000 K/sec                  
+              2972      page-faults:u             #    0,079 M/sec                  
+          10663343      cycles:u                  #    0,283 GHz                      (87,31%)
+          54839688      stalled-cycles-frontend:u #  514,28% frontend cycles idle     (85,04%)
+          54782220      stalled-cycles-backend:u  #  513,74% backend cycles idle      (57,09%)
+           6233328      instructions:u            #    0,58  insn per cycle         
+                                                  #    8,80  stalled cycles per insn  (81,34%)
+           1216223      branches:u                #   32,320 M/sec                    (81,03%)
+            112733      branch-misses:u           #    9,27% of all branches          (90,23%)
+
+       0,521315462 seconds time elapsed
+
+       0,011980000 seconds user
+       0,044646000 seconds sys
+```
+  
+*Input files: example[1-8].fastq*  
+*Script files: exercise_8.slurm, bwa_example.sh*  
+*Output files: exercise_8-output*  
   
 # Exercise 9  
 
