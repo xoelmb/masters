@@ -2,5 +2,9 @@
 /usr/bin/bwa index example1.fastq
 /usr/bin/bwa index example2.fastq
 /usr/bin/bwa index example3.fastq
+/usr/bin/bwa index example4.fastq
+/usr/bin/bwa index example5.fastq
+/usr/bin/bwa index example6.fastq
+/usr/bin/bwa index example7.fastq
+/usr/bin/bwa index example8.fastq
 rm example*.fastq.*
-echo "All processes completed"
