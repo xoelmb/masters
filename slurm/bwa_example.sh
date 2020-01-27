@@ -7,4 +7,3 @@
 /usr/bin/bwa index example6.fastq
 /usr/bin/bwa index example7.fastq
 /usr/bin/bwa index example8.fastq
-rm example*.fastq.*
