@@ -5,6 +5,7 @@
 #SBATCH --nodelist=aolin23,aolin24
 #SBATCH --cpus-per-task=8
 #SBATCH --exclusive
+#SBATCH --ntasks=8
 
 perf stat bash bwa_example.sh
 rm example*.fastq.*

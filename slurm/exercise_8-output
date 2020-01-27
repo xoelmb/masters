@@ -1,0 +1,186 @@
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example1.fastq
+[main] Real time: 0.152 sec; CPU: 0.006 sec
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example2.fastq
+[main] Real time: 0.213 sec; CPU: 0.005 sec
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example3.fastq
+[main] Real time: 0.078 sec; CPU: 0.005 sec
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example4.fastq
+[main] Real time: 0.139 sec; CPU: 0.005 sec
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example5.fastq
+[main] Real time: 0.220 sec; CPU: 0.006 sec
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example6.fastq
+[main] Real time: 0.075 sec; CPU: 0.005 sec
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example7.fastq
+[main] Real time: 0.079 sec; CPU: 0.005 sec
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example8.fastq
+[main] Real time: 0.137 sec; CPU: 0.005 sec
+
+ Performance counter stats for 'bash bwa_example.sh':
+
+             26,24 msec task-clock                #    0,023 CPUs utilized          
+               356      context-switches          #    0,014 M/sec                  
+                16      cpu-migrations            #    0,610 K/sec                  
+              3288      page-faults               #    0,125 M/sec                  
+          53882198      cycles                    #    2,053 GHz                      (79,65%)
+          37644599      stalled-cycles-frontend   #   69,86% frontend cycles idle     (96,65%)
+          25986185      stalled-cycles-backend    #   48,23% backend cycles idle      (63,87%)
+          27219390      instructions              #    0,51  insn per cycle         
+                                                  #    1,38  stalled cycles per insn  (77,02%)
+           5863125      branches                  #  223,406 M/sec                    (73,88%)
+            353017      branch-misses             #    6,02% of all branches          (86,86%)
+
+       1,142779418 seconds time elapsed
+
+       0,008623000 seconds user
+       0,040517000 seconds sys
+
+
+[bwa_index] Pack FASTA... [bwa_index] Pack FASTA... [bwa_index] Pack FASTA... [bwa_index] Pack FASTA... [bwa_index] Pack FASTA... [bwa_index] Pack FASTA... [bwa_index] Pack FASTA... [bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... [bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Pack forward-only FASTA... [bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... [bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... [bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Pack forward-only FASTA... [bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+0.00 sec
+[bwa_index] Construct SA from BWT and Occ... [bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example8.fastq
+[main] Real time: 0.314 sec; CPU: 0.006 sec
+0.00 sec
+0.00 sec
+[bwa_index] Construct SA from BWT and Occ... [main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example3.fastq
+[main] Real time: 0.367 sec; CPU: 0.003 sec
+0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+0.00 sec
+[bwa_index] Construct SA from BWT and Occ... [main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example6.fastq
+[main] Real time: 0.407 sec; CPU: 0.006 sec
+0.00 sec
+0.00 sec
+0.00 sec
+0.00 sec
+[bwa_index] Construct SA from BWT and Occ... [main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example7.fastq
+[main] Real time: 0.479 sec; CPU: 0.003 sec
+0.00 sec
+[bwa_index] Construct SA from BWT and Occ... [main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example1.fastq[main] Version: 0.7.12-r1039
+
+[main] Real time: 0.486 sec; CPU: 0.007 sec
+[main] CMD: /usr/bin/bwa index example4.fastq
+[main] Real time: 0.484 sec; CPU: 0.006 sec
+0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example2.fastq
+[main] Real time: 0.492 sec; CPU: 0.006 sec
+0.00 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: /usr/bin/bwa index example5.fastq
+[main] Real time: 0.499 sec; CPU: 0.005 sec
+
+ Performance counter stats for 'xargs -n1 -P0 -I{} /usr/bin/bwa index example{}.fastq':
+
+             24,84 msec task-clock                #    0,049 CPUs utilized          
+               417      context-switches          #    0,017 M/sec                  
+                13      cpu-migrations            #    0,523 K/sec                  
+              3045      page-faults               #    0,123 M/sec                  
+          58454608      cycles                    #    2,354 GHz                      (90,42%)
+          40798151      stalled-cycles-frontend   #   69,79% frontend cycles idle     (86,45%)
+          35813966      stalled-cycles-backend    #   61,27% backend cycles idle      (48,91%)
+          26175181      instructions              #    0,45  insn per cycle         
+                                                  #    1,56  stalled cycles per insn  (86,35%)
+           5460407      branches                  #  219,853 M/sec                    (85,48%)
+            343330      branch-misses             #    6,29% of all branches          (89,63%)
+
+       0,506227743 seconds time elapsed
+
+       0,004595000 seconds user
+       0,041787000 seconds sys
+
+
