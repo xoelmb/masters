@@ -5,4 +5,4 @@
 #SBATCH --nodelist=aolin23,aolin24
 #SBATCH --exclusive
 
-perf bash bwa_example.sh
+perf stat bash bwa_example.sh

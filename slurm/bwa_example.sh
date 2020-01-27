@@ -1,6 +1,5 @@
 #!/bin/bash
-/usr/bin/bwa index sample1.fastq &
-/usr/bin/bwa index sample2.fastq &
-/usr/bin/bwa index sample3.fastq &
-wait
+/usr/bin/bwa index example1.fastq &
+/usr/bin/bwa index example2.fastq &
+/usr/bin/bwa index example3.fastq &
 echo "All processes completed"
