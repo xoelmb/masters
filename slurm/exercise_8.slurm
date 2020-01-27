@@ -3,6 +3,7 @@
 #SBATCH --output=exercise_8-output
 #SBATCH --partition=research.q
 #SBATCH --nodelist=aolin23,aolin24
+#SBATCH --cpus-per-task=8
 #SBATCH --exclusive
 
 perf stat bash bwa_example.sh
