@@ -1,10 +1,11 @@
 #!/bin/bash
 #SBATCH --job-name=mpi_prime      # Job name
 #SBATCH --nodes=1
-#SBATCH --tasks-per-node=1
-#SBATCH --ntasks=1
+#SBATCH --tasks-per-node=2
+#SBATCH --ntasks=2
 #SBATCH --cpus-per-task=1
-#SBATCH --output=mpi_prime_%j.out     # Standard output and error log
+#SBATCH --exclusive
+#SBATCH --output=mpi_prime2_%j.out     # Standard output and error log
 #SBATCH --partition=research.q
 hostname
 date

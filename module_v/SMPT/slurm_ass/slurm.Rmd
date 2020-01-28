@@ -88,7 +88,7 @@ To make the job 4 an array job, I added the following option to the script. Besi
   
 Job 5 only starts after all of the jobs in the array have been completed as I could check by the ending times of job4 outputs and the starting time of the job 5.  
   
-*Script files: dependencies.slurm, job[1, 2, 3, 4_array, 5].slurm*  
+*Script files: dependencies_array.slurm, job[1, 2, 3, 4_array, 5].slurm*
 *Output files: basic-job-output, basic-job4-output[1-5]*  
   
   
