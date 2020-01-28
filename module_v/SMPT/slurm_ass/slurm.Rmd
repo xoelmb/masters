@@ -189,10 +189,20 @@ The result shows that there is an **important decrease in the time spent when us
   
 **Complete the SLURM script provided to run the MPI application that computes prime numbers. Execute it with different configurations regarding number of nodes, number of tasks and number of tasks per node and see the performance variations (you could also try out the --ntasks-per-node option)**  
   
-
-
-
-
+I tried out different options for this job. All of them were performed in --exclusive mode. The selected configurations were the following (processes running wew extracted from the output):
+```{r}
+settings <- read.csv('./files/settings.csv')
+settings
+```
+Below, the time spent for the prime numbers found are presented below (only the last one is shown). Each of the rows corresponds to a differently set-up job.
+```{r}
+results <- read.csv('./files/results.csv')
+matrix(results[,19], nrow=6)
+```
+From the results, we can see that the performance increase expected from 1 process to 2 processes is not aparent (compare run 1 and run 2).  
+However, there is an important increase in performance when using more than one node even if the number of tasks and processes running are exactly the same (compare run 2 and 3).  
+If we increase the number of tasks (see run 3, 5 and 6) and therefore, the number of processes running, the performance increases are obvious. Nevertheless, using more cpus-per-task surprisingly yielded worse results than using only one cpu per task (compare run 4 and 5).  
+From my data, I would increase the number of nodes, tasks per node and number of tasks to use as many parallel processes as possible.
 
 
 
