@@ -1,0 +1,117 @@
+---
+title: "Genetic algorithms"
+output: html_notebook
+---
+
+
+```{r}
+#############FUNCTIONS##############
+
+init_pop <- function(n){
+  popu <- matrix(ncol=2, nrow=n)
+  colnames(popu) <- c('x', 'y')
+  for (i in c(1:n)){
+    popu[i,] <- c(runif(2,0,10))
+  }
+  return(popu)
+}
+
+
+fitness <- function(x){
+  return(x[1]*sin(4*x[1])+1.1*x[2]*sin(2*x[2]))
+}
+
+
+reproduce <- function(fucker1, fucker2){
+  return(c(mean(c(fucker1[1],fucker2[1])), mean(c(fucker1[2],fucker2[2]))))
+}
+
+
+orgy <- function(ascendants){
+  children <- matrix(ncol=2, nrow=10)
+  colnames(children) <- c('x', 'y')
+  ch <- 1
+  for (i in c(1:(nrow(ascendants)-1))){
+    for (j in c((i+1):nrow(ascendants))){
+      children[ch,] <- reproduce(ascendants[i,], ascendants[j,])
+      ch <- ch+1
+    }
+  }
+  return(children)
+}
+
+
+mutate <- function(pop){
+  for (i in c(1:nrow(pop))){
+    pop[i,] <- c(min(10, pop[i,1]*runif(1,0.9,1.1)), min(10, pop[i,2]*runif(1,0.9,1.1)))
+  }
+  return(pop)
+}
+
+
+iterate <- function(k){
+  
+  my_population <- init_pop(10)
+  print(my_population)
+  
+  for (generation in c(1:k)){
+    
+    print(paste('Generation', generation))
+    
+    my_fitness <- matrix(ncol=1, nrow=nrow(my_population))
+    colnames(my_fitness) <- c('fitness')
+    
+    for (i in c(1:nrow(my_population))){
+      my_fitness[i,] <- fitness(my_population[i,])
+    }
+    print(paste("Population mean fitness", mean(my_fitness)))
+    my_evalpop <- cbind(my_population, my_fitness)
+    print(my_evalpop)
+    
+    
+    parents <- my_evalpop[order(my_evalpop[,3]),][1:5,1:2]
+    print(parents)
+    
+    
+    new_gen <- orgy(parents)
+    print(new_gen)
+    
+    
+    my_population <- mutate(new_gen)
+  }
+  return(my_population)
+}
+```
+
+
+
+```{r}
+
+###############----MAIN-SCRIPT----################
+iterate(1000)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
