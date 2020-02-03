@@ -1,16 +1,37 @@
-REFDIR=./references/
-IDXDIR=./index/
-FASTA_FILES=$(wildcard $(REFDIR)*.f*a)
-FA_FILES=$(patsubst %.fasta, %.fa, $(FASTA_FILES))
-AMB_FILES=$(patsubst $(REFDIR)%.fa, %.amb, $(FA_FILES))
-TARGET_DIRS=$(patsubst $(REFDIR)%.fa, $(IDXDIR)%/, $(FA_FILES))
+INPUTDIR=./references/ 
+INDEXDIR=./index/
 
-all: $(AMB_FILES)
+INPUTS_FA=$(wildcard $(INPUTDIR)*.fa)
+INPUTS_FASTA=$(wildcard $(INPUTDIR)*.fasta)
+
+NAMES_FA=$(patsubst $(INPUTDIR)%.fa, %, $(INPUTS_FA))
+NAMES_FASTA=$(patsubst $(INPUTDIR)%.fasta, %, $(INPUTS_FASTA))
+
+TARGETDIRS_FA=$(patsubst $(INPUTDIR)%.fa, $(INDEXDIR)%/, $(INPUTS_FA))
+TARGETDIRS_FASTA=$(patsubst $(INPUTDIR)%.fasta, $(INDEXDIR)%/, $(INPUTS_FASTA))
+
+NAMES=$(NAMES_FA) $(NAMES_FASTA)
+TARGETDIRS=$(TARGETDIRS_FA) $(TARGETDIRS_FASTA)
+
+TARGETNAMES=$(addsuffix .ann, $(NAMES))
+ 
+.PHONY: all clean
+all: $(TARGETNAMES)
+	@echo $(TARGETNAMES)
 	
 
-%.amb: $(IDXDIR)%/
-	bwa index -p $<$* $(REFDIR)$*.f*a
-	
-$(TARGET_DIRS):
-	mkdir -p $@
+$(TARGETDIRS):	
+	@mkdir -p $@
+
+%.ann: $(INDEXDIR)%/
+	@echo ""
+	@echo Indexing file: $*
+	@echo ""
+	@if test -f $(INPUTDIR)$*.fa; then bwa index -p $(INDEXDIR)$*/$* $(INPUTDIR)$*.fa; fi
+	@if test -f $(INPUTDIR)$*.fasta; then bwa index -p $(INDEXDIR)$*/$* $(INPUTDIR)$*.fasta; fi
+clean:
+	rm -r index	
+
+
+
 
