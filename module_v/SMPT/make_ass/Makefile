@@ -1,4 +1,4 @@
-INPUTDIR=./references/ 
+INPUTDIR=./references/
 INDEXDIR=./index/
 
 INPUTS_FA=$(wildcard $(INPUTDIR)*.fa)
