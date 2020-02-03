@@ -1,6 +1,9 @@
-[bwa_index] Pack FASTA... 0.12 sec
+[bwa_index] Pack FASTA... 0.10 sec
 [bwa_index] Construct BWT for the packed sequence...
-[bwa_index] 6.78 seconds elapse.
-[bwa_index] Update BWT... 0.09 sec
-[bwa_index] Pack forward-only FASTA... 0.07 sec
-[bwa_index] Construct SA from BWT and Occ... [bwt_dump_sa] fail to open file './index/sequence/sequence.sa' : No such file or directory
+[bwa_index] 4.35 seconds elapse.
+[bwa_index] Update BWT... 0.08 sec
+[bwa_index] Pack forward-only FASTA... 0.06 sec
+[bwa_index] Construct SA from BWT and Occ... 1.73 sec
+[main] Version: 0.7.12-r1039
+[main] CMD: bwa index -p ./index/sequence/sequence ./references/sequence.fasta
+[main] Real time: 8.296 sec; CPU: 6.324 sec
