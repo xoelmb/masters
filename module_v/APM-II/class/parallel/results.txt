@@ -1,0 +1,126 @@
+INITIAL CODE
+In [8]: %prun str.run(1000000,1000)
+String motion: X= 1000000  and T=  1000
+CheckSum =  634011.25
+         4 function calls in 37.598 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1   37.598   37.598   37.598   37.598 {str.run}
+        1    0.000    0.000   37.598   37.598 <string>:1(<module>)
+        1    0.000    0.000   37.598   37.598 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+
+
+OPTIMIZED CODE
+
+In [4]: import strX as strX
+
+In [5]: %prun strX.run(100000,1000)
+String motion: X= 100000  and T=  1000
+CheckSum =  65257.78125
+         4 function calls in 0.251 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.251    0.251    0.251    0.251 {strX.run}
+        1    0.000    0.000    0.251    0.251 {built-in method builtins.exec}
+        1    0.000    0.000    0.251    0.251 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+#CPDEF
+In [1]: import strX as strX
+
+In [2]: %prun strX.run(100000,1000)
+String motion: X= 100000  and T=  1000
+CheckSum =  65257.78125
+         4 function calls in 0.245 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.245    0.245    0.245    0.245 {built-in method strX.run}
+        1    0.000    0.000    0.245    0.245 {built-in method builtins.exec}
+        1    0.000    0.000    0.245    0.245 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+In [3]:
+
+# malloc and 0.0 1000000
+In [7]: %prun strX.run(1000000,1000)
+String motion: X= 1000000  and T=  1000
+CheckSum =  653096.8125
+         4 function calls in 2.077 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    2.077    2.077    2.077    2.077 {built-in method strX.run}
+        1    0.000    0.000    2.077    2.077 {built-in method builtins.exec}
+        1    0.000    0.000    2.077    2.077 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+# Redifining factors
+
+In [3]: %prun strX.run(1000000,1000)
+String motion: X= 1000000  and T=  1000
+CheckSum =  653122.9375
+         4 function calls in 1.616 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    1.616    1.616    1.616    1.616 {built-in method strX.run}
+        1    0.000    0.000    1.616    1.616 {built-in method builtins.exec}
+        1    0.000    0.000    1.616    1.616 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+# prange on evolve
+
+String motion: X= 1000000  and T=  1000
+CheckSum =  653122.9375
+         4 function calls in 1.973 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    1.973    1.973    1.973    1.973 {built-in method strX.run}
+        1    0.000    0.000    1.973    1.973 {built-in method builtins.exec}
+        1    0.000    0.000    1.973    1.973 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+# xrange on init
+
+String motion: X= 1000000  and T=  1000
+CheckSum =  653122.9375
+         4 function calls in 1.629 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    1.629    1.629    1.629    1.629 {built-in method strX.run}
+        1    0.000    0.000    1.629    1.629 {built-in method builtins.exec}
+        1    0.000    0.000    1.629    1.629 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+# xrange on evolve
+
+String motion: X= 1000000  and T=  1000
+CheckSum =  653122.9375
+         4 function calls in 1.683 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    1.683    1.683    1.683    1.683 {built-in method strX.run}
+        1    0.000    0.000    1.683    1.683 {built-in method builtins.exec}
+        1    0.000    0.000    1.683    1.683 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
