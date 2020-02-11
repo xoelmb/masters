@@ -2,7 +2,7 @@ import random
 import math
 import time
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from progress.bar import Bar
 
 
@@ -16,7 +16,7 @@ class InvWeed:
             self.pop.append(new_plant)
         self.pop.sort(key=lambda x: x[2])
         self.records = [self.pop[0][2]]
-        self.runtime = 0
+        self.runtime = time.time()
         self.niters = 0
         self.iterate(pmax, new_seeds, niter, delta, max_rep)
 
@@ -59,7 +59,7 @@ class InvWeed:
                     break
             else:
                 counter = 0
-        self.runtime -= time.time()
+        self.runtime = time.time() - self.runtime
 
 
 def grid_search(function, pars, npars):
@@ -72,7 +72,7 @@ def grid_search(function, pars, npars):
                     for delta in pars['delta']:
                         for max_rep in pars['max_rep']:
                             model = function(pi, pmax, new_seeds, niter, delta, max_rep)
-                            results.append([model.records[0], model.runtime, model.niters,
+                            results.append([model.records[-1], model.runtime, model.niters,
                                             [pi, pmax, new_seeds, niter, delta, max_rep]])
                             # plt.plot(model.records)
                             # plt.ylabel('Cost function')
@@ -105,10 +105,11 @@ parameters = {
 t0 = time.time()
 # my_model = InvWeed()
 
-n_pars = 1
-for k in parameters.keys():
-    print(len([parameters[k]]))
-print(n_pars)
-best_parameters = grid_search(InvWeed, parameters, n_pars)
+best_parameters = grid_search(InvWeed, parameters, 324)
+# print(best_parameters)
+for r in best_parameters:
+    if r[0] < -18.550:
+        print(r)
+        print()
 
 print(time.time() - t0)
