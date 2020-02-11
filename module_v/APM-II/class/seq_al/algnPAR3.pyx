@@ -1,26 +1,28 @@
 import numpy as np
 import cython
-from cython.parallel import prange
+
+from cython.parallel cimport prange, parallel
 from libc.stdlib cimport malloc, free
+
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
 
-cdef int align_edit_distance ( char *pt, char *tx, int vsz, int hsz, int[:,::1] dp, char *cigar ) nogil:
+cdef int align_edit_distance ( char *pt, char *tx, int vsz, int hsz, int *dp, int hMAX, char *cigar ) nogil: 
   cdef int v, h, c
   for v in range(1,vsz):
     for h in range(1,hsz):
-      dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1), 
-                     dp[  v,h-1] + 1, 
-                     dp[v-1,  h] + 1)
+      dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1), 
+                          dp[ v*hMAX+h-1] + 1, 
+                          dp[(v-1)*hMAX+h] + 1)
 
   v, h, c = vsz-1, hsz-1, 0
   while v>0 and h>0:
-    if dp[v,h] == dp[v-1,h] + 1:
+    if dp[v*hMAX+h] == dp[(v-1)*hMAX+h] + 1:
       v -= 1
       cigar[c]= 3 # "D"
-    elif dp[v,h] == dp[v,h-1] + 1: 
+    elif dp[v*hMAX+h] == dp[v*hMAX+h-1] + 1: 
       h -= 1
       cigar[c]= 2 # "I"
     else:
@@ -68,12 +70,11 @@ cdef void write_cigar( char * CIG, int pos, ofile ):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-cdef void copyString( char *in_s, char *out_s, int Sz):
+cdef void copyString( char *in_s, char *out_s, int Sz) nogil:
   cdef int i
-  with nogil:
-    for i in prange(Sz):
-      out_s[i] = in_s[i]
-    out_s[Sz] = 0
+  for i in range(Sz):
+    out_s[i] = in_s[i]
+  out_s[Sz] = 0
 
 
 
@@ -137,29 +138,23 @@ def align(in_filename, out_filename):
   infile.close()
 
 
+  cdef int * DP
 
-  ## Allocate memory for Dynamic Programming Matrix and perform the N alignments
+  with nogil, parallel():
+    DP = <int *> malloc ((vMAX*hMAX)*sizeof(int))
+    for v in range(vMAX):
+      DP[v*hMAX] = v
+    for h in range(hMAX):
+      DP[h] = h
 
-  cdef int[:,::1] dp = np.empty( (vMAX,hMAX), dtype= np.intc )
-
-  for v in range(vMAX):
-    dp[v,0] = v
-
-  for h in range(hMAX):
-    dp[0,h] = h
-
-  with nogil:
     for i in prange(N):
       vPos, hPos = PattIdx[i], TextIdx[i]
       vsz,  hsz  = PattIdx[i+1]-vPos, TextIdx[i+1]-hPos
-      CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, dp, cgBUFFER+vPos+hPos+i )
+      CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, DP, hMAX, cgBUFFER+vPos+hPos+i )
 
-  free(ptBUFFER) ## free the memory allocated previously
+  free(ptBUFFER)
   free(txBUFFER)
 
-
-
-  ## Write cigars to file and then close file and free memory
   outfile = open(out_filename, 'w')
 
   for i in range(N):

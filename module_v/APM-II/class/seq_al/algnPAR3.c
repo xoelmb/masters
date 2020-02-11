@@ -4,12 +4,12 @@
 {
     "distutils": {
         "depends": [],
-        "name": "algnPAR2",
+        "name": "algnPAR3",
         "sources": [
-            "/home/master/biom/biom-4-3/Escritorio/github/masters/module_v/APM-II/class/seq_al/algnPAR2.pyx"
+            "/home/master/biom/biom-4-3/Escritorio/github/masters/module_v/APM-II/class/seq_al/algnPAR3.pyx"
         ]
     },
-    "module_name": "algnPAR2"
+    "module_name": "algnPAR3"
 }
 END: Cython Metadata */
 
@@ -618,8 +618,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__algnPAR2
-#define __PYX_HAVE_API__algnPAR2
+#define __PYX_HAVE__algnPAR3
+#define __PYX_HAVE_API__algnPAR3
 /* Early includes */
 #include <string.h>
 #include <stdlib.h>
@@ -833,7 +833,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "algnPAR2.pyx",
+  "algnPAR3.pyx",
   "stringsource",
 };
 /* NoFastGil.proto */
@@ -1667,9 +1667,6 @@ static int __Pyx_ValidateAndInit_memviewslice(
 /* ObjectToMemviewSlice.proto */
 static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_int(PyObject *, int writable_flag);
 
-/* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_int(PyObject *, int writable_flag);
-
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
@@ -1695,7 +1692,7 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 
 /* Module declarations from 'libc.stdlib' */
 
-/* Module declarations from 'algnPAR2' */
+/* Module declarations from 'algnPAR3' */
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
@@ -1707,9 +1704,9 @@ static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
-static int __pyx_f_8algnPAR2_align_edit_distance(char *, char *, int, int, __Pyx_memviewslice, char *); /*proto*/
-static void __pyx_f_8algnPAR2_write_cigar(char *, int, PyObject *); /*proto*/
-static void __pyx_f_8algnPAR2_copyString(char *, char *, int); /*proto*/
+static int __pyx_f_8algnPAR3_align_edit_distance(char *, char *, int, int, int *, int, char *); /*proto*/
+static void __pyx_f_8algnPAR3_write_cigar(char *, int, PyObject *); /*proto*/
+static void __pyx_f_8algnPAR3_copyString(char *, char *, int); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -1744,11 +1741,11 @@ static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, PyObject *); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_int = { "int", NULL, sizeof(int), { 0 }, 0, IS_UNSIGNED(int) ? 'U' : 'I', IS_UNSIGNED(int), 0 };
-#define __Pyx_MODULE_NAME "algnPAR2"
-extern int __pyx_module_is_main_algnPAR2;
-int __pyx_module_is_main_algnPAR2 = 0;
+#define __Pyx_MODULE_NAME "algnPAR3"
+extern int __pyx_module_is_main_algnPAR3;
+int __pyx_module_is_main_algnPAR3 = 0;
 
-/* Implementation of 'algnPAR2' */
+/* Implementation of 'algnPAR3' */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_open;
 static PyObject *__pyx_builtin_print;
@@ -1772,8 +1769,8 @@ static const char __pyx_k_h[] = "h";
 static const char __pyx_k_i[] = "i";
 static const char __pyx_k_v[] = "v";
 static const char __pyx_k_w[] = "w";
+static const char __pyx_k_DP[] = "DP";
 static const char __pyx_k__4[] = "\t";
-static const char __pyx_k_dp[] = "dp";
 static const char __pyx_k_id[] = "id";
 static const char __pyx_k_np[] = "np";
 static const char __pyx_k_hsz[] = "hsz";
@@ -1833,7 +1830,7 @@ static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_outfile[] = "outfile";
 static const char __pyx_k_pattern[] = "pattern";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
-static const char __pyx_k_algnPAR2[] = "algnPAR2";
+static const char __pyx_k_algnPAR3[] = "algnPAR3";
 static const char __pyx_k_cgBUFFER[] = "cgBUFFER";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_itemsize[] = "itemsize";
@@ -1853,7 +1850,7 @@ static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
 static const char __pyx_k_in_filename[] = "in_filename";
-static const char __pyx_k_algnPAR2_pyx[] = "algnPAR2.pyx";
+static const char __pyx_k_algnPAR3_pyx[] = "algnPAR3.pyx";
 static const char __pyx_k_out_filename[] = "out_filename";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "stringsource";
@@ -1900,6 +1897,7 @@ static PyObject *__pyx_kp_s_Cannot_create_writable_memory_vi;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
 static PyObject *__pyx_n_s_CgIdx;
 static PyObject *__pyx_n_u_D;
+static PyObject *__pyx_n_s_DP;
 static PyObject *__pyx_n_u_ERROR;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
@@ -1925,8 +1923,8 @@ static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_View_MemoryView;
 static PyObject *__pyx_n_u_X;
 static PyObject *__pyx_kp_u__4;
-static PyObject *__pyx_n_s_algnPAR2;
-static PyObject *__pyx_kp_s_algnPAR2_pyx;
+static PyObject *__pyx_n_s_algnPAR3;
+static PyObject *__pyx_kp_s_algnPAR3_pyx;
 static PyObject *__pyx_n_s_align;
 static PyObject *__pyx_n_s_allocate_buffer;
 static PyObject *__pyx_n_s_base;
@@ -1939,7 +1937,6 @@ static PyObject *__pyx_n_s_close;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
 static PyObject *__pyx_n_s_dict;
-static PyObject *__pyx_n_s_dp;
 static PyObject *__pyx_n_s_dtype;
 static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_empty;
@@ -2023,7 +2020,7 @@ static PyObject *__pyx_n_s_vTOT;
 static PyObject *__pyx_n_s_vsz;
 static PyObject *__pyx_n_u_w;
 static PyObject *__pyx_n_s_write;
-static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_in_filename, PyObject *__pyx_v_out_filename); /* proto */
+static PyObject *__pyx_pf_8algnPAR3_align(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_in_filename, PyObject *__pyx_v_out_filename); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2105,15 +2102,15 @@ static PyObject *__pyx_codeobj__24;
 static PyObject *__pyx_codeobj__31;
 /* Late includes */
 
-/* "algnPAR2.pyx":10
+/* "algnPAR3.pyx":12
  * @cython.initializedcheck(False)
  * 
- * cdef int align_edit_distance ( char *pt, char *tx, int vsz, int hsz, int[:,::1] dp, char *cigar ) nogil:             # <<<<<<<<<<<<<<
+ * cdef int align_edit_distance ( char *pt, char *tx, int vsz, int hsz, int *dp, int hMAX, char *cigar ) nogil:             # <<<<<<<<<<<<<<
  *   cdef int v, h, c
  *   for v in range(1,vsz):
  */
 
-static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v_tx, int __pyx_v_vsz, int __pyx_v_hsz, __Pyx_memviewslice __pyx_v_dp, char *__pyx_v_cigar) {
+static int __pyx_f_8algnPAR3_align_edit_distance(char *__pyx_v_pt, char *__pyx_v_tx, int __pyx_v_vsz, int __pyx_v_hsz, int *__pyx_v_dp, int __pyx_v_hMAX, char *__pyx_v_cigar) {
   int __pyx_v_v;
   int __pyx_v_h;
   int __pyx_v_c;
@@ -2125,231 +2122,199 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
   int __pyx_t_4;
   int __pyx_t_5;
   int __pyx_t_6;
-  Py_ssize_t __pyx_t_7;
-  Py_ssize_t __pyx_t_8;
+  long __pyx_t_7;
+  long __pyx_t_8;
   long __pyx_t_9;
-  Py_ssize_t __pyx_t_10;
-  Py_ssize_t __pyx_t_11;
-  long __pyx_t_12;
-  Py_ssize_t __pyx_t_13;
-  Py_ssize_t __pyx_t_14;
-  long __pyx_t_15;
-  long __pyx_t_16;
-  Py_ssize_t __pyx_t_17;
-  Py_ssize_t __pyx_t_18;
-  int __pyx_t_19;
-  int __pyx_t_20;
-  Py_ssize_t __pyx_t_21;
-  Py_ssize_t __pyx_t_22;
-  Py_ssize_t __pyx_t_23;
-  Py_ssize_t __pyx_t_24;
-  Py_ssize_t __pyx_t_25;
-  Py_ssize_t __pyx_t_26;
-  Py_ssize_t __pyx_t_27;
-  Py_ssize_t __pyx_t_28;
+  long __pyx_t_10;
+  int __pyx_t_11;
+  int __pyx_t_12;
 
-  /* "algnPAR2.pyx":12
- * cdef int align_edit_distance ( char *pt, char *tx, int vsz, int hsz, int[:,::1] dp, char *cigar ) nogil:
+  /* "algnPAR3.pyx":14
+ * cdef int align_edit_distance ( char *pt, char *tx, int vsz, int hsz, int *dp, int hMAX, char *cigar ) nogil:
  *   cdef int v, h, c
  *   for v in range(1,vsz):             # <<<<<<<<<<<<<<
  *     for h in range(1,hsz):
- *       dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1),
+ *       dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1),
  */
   __pyx_t_1 = __pyx_v_vsz;
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 1; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_v = __pyx_t_3;
 
-    /* "algnPAR2.pyx":13
+    /* "algnPAR3.pyx":15
  *   cdef int v, h, c
  *   for v in range(1,vsz):
  *     for h in range(1,hsz):             # <<<<<<<<<<<<<<
- *       dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1),
- *                      dp[  v,h-1] + 1,
+ *       dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1),
+ *                           dp[ v*hMAX+h-1] + 1,
  */
     __pyx_t_4 = __pyx_v_hsz;
     __pyx_t_5 = __pyx_t_4;
     for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_h = __pyx_t_6;
 
-      /* "algnPAR2.pyx":15
+      /* "algnPAR3.pyx":17
  *     for h in range(1,hsz):
- *       dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1),
- *                      dp[  v,h-1] + 1,             # <<<<<<<<<<<<<<
- *                      dp[v-1,  h] + 1)
+ *       dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1),
+ *                           dp[ v*hMAX+h-1] + 1,             # <<<<<<<<<<<<<<
+ *                           dp[(v-1)*hMAX+h] + 1)
  * 
  */
-      __pyx_t_7 = __pyx_v_v;
-      __pyx_t_8 = (__pyx_v_h - 1);
-      __pyx_t_9 = ((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_7 * __pyx_v_dp.strides[0]) )) + __pyx_t_8)) ))) + 1);
+      __pyx_t_7 = ((__pyx_v_dp[(((__pyx_v_v * __pyx_v_hMAX) + __pyx_v_h) - 1)]) + 1);
 
-      /* "algnPAR2.pyx":16
- *       dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1),
- *                      dp[  v,h-1] + 1,
- *                      dp[v-1,  h] + 1)             # <<<<<<<<<<<<<<
+      /* "algnPAR3.pyx":18
+ *       dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1),
+ *                           dp[ v*hMAX+h-1] + 1,
+ *                           dp[(v-1)*hMAX+h] + 1)             # <<<<<<<<<<<<<<
  * 
  *   v, h, c = vsz-1, hsz-1, 0
  */
-      __pyx_t_10 = (__pyx_v_v - 1);
-      __pyx_t_11 = __pyx_v_h;
-      __pyx_t_12 = ((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_10 * __pyx_v_dp.strides[0]) )) + __pyx_t_11)) ))) + 1);
+      __pyx_t_8 = ((__pyx_v_dp[(((__pyx_v_v - 1) * __pyx_v_hMAX) + __pyx_v_h)]) + 1);
 
-      /* "algnPAR2.pyx":14
+      /* "algnPAR3.pyx":16
  *   for v in range(1,vsz):
  *     for h in range(1,hsz):
- *       dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1),             # <<<<<<<<<<<<<<
- *                      dp[  v,h-1] + 1,
- *                      dp[v-1,  h] + 1)
+ *       dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1),             # <<<<<<<<<<<<<<
+ *                           dp[ v*hMAX+h-1] + 1,
+ *                           dp[(v-1)*hMAX+h] + 1)
  */
-      __pyx_t_13 = (__pyx_v_v - 1);
-      __pyx_t_14 = (__pyx_v_h - 1);
       if ((((__pyx_v_pt[(__pyx_v_v - 1)]) == (__pyx_v_tx[(__pyx_v_h - 1)])) != 0)) {
-        __pyx_t_15 = 0;
+        __pyx_t_9 = 0;
       } else {
-        __pyx_t_15 = 1;
+        __pyx_t_9 = 1;
       }
-      __pyx_t_16 = ((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_13 * __pyx_v_dp.strides[0]) )) + __pyx_t_14)) ))) + __pyx_t_15);
+      __pyx_t_10 = ((__pyx_v_dp[((((__pyx_v_v - 1) * __pyx_v_hMAX) + __pyx_v_h) - 1)]) + __pyx_t_9);
 
-      /* "algnPAR2.pyx":15
+      /* "algnPAR3.pyx":17
  *     for h in range(1,hsz):
- *       dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1),
- *                      dp[  v,h-1] + 1,             # <<<<<<<<<<<<<<
- *                      dp[v-1,  h] + 1)
+ *       dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1),
+ *                           dp[ v*hMAX+h-1] + 1,             # <<<<<<<<<<<<<<
+ *                           dp[(v-1)*hMAX+h] + 1)
  * 
  */
-      if (((__pyx_t_9 < __pyx_t_16) != 0)) {
-        __pyx_t_15 = __pyx_t_9;
+      if (((__pyx_t_7 < __pyx_t_10) != 0)) {
+        __pyx_t_9 = __pyx_t_7;
       } else {
-        __pyx_t_15 = __pyx_t_16;
+        __pyx_t_9 = __pyx_t_10;
       }
-      __pyx_t_16 = __pyx_t_15;
+      __pyx_t_10 = __pyx_t_9;
 
-      /* "algnPAR2.pyx":16
- *       dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1),
- *                      dp[  v,h-1] + 1,
- *                      dp[v-1,  h] + 1)             # <<<<<<<<<<<<<<
+      /* "algnPAR3.pyx":18
+ *       dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1),
+ *                           dp[ v*hMAX+h-1] + 1,
+ *                           dp[(v-1)*hMAX+h] + 1)             # <<<<<<<<<<<<<<
  * 
  *   v, h, c = vsz-1, hsz-1, 0
  */
-      if (((__pyx_t_12 < __pyx_t_16) != 0)) {
-        __pyx_t_15 = __pyx_t_12;
+      if (((__pyx_t_8 < __pyx_t_10) != 0)) {
+        __pyx_t_9 = __pyx_t_8;
       } else {
-        __pyx_t_15 = __pyx_t_16;
+        __pyx_t_9 = __pyx_t_10;
       }
 
-      /* "algnPAR2.pyx":14
+      /* "algnPAR3.pyx":16
  *   for v in range(1,vsz):
  *     for h in range(1,hsz):
- *       dp[v,h] = min (dp[v-1,h-1] + (0 if pt[v-1]==tx[h-1] else 1),             # <<<<<<<<<<<<<<
- *                      dp[  v,h-1] + 1,
- *                      dp[v-1,  h] + 1)
+ *       dp[v*hMAX+h] = min (dp[(v-1)*hMAX+h-1] + (0 if pt[v-1]==tx[h-1] else 1),             # <<<<<<<<<<<<<<
+ *                           dp[ v*hMAX+h-1] + 1,
+ *                           dp[(v-1)*hMAX+h] + 1)
  */
-      __pyx_t_17 = __pyx_v_v;
-      __pyx_t_18 = __pyx_v_h;
-      *((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_17 * __pyx_v_dp.strides[0]) )) + __pyx_t_18)) )) = __pyx_t_15;
+      (__pyx_v_dp[((__pyx_v_v * __pyx_v_hMAX) + __pyx_v_h)]) = __pyx_t_9;
     }
   }
 
-  /* "algnPAR2.pyx":18
- *                      dp[v-1,  h] + 1)
+  /* "algnPAR3.pyx":20
+ *                           dp[(v-1)*hMAX+h] + 1)
  * 
  *   v, h, c = vsz-1, hsz-1, 0             # <<<<<<<<<<<<<<
  *   while v>0 and h>0:
- *     if dp[v,h] == dp[v-1,h] + 1:
+ *     if dp[v*hMAX+h] == dp[(v-1)*hMAX+h] + 1:
  */
-  __pyx_t_15 = (__pyx_v_vsz - 1);
-  __pyx_t_9 = (__pyx_v_hsz - 1);
+  __pyx_t_9 = (__pyx_v_vsz - 1);
+  __pyx_t_7 = (__pyx_v_hsz - 1);
   __pyx_t_1 = 0;
-  __pyx_v_v = __pyx_t_15;
-  __pyx_v_h = __pyx_t_9;
+  __pyx_v_v = __pyx_t_9;
+  __pyx_v_h = __pyx_t_7;
   __pyx_v_c = __pyx_t_1;
 
-  /* "algnPAR2.pyx":19
+  /* "algnPAR3.pyx":21
  * 
  *   v, h, c = vsz-1, hsz-1, 0
  *   while v>0 and h>0:             # <<<<<<<<<<<<<<
- *     if dp[v,h] == dp[v-1,h] + 1:
+ *     if dp[v*hMAX+h] == dp[(v-1)*hMAX+h] + 1:
  *       v -= 1
  */
   while (1) {
-    __pyx_t_20 = ((__pyx_v_v > 0) != 0);
-    if (__pyx_t_20) {
+    __pyx_t_12 = ((__pyx_v_v > 0) != 0);
+    if (__pyx_t_12) {
     } else {
-      __pyx_t_19 = __pyx_t_20;
+      __pyx_t_11 = __pyx_t_12;
       goto __pyx_L9_bool_binop_done;
     }
-    __pyx_t_20 = ((__pyx_v_h > 0) != 0);
-    __pyx_t_19 = __pyx_t_20;
+    __pyx_t_12 = ((__pyx_v_h > 0) != 0);
+    __pyx_t_11 = __pyx_t_12;
     __pyx_L9_bool_binop_done:;
-    if (!__pyx_t_19) break;
+    if (!__pyx_t_11) break;
 
-    /* "algnPAR2.pyx":20
+    /* "algnPAR3.pyx":22
  *   v, h, c = vsz-1, hsz-1, 0
  *   while v>0 and h>0:
- *     if dp[v,h] == dp[v-1,h] + 1:             # <<<<<<<<<<<<<<
+ *     if dp[v*hMAX+h] == dp[(v-1)*hMAX+h] + 1:             # <<<<<<<<<<<<<<
  *       v -= 1
  *       cigar[c]= 3 # "D"
  */
-    __pyx_t_21 = __pyx_v_v;
-    __pyx_t_22 = __pyx_v_h;
-    __pyx_t_23 = (__pyx_v_v - 1);
-    __pyx_t_24 = __pyx_v_h;
-    __pyx_t_19 = (((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_21 * __pyx_v_dp.strides[0]) )) + __pyx_t_22)) ))) == ((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_23 * __pyx_v_dp.strides[0]) )) + __pyx_t_24)) ))) + 1)) != 0);
-    if (__pyx_t_19) {
+    __pyx_t_11 = (((__pyx_v_dp[((__pyx_v_v * __pyx_v_hMAX) + __pyx_v_h)]) == ((__pyx_v_dp[(((__pyx_v_v - 1) * __pyx_v_hMAX) + __pyx_v_h)]) + 1)) != 0);
+    if (__pyx_t_11) {
 
-      /* "algnPAR2.pyx":21
+      /* "algnPAR3.pyx":23
  *   while v>0 and h>0:
- *     if dp[v,h] == dp[v-1,h] + 1:
+ *     if dp[v*hMAX+h] == dp[(v-1)*hMAX+h] + 1:
  *       v -= 1             # <<<<<<<<<<<<<<
  *       cigar[c]= 3 # "D"
- *     elif dp[v,h] == dp[v,h-1] + 1:
+ *     elif dp[v*hMAX+h] == dp[v*hMAX+h-1] + 1:
  */
       __pyx_v_v = (__pyx_v_v - 1);
 
-      /* "algnPAR2.pyx":22
- *     if dp[v,h] == dp[v-1,h] + 1:
+      /* "algnPAR3.pyx":24
+ *     if dp[v*hMAX+h] == dp[(v-1)*hMAX+h] + 1:
  *       v -= 1
  *       cigar[c]= 3 # "D"             # <<<<<<<<<<<<<<
- *     elif dp[v,h] == dp[v,h-1] + 1:
+ *     elif dp[v*hMAX+h] == dp[v*hMAX+h-1] + 1:
  *       h -= 1
  */
       (__pyx_v_cigar[__pyx_v_c]) = 3;
 
-      /* "algnPAR2.pyx":20
+      /* "algnPAR3.pyx":22
  *   v, h, c = vsz-1, hsz-1, 0
  *   while v>0 and h>0:
- *     if dp[v,h] == dp[v-1,h] + 1:             # <<<<<<<<<<<<<<
+ *     if dp[v*hMAX+h] == dp[(v-1)*hMAX+h] + 1:             # <<<<<<<<<<<<<<
  *       v -= 1
  *       cigar[c]= 3 # "D"
  */
       goto __pyx_L11;
     }
 
-    /* "algnPAR2.pyx":23
+    /* "algnPAR3.pyx":25
  *       v -= 1
  *       cigar[c]= 3 # "D"
- *     elif dp[v,h] == dp[v,h-1] + 1:             # <<<<<<<<<<<<<<
+ *     elif dp[v*hMAX+h] == dp[v*hMAX+h-1] + 1:             # <<<<<<<<<<<<<<
  *       h -= 1
  *       cigar[c]= 2 # "I"
  */
-    __pyx_t_25 = __pyx_v_v;
-    __pyx_t_26 = __pyx_v_h;
-    __pyx_t_27 = __pyx_v_v;
-    __pyx_t_28 = (__pyx_v_h - 1);
-    __pyx_t_19 = (((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_25 * __pyx_v_dp.strides[0]) )) + __pyx_t_26)) ))) == ((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_27 * __pyx_v_dp.strides[0]) )) + __pyx_t_28)) ))) + 1)) != 0);
-    if (__pyx_t_19) {
+    __pyx_t_11 = (((__pyx_v_dp[((__pyx_v_v * __pyx_v_hMAX) + __pyx_v_h)]) == ((__pyx_v_dp[(((__pyx_v_v * __pyx_v_hMAX) + __pyx_v_h) - 1)]) + 1)) != 0);
+    if (__pyx_t_11) {
 
-      /* "algnPAR2.pyx":24
+      /* "algnPAR3.pyx":26
  *       cigar[c]= 3 # "D"
- *     elif dp[v,h] == dp[v,h-1] + 1:
+ *     elif dp[v*hMAX+h] == dp[v*hMAX+h-1] + 1:
  *       h -= 1             # <<<<<<<<<<<<<<
  *       cigar[c]= 2 # "I"
  *     else:
  */
       __pyx_v_h = (__pyx_v_h - 1);
 
-      /* "algnPAR2.pyx":25
- *     elif dp[v,h] == dp[v,h-1] + 1:
+      /* "algnPAR3.pyx":27
+ *     elif dp[v*hMAX+h] == dp[v*hMAX+h-1] + 1:
  *       h -= 1
  *       cigar[c]= 2 # "I"             # <<<<<<<<<<<<<<
  *     else:
@@ -2357,17 +2322,17 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
  */
       (__pyx_v_cigar[__pyx_v_c]) = 2;
 
-      /* "algnPAR2.pyx":23
+      /* "algnPAR3.pyx":25
  *       v -= 1
  *       cigar[c]= 3 # "D"
- *     elif dp[v,h] == dp[v,h-1] + 1:             # <<<<<<<<<<<<<<
+ *     elif dp[v*hMAX+h] == dp[v*hMAX+h-1] + 1:             # <<<<<<<<<<<<<<
  *       h -= 1
  *       cigar[c]= 2 # "I"
  */
       goto __pyx_L11;
     }
 
-    /* "algnPAR2.pyx":27
+    /* "algnPAR3.pyx":29
  *       cigar[c]= 2 # "I"
  *     else:
  *       v -= 1             # <<<<<<<<<<<<<<
@@ -2377,7 +2342,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
     /*else*/ {
       __pyx_v_v = (__pyx_v_v - 1);
 
-      /* "algnPAR2.pyx":28
+      /* "algnPAR3.pyx":30
  *     else:
  *       v -= 1
  *       h -= 1             # <<<<<<<<<<<<<<
@@ -2386,17 +2351,17 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
  */
       __pyx_v_h = (__pyx_v_h - 1);
 
-      /* "algnPAR2.pyx":29
+      /* "algnPAR3.pyx":31
  *       v -= 1
  *       h -= 1
  *       if pt[v] == tx[h]:             # <<<<<<<<<<<<<<
  *         cigar[c]= 0 # "M"
  *       else:
  */
-      __pyx_t_19 = (((__pyx_v_pt[__pyx_v_v]) == (__pyx_v_tx[__pyx_v_h])) != 0);
-      if (__pyx_t_19) {
+      __pyx_t_11 = (((__pyx_v_pt[__pyx_v_v]) == (__pyx_v_tx[__pyx_v_h])) != 0);
+      if (__pyx_t_11) {
 
-        /* "algnPAR2.pyx":30
+        /* "algnPAR3.pyx":32
  *       h -= 1
  *       if pt[v] == tx[h]:
  *         cigar[c]= 0 # "M"             # <<<<<<<<<<<<<<
@@ -2405,7 +2370,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
  */
         (__pyx_v_cigar[__pyx_v_c]) = 0;
 
-        /* "algnPAR2.pyx":29
+        /* "algnPAR3.pyx":31
  *       v -= 1
  *       h -= 1
  *       if pt[v] == tx[h]:             # <<<<<<<<<<<<<<
@@ -2415,7 +2380,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
         goto __pyx_L12;
       }
 
-      /* "algnPAR2.pyx":32
+      /* "algnPAR3.pyx":34
  *         cigar[c]= 0 # "M"
  *       else:
  *         cigar[c]= 1 # "X"             # <<<<<<<<<<<<<<
@@ -2429,7 +2394,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
     }
     __pyx_L11:;
 
-    /* "algnPAR2.pyx":33
+    /* "algnPAR3.pyx":35
  *       else:
  *         cigar[c]= 1 # "X"
  *     c=c+1             # <<<<<<<<<<<<<<
@@ -2439,17 +2404,17 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
     __pyx_v_c = (__pyx_v_c + 1);
   }
 
-  /* "algnPAR2.pyx":35
+  /* "algnPAR3.pyx":37
  *     c=c+1
  * 
  *   if v>0:             # <<<<<<<<<<<<<<
  *     for _ in range(v):
  *       cigar[c]=3 # "D"
  */
-  __pyx_t_19 = ((__pyx_v_v > 0) != 0);
-  if (__pyx_t_19) {
+  __pyx_t_11 = ((__pyx_v_v > 0) != 0);
+  if (__pyx_t_11) {
 
-    /* "algnPAR2.pyx":36
+    /* "algnPAR3.pyx":38
  * 
  *   if v>0:
  *     for _ in range(v):             # <<<<<<<<<<<<<<
@@ -2461,7 +2426,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
     for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
       __pyx_v__ = __pyx_t_3;
 
-      /* "algnPAR2.pyx":37
+      /* "algnPAR3.pyx":39
  *   if v>0:
  *     for _ in range(v):
  *       cigar[c]=3 # "D"             # <<<<<<<<<<<<<<
@@ -2470,7 +2435,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
  */
       (__pyx_v_cigar[__pyx_v_c]) = 3;
 
-      /* "algnPAR2.pyx":38
+      /* "algnPAR3.pyx":40
  *     for _ in range(v):
  *       cigar[c]=3 # "D"
  *       c=c+1             # <<<<<<<<<<<<<<
@@ -2480,7 +2445,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
       __pyx_v_c = (__pyx_v_c + 1);
     }
 
-    /* "algnPAR2.pyx":35
+    /* "algnPAR3.pyx":37
  *     c=c+1
  * 
  *   if v>0:             # <<<<<<<<<<<<<<
@@ -2489,17 +2454,17 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
  */
   }
 
-  /* "algnPAR2.pyx":39
+  /* "algnPAR3.pyx":41
  *       cigar[c]=3 # "D"
  *       c=c+1
  *   if h>0:             # <<<<<<<<<<<<<<
  *     for _ in range(h):
  *       cigar[c]=2 # "I"
  */
-  __pyx_t_19 = ((__pyx_v_h > 0) != 0);
-  if (__pyx_t_19) {
+  __pyx_t_11 = ((__pyx_v_h > 0) != 0);
+  if (__pyx_t_11) {
 
-    /* "algnPAR2.pyx":40
+    /* "algnPAR3.pyx":42
  *       c=c+1
  *   if h>0:
  *     for _ in range(h):             # <<<<<<<<<<<<<<
@@ -2511,7 +2476,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
     for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
       __pyx_v__ = __pyx_t_3;
 
-      /* "algnPAR2.pyx":41
+      /* "algnPAR3.pyx":43
  *   if h>0:
  *     for _ in range(h):
  *       cigar[c]=2 # "I"             # <<<<<<<<<<<<<<
@@ -2520,7 +2485,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
  */
       (__pyx_v_cigar[__pyx_v_c]) = 2;
 
-      /* "algnPAR2.pyx":42
+      /* "algnPAR3.pyx":44
  *     for _ in range(h):
  *       cigar[c]=2 # "I"
  *       c=c+1             # <<<<<<<<<<<<<<
@@ -2530,7 +2495,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
       __pyx_v_c = (__pyx_v_c + 1);
     }
 
-    /* "algnPAR2.pyx":39
+    /* "algnPAR3.pyx":41
  *       cigar[c]=3 # "D"
  *       c=c+1
  *   if h>0:             # <<<<<<<<<<<<<<
@@ -2539,7 +2504,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
  */
   }
 
-  /* "algnPAR2.pyx":44
+  /* "algnPAR3.pyx":46
  *       c=c+1
  * 
  *   return c             # <<<<<<<<<<<<<<
@@ -2549,10 +2514,10 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
   __pyx_r = __pyx_v_c;
   goto __pyx_L0;
 
-  /* "algnPAR2.pyx":10
+  /* "algnPAR3.pyx":12
  * @cython.initializedcheck(False)
  * 
- * cdef int align_edit_distance ( char *pt, char *tx, int vsz, int hsz, int[:,::1] dp, char *cigar ) nogil:             # <<<<<<<<<<<<<<
+ * cdef int align_edit_distance ( char *pt, char *tx, int vsz, int hsz, int *dp, int hMAX, char *cigar ) nogil:             # <<<<<<<<<<<<<<
  *   cdef int v, h, c
  *   for v in range(1,vsz):
  */
@@ -2562,7 +2527,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
   return __pyx_r;
 }
 
-/* "algnPAR2.pyx":47
+/* "algnPAR3.pyx":49
  * 
  * 
  * cdef void write_cigar( char * CIG, int pos, ofile ):             # <<<<<<<<<<<<<<
@@ -2570,7 +2535,7 @@ static int __pyx_f_8algnPAR2_align_edit_distance(char *__pyx_v_pt, char *__pyx_v
  *   cdef int  count= 0, i
  */
 
-static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, PyObject *__pyx_v_ofile) {
+static void __pyx_f_8algnPAR3_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, PyObject *__pyx_v_ofile) {
   int __pyx_v_count;
   int __pyx_v_i;
   char __pyx_v_last;
@@ -2586,7 +2551,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("write_cigar", 0);
 
-  /* "algnPAR2.pyx":49
+  /* "algnPAR3.pyx":51
  * cdef void write_cigar( char * CIG, int pos, ofile ):
  * 
  *   cdef int  count= 0, i             # <<<<<<<<<<<<<<
@@ -2595,7 +2560,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
  */
   __pyx_v_count = 0;
 
-  /* "algnPAR2.pyx":50
+  /* "algnPAR3.pyx":52
  * 
  *   cdef int  count= 0, i
  *   cdef char last=4, v             # <<<<<<<<<<<<<<
@@ -2604,14 +2569,14 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
  */
   __pyx_v_last = 4;
 
-  /* "algnPAR2.pyx":51
+  /* "algnPAR3.pyx":53
  *   cdef int  count= 0, i
  *   cdef char last=4, v
  *   Translate = ['M','X','I','D','A']             # <<<<<<<<<<<<<<
  * 
  *   for i in range(pos,0,-1):
  */
-  __pyx_t_1 = PyList_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_u_M);
   __Pyx_GIVEREF(__pyx_n_u_M);
@@ -2631,7 +2596,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
   __pyx_v_Translate = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "algnPAR2.pyx":53
+  /* "algnPAR3.pyx":55
  *   Translate = ['M','X','I','D','A']
  * 
  *   for i in range(pos,0,-1):             # <<<<<<<<<<<<<<
@@ -2641,7 +2606,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
   for (__pyx_t_2 = __pyx_v_pos; __pyx_t_2 > 0; __pyx_t_2-=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "algnPAR2.pyx":54
+    /* "algnPAR3.pyx":56
  * 
  *   for i in range(pos,0,-1):
  *     v = CIG[i-1]             # <<<<<<<<<<<<<<
@@ -2650,7 +2615,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
  */
     __pyx_v_v = (__pyx_v_CIG[(__pyx_v_i - 1)]);
 
-    /* "algnPAR2.pyx":55
+    /* "algnPAR3.pyx":57
  *   for i in range(pos,0,-1):
  *     v = CIG[i-1]
  *     if v == last:             # <<<<<<<<<<<<<<
@@ -2660,7 +2625,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
     __pyx_t_3 = ((__pyx_v_v == __pyx_v_last) != 0);
     if (__pyx_t_3) {
 
-      /* "algnPAR2.pyx":56
+      /* "algnPAR3.pyx":58
  *     v = CIG[i-1]
  *     if v == last:
  *       count += 1             # <<<<<<<<<<<<<<
@@ -2669,7 +2634,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
  */
       __pyx_v_count = (__pyx_v_count + 1);
 
-      /* "algnPAR2.pyx":55
+      /* "algnPAR3.pyx":57
  *   for i in range(pos,0,-1):
  *     v = CIG[i-1]
  *     if v == last:             # <<<<<<<<<<<<<<
@@ -2679,7 +2644,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
       goto __pyx_L5;
     }
 
-    /* "algnPAR2.pyx":58
+    /* "algnPAR3.pyx":60
  *       count += 1
  *     else:
  *       if count != 0:             # <<<<<<<<<<<<<<
@@ -2690,23 +2655,23 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
       __pyx_t_3 = ((__pyx_v_count != 0) != 0);
       if (__pyx_t_3) {
 
-        /* "algnPAR2.pyx":59
+        /* "algnPAR3.pyx":61
  *     else:
  *       if count != 0:
  *         ofile.write(str(count)+Translate[last])             # <<<<<<<<<<<<<<
  *       last = v
  *       count=1
  */
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ofile, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ofile, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 61, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_count); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_count); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 61, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 61, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_Translate, __pyx_v_last, char, 1, __Pyx_PyInt_From_char, 1, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_Translate, __pyx_v_last, char, 1, __Pyx_PyInt_From_char, 1, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 61, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_7 = PyNumber_Add(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __pyx_t_7 = PyNumber_Add(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 61, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2723,12 +2688,12 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
         __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_7);
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "algnPAR2.pyx":58
+        /* "algnPAR3.pyx":60
  *       count += 1
  *     else:
  *       if count != 0:             # <<<<<<<<<<<<<<
@@ -2737,7 +2702,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
  */
       }
 
-      /* "algnPAR2.pyx":60
+      /* "algnPAR3.pyx":62
  *       if count != 0:
  *         ofile.write(str(count)+Translate[last])
  *       last = v             # <<<<<<<<<<<<<<
@@ -2746,7 +2711,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
  */
       __pyx_v_last = __pyx_v_v;
 
-      /* "algnPAR2.pyx":61
+      /* "algnPAR3.pyx":63
  *         ofile.write(str(count)+Translate[last])
  *       last = v
  *       count=1             # <<<<<<<<<<<<<<
@@ -2758,7 +2723,7 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
     __pyx_L5:;
   }
 
-  /* "algnPAR2.pyx":63
+  /* "algnPAR3.pyx":65
  *       count=1
  * 
  *   if count != 0:             # <<<<<<<<<<<<<<
@@ -2768,23 +2733,23 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
   __pyx_t_3 = ((__pyx_v_count != 0) != 0);
   if (__pyx_t_3) {
 
-    /* "algnPAR2.pyx":64
+    /* "algnPAR3.pyx":66
  * 
  *   if count != 0:
  *     ofile.write(str(count)+Translate[last])             # <<<<<<<<<<<<<<
  * 
  *   ofile.write("\n")
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ofile, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ofile, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_count); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_count); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_GetItemInt_List(__pyx_v_Translate, __pyx_v_last, char, 1, __Pyx_PyInt_From_char, 1, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_GetItemInt_List(__pyx_v_Translate, __pyx_v_last, char, 1, __Pyx_PyInt_From_char, 1, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_6 = PyNumber_Add(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __pyx_t_6 = PyNumber_Add(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -2801,12 +2766,12 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
     __pyx_t_1 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "algnPAR2.pyx":63
+    /* "algnPAR3.pyx":65
  *       count=1
  * 
  *   if count != 0:             # <<<<<<<<<<<<<<
@@ -2815,14 +2780,14 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
  */
   }
 
-  /* "algnPAR2.pyx":66
+  /* "algnPAR3.pyx":68
  *     ofile.write(str(count)+Translate[last])
  * 
  *   ofile.write("\n")             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ofile, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_ofile, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2836,12 +2801,12 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
   }
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_6, __pyx_kp_u_) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_kp_u_);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "algnPAR2.pyx":47
+  /* "algnPAR3.pyx":49
  * 
  * 
  * cdef void write_cigar( char * CIG, int pos, ofile ):             # <<<<<<<<<<<<<<
@@ -2857,135 +2822,69 @@ static void __pyx_f_8algnPAR2_write_cigar(char *__pyx_v_CIG, int __pyx_v_pos, Py
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_WriteUnraisable("algnPAR2.write_cigar", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_WriteUnraisable("algnPAR3.write_cigar", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_Translate);
   __Pyx_RefNannyFinishContext();
 }
 
-/* "algnPAR2.pyx":71
+/* "algnPAR3.pyx":73
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cdef void copyString( char *in_s, char *out_s, int Sz):             # <<<<<<<<<<<<<<
+ * cdef void copyString( char *in_s, char *out_s, int Sz) nogil:             # <<<<<<<<<<<<<<
  *   cdef int i
- *   with nogil:
+ *   for i in range(Sz):
  */
 
-static void __pyx_f_8algnPAR2_copyString(char *__pyx_v_in_s, char *__pyx_v_out_s, int __pyx_v_Sz) {
+static void __pyx_f_8algnPAR3_copyString(char *__pyx_v_in_s, char *__pyx_v_out_s, int __pyx_v_Sz) {
   int __pyx_v_i;
-  __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
   int __pyx_t_3;
-  __Pyx_RefNannySetupContext("copyString", 0);
 
-  /* "algnPAR2.pyx":73
- * cdef void copyString( char *in_s, char *out_s, int Sz):
+  /* "algnPAR3.pyx":75
+ * cdef void copyString( char *in_s, char *out_s, int Sz) nogil:
  *   cdef int i
- *   with nogil:             # <<<<<<<<<<<<<<
- *     for i in prange(Sz):
- *       out_s[i] = in_s[i]
+ *   for i in range(Sz):             # <<<<<<<<<<<<<<
+ *     out_s[i] = in_s[i]
+ *   out_s[Sz] = 0
  */
-  {
-      #ifdef WITH_THREAD
-      PyThreadState *_save;
-      Py_UNBLOCK_THREADS
-      __Pyx_FastGIL_Remember();
-      #endif
-      /*try:*/ {
+  __pyx_t_1 = __pyx_v_Sz;
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v_i = __pyx_t_3;
 
-        /* "algnPAR2.pyx":74
+    /* "algnPAR3.pyx":76
  *   cdef int i
- *   with nogil:
- *     for i in prange(Sz):             # <<<<<<<<<<<<<<
- *       out_s[i] = in_s[i]
- *     out_s[Sz] = 0
- */
-        __pyx_t_1 = __pyx_v_Sz;
-        if (1 == 0) abort();
-        {
-            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
-                #undef likely
-                #undef unlikely
-                #define likely(x)   (x)
-                #define unlikely(x) (x)
-            #endif
-            __pyx_t_3 = (__pyx_t_1 - 0 + 1 - 1/abs(1)) / 1;
-            if (__pyx_t_3 > 0)
-            {
-                #ifdef _OPENMP
-                #pragma omp parallel
-                #endif /* _OPENMP */
-                {
-                    #ifdef _OPENMP
-                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i)
-                    #endif /* _OPENMP */
-                    for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_3; __pyx_t_2++){
-                        {
-                            __pyx_v_i = (int)(0 + 1 * __pyx_t_2);
-
-                            /* "algnPAR2.pyx":75
- *   with nogil:
- *     for i in prange(Sz):
- *       out_s[i] = in_s[i]             # <<<<<<<<<<<<<<
- *     out_s[Sz] = 0
+ *   for i in range(Sz):
+ *     out_s[i] = in_s[i]             # <<<<<<<<<<<<<<
+ *   out_s[Sz] = 0
  * 
  */
-                            (__pyx_v_out_s[__pyx_v_i]) = (__pyx_v_in_s[__pyx_v_i]);
-                        }
-                    }
-                }
-            }
-        }
-        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
-            #undef likely
-            #undef unlikely
-            #define likely(x)   __builtin_expect(!!(x), 1)
-            #define unlikely(x) __builtin_expect(!!(x), 0)
-        #endif
-
-        /* "algnPAR2.pyx":76
- *     for i in prange(Sz):
- *       out_s[i] = in_s[i]
- *     out_s[Sz] = 0             # <<<<<<<<<<<<<<
- * 
- * 
- */
-        (__pyx_v_out_s[__pyx_v_Sz]) = 0;
-      }
-
-      /* "algnPAR2.pyx":73
- * cdef void copyString( char *in_s, char *out_s, int Sz):
- *   cdef int i
- *   with nogil:             # <<<<<<<<<<<<<<
- *     for i in prange(Sz):
- *       out_s[i] = in_s[i]
- */
-      /*finally:*/ {
-        /*normal exit:*/{
-          #ifdef WITH_THREAD
-          __Pyx_FastGIL_Forget();
-          Py_BLOCK_THREADS
-          #endif
-          goto __pyx_L5;
-        }
-        __pyx_L5:;
-      }
+    (__pyx_v_out_s[__pyx_v_i]) = (__pyx_v_in_s[__pyx_v_i]);
   }
 
-  /* "algnPAR2.pyx":71
+  /* "algnPAR3.pyx":77
+ *   for i in range(Sz):
+ *     out_s[i] = in_s[i]
+ *   out_s[Sz] = 0             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  (__pyx_v_out_s[__pyx_v_Sz]) = 0;
+
+  /* "algnPAR3.pyx":73
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cdef void copyString( char *in_s, char *out_s, int Sz):             # <<<<<<<<<<<<<<
+ * cdef void copyString( char *in_s, char *out_s, int Sz) nogil:             # <<<<<<<<<<<<<<
  *   cdef int i
- *   with nogil:
+ *   for i in range(Sz):
  */
 
   /* function exit code */
-  __Pyx_RefNannyFinishContext();
 }
 
-/* "algnPAR2.pyx":82
+/* "algnPAR3.pyx":83
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def align(in_filename, out_filename):             # <<<<<<<<<<<<<<
@@ -2994,9 +2893,9 @@ static void __pyx_f_8algnPAR2_copyString(char *__pyx_v_in_s, char *__pyx_v_out_s
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8algnPAR2_1align(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_8algnPAR2_1align = {"align", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_8algnPAR2_1align, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8algnPAR2_1align(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8algnPAR3_1align(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_8algnPAR3_1align = {"align", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_8algnPAR3_1align, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8algnPAR3_1align(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_in_filename = 0;
   PyObject *__pyx_v_out_filename = 0;
   PyObject *__pyx_r = 0;
@@ -3025,11 +2924,11 @@ static PyObject *__pyx_pw_8algnPAR2_1align(PyObject *__pyx_self, PyObject *__pyx
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_out_filename)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("align", 1, 2, 2, 1); __PYX_ERR(0, 82, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("align", 1, 2, 2, 1); __PYX_ERR(0, 83, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "align") < 0)) __PYX_ERR(0, 82, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "align") < 0)) __PYX_ERR(0, 83, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3042,20 +2941,20 @@ static PyObject *__pyx_pw_8algnPAR2_1align(PyObject *__pyx_self, PyObject *__pyx
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("align", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 82, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("align", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 83, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("algnPAR2.align", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("algnPAR3.align", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8algnPAR2_align(__pyx_self, __pyx_v_in_filename, __pyx_v_out_filename);
+  __pyx_r = __pyx_pf_8algnPAR3_align(__pyx_self, __pyx_v_in_filename, __pyx_v_out_filename);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_in_filename, PyObject *__pyx_v_out_filename) {
+static PyObject *__pyx_pf_8algnPAR3_align(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_in_filename, PyObject *__pyx_v_out_filename) {
   int __pyx_v_vsz;
   int __pyx_v_hsz;
   int __pyx_v_v;
@@ -3077,7 +2976,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   char *__pyx_v_ptBUFFER;
   char *__pyx_v_txBUFFER;
   char *__pyx_v_cgBUFFER;
-  __Pyx_memviewslice __pyx_v_dp = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int *__pyx_v_DP;
   PyObject *__pyx_v_outfile = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -3101,7 +3000,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   Py_ssize_t __pyx_t_18;
   Py_ssize_t __pyx_t_19;
   Py_ssize_t __pyx_t_20;
-  __Pyx_memviewslice __pyx_t_21 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_t_21;
   Py_ssize_t __pyx_t_22;
   Py_ssize_t __pyx_t_23;
   Py_ssize_t __pyx_t_24;
@@ -3109,26 +3008,21 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   Py_ssize_t __pyx_t_26;
   Py_ssize_t __pyx_t_27;
   Py_ssize_t __pyx_t_28;
-  Py_ssize_t __pyx_t_29;
-  Py_ssize_t __pyx_t_30;
-  Py_ssize_t __pyx_t_31;
-  Py_ssize_t __pyx_t_32;
-  Py_ssize_t __pyx_t_33;
   __Pyx_RefNannySetupContext("align", 0);
 
-  /* "algnPAR2.pyx":88
+  /* "algnPAR3.pyx":89
  * 
  *   ## Compute number of sequence pairs, aggregate and maximum length of sequences
  *   infile  = open(in_filename)             # <<<<<<<<<<<<<<
  *   N, vMAX, hMAX = 0, 1, 1
  *   vTOT, hTOT    = 0, 0
  */
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_open, __pyx_v_in_filename); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_open, __pyx_v_in_filename); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_infile = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "algnPAR2.pyx":89
+  /* "algnPAR3.pyx":90
  *   ## Compute number of sequence pairs, aggregate and maximum length of sequences
  *   infile  = open(in_filename)
  *   N, vMAX, hMAX = 0, 1, 1             # <<<<<<<<<<<<<<
@@ -3142,7 +3036,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __pyx_v_vMAX = __pyx_t_3;
   __pyx_v_hMAX = __pyx_t_4;
 
-  /* "algnPAR2.pyx":90
+  /* "algnPAR3.pyx":91
  *   infile  = open(in_filename)
  *   N, vMAX, hMAX = 0, 1, 1
  *   vTOT, hTOT    = 0, 0             # <<<<<<<<<<<<<<
@@ -3154,14 +3048,14 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __pyx_v_vTOT = __pyx_t_4;
   __pyx_v_hTOT = __pyx_t_3;
 
-  /* "algnPAR2.pyx":91
+  /* "algnPAR3.pyx":92
  *   N, vMAX, hMAX = 0, 1, 1
  *   vTOT, hTOT    = 0, 0
  *   pattern, text = infile.readline(), infile.readline()             # <<<<<<<<<<<<<<
  *   vsz, hsz      = len(pattern), len(text)
  *   while (vsz and hsz > 1):
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3175,10 +3069,10 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   }
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -3192,7 +3086,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   }
   __pyx_t_5 = (__pyx_t_7) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_pattern = __pyx_t_1;
@@ -3200,19 +3094,19 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __pyx_v_text = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "algnPAR2.pyx":92
+  /* "algnPAR3.pyx":93
  *   vTOT, hTOT    = 0, 0
  *   pattern, text = infile.readline(), infile.readline()
  *   vsz, hsz      = len(pattern), len(text)             # <<<<<<<<<<<<<<
  *   while (vsz and hsz > 1):
  *     N = N+1
  */
-  __pyx_t_8 = PyObject_Length(__pyx_v_pattern); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 92, __pyx_L1_error)
-  __pyx_t_9 = PyObject_Length(__pyx_v_text); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_8 = PyObject_Length(__pyx_v_pattern); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_9 = PyObject_Length(__pyx_v_text); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 93, __pyx_L1_error)
   __pyx_v_vsz = __pyx_t_8;
   __pyx_v_hsz = __pyx_t_9;
 
-  /* "algnPAR2.pyx":93
+  /* "algnPAR3.pyx":94
  *   pattern, text = infile.readline(), infile.readline()
  *   vsz, hsz      = len(pattern), len(text)
  *   while (vsz and hsz > 1):             # <<<<<<<<<<<<<<
@@ -3231,7 +3125,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     __pyx_L5_bool_binop_done:;
     if (!__pyx_t_10) break;
 
-    /* "algnPAR2.pyx":94
+    /* "algnPAR3.pyx":95
  *   vsz, hsz      = len(pattern), len(text)
  *   while (vsz and hsz > 1):
  *     N = N+1             # <<<<<<<<<<<<<<
@@ -3240,7 +3134,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
     __pyx_v_N = (__pyx_v_N + 1);
 
-    /* "algnPAR2.pyx":95
+    /* "algnPAR3.pyx":96
  *   while (vsz and hsz > 1):
  *     N = N+1
  *     vTOT, hTOT = vTOT+vsz, hTOT+hsz             # <<<<<<<<<<<<<<
@@ -3252,7 +3146,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     __pyx_v_vTOT = __pyx_t_3;
     __pyx_v_hTOT = __pyx_t_4;
 
-    /* "algnPAR2.pyx":96
+    /* "algnPAR3.pyx":97
  *     N = N+1
  *     vTOT, hTOT = vTOT+vsz, hTOT+hsz
  *     if (vMAX<vsz):             # <<<<<<<<<<<<<<
@@ -3262,7 +3156,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     __pyx_t_10 = ((__pyx_v_vMAX < __pyx_v_vsz) != 0);
     if (__pyx_t_10) {
 
-      /* "algnPAR2.pyx":97
+      /* "algnPAR3.pyx":98
  *     vTOT, hTOT = vTOT+vsz, hTOT+hsz
  *     if (vMAX<vsz):
  *       vMAX = vsz             # <<<<<<<<<<<<<<
@@ -3271,7 +3165,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
       __pyx_v_vMAX = __pyx_v_vsz;
 
-      /* "algnPAR2.pyx":96
+      /* "algnPAR3.pyx":97
  *     N = N+1
  *     vTOT, hTOT = vTOT+vsz, hTOT+hsz
  *     if (vMAX<vsz):             # <<<<<<<<<<<<<<
@@ -3280,7 +3174,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
     }
 
-    /* "algnPAR2.pyx":98
+    /* "algnPAR3.pyx":99
  *     if (vMAX<vsz):
  *       vMAX = vsz
  *     if (hMAX<hsz):             # <<<<<<<<<<<<<<
@@ -3290,7 +3184,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     __pyx_t_10 = ((__pyx_v_hMAX < __pyx_v_hsz) != 0);
     if (__pyx_t_10) {
 
-      /* "algnPAR2.pyx":99
+      /* "algnPAR3.pyx":100
  *       vMAX = vsz
  *     if (hMAX<hsz):
  *       hMAX = hsz             # <<<<<<<<<<<<<<
@@ -3299,7 +3193,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
       __pyx_v_hMAX = __pyx_v_hsz;
 
-      /* "algnPAR2.pyx":98
+      /* "algnPAR3.pyx":99
  *     if (vMAX<vsz):
  *       vMAX = vsz
  *     if (hMAX<hsz):             # <<<<<<<<<<<<<<
@@ -3308,14 +3202,14 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
     }
 
-    /* "algnPAR2.pyx":100
+    /* "algnPAR3.pyx":101
  *     if (hMAX<hsz):
  *       hMAX = hsz
  *     pattern, text = infile.readline(), infile.readline()             # <<<<<<<<<<<<<<
  *     vsz, hsz = len(pattern), len(text)
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -3329,10 +3223,10 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     }
     __pyx_t_5 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -3346,7 +3240,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     }
     __pyx_t_1 = (__pyx_t_7) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF_SET(__pyx_v_pattern, __pyx_t_5);
@@ -3354,27 +3248,27 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     __Pyx_DECREF_SET(__pyx_v_text, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "algnPAR2.pyx":101
+    /* "algnPAR3.pyx":102
  *       hMAX = hsz
  *     pattern, text = infile.readline(), infile.readline()
  *     vsz, hsz = len(pattern), len(text)             # <<<<<<<<<<<<<<
  * 
  *   infile.close()
  */
-    __pyx_t_9 = PyObject_Length(__pyx_v_pattern); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 101, __pyx_L1_error)
-    __pyx_t_8 = PyObject_Length(__pyx_v_text); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_9 = PyObject_Length(__pyx_v_pattern); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_8 = PyObject_Length(__pyx_v_text); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 102, __pyx_L1_error)
     __pyx_v_vsz = __pyx_t_9;
     __pyx_v_hsz = __pyx_t_8;
   }
 
-  /* "algnPAR2.pyx":103
+  /* "algnPAR3.pyx":104
  *     vsz, hsz = len(pattern), len(text)
  * 
  *   infile.close()             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_close); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_close); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3388,129 +3282,129 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   }
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "algnPAR2.pyx":107
+  /* "algnPAR3.pyx":108
  * 
  *   ## Allocate memory for sequences and cigar & read from file
  *   cdef int[::1] PattIdx= np.empty( N+1, dtype= np.intc )             # <<<<<<<<<<<<<<
  *   cdef int[::1] TextIdx= np.empty( N+1, dtype= np.intc )
  *   cdef int[::1] CgIdx  = np.empty( N,   dtype= np.intc )
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_N + 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_N + 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_intc); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_intc); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_12) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_12) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_t_12, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_t_12, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_v_PattIdx = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "algnPAR2.pyx":108
+  /* "algnPAR3.pyx":109
  *   ## Allocate memory for sequences and cigar & read from file
  *   cdef int[::1] PattIdx= np.empty( N+1, dtype= np.intc )
  *   cdef int[::1] TextIdx= np.empty( N+1, dtype= np.intc )             # <<<<<<<<<<<<<<
  *   cdef int[::1] CgIdx  = np.empty( N,   dtype= np.intc )
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_n_s_np); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_n_s_np); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_empty); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_empty); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_PyInt_From_long((__pyx_v_N + 1)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyInt_From_long((__pyx_v_N + 1)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_12);
   __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_intc); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_intc); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, __pyx_t_12); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, __pyx_t_12); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_t_7, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_t_7, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_TextIdx = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "algnPAR2.pyx":109
+  /* "algnPAR3.pyx":110
  *   cdef int[::1] PattIdx= np.empty( N+1, dtype= np.intc )
  *   cdef int[::1] TextIdx= np.empty( N+1, dtype= np.intc )
  *   cdef int[::1] CgIdx  = np.empty( N,   dtype= np.intc )             # <<<<<<<<<<<<<<
  * 
  *   cdef char *ptBUFFER
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_empty); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_empty); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_7);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_7);
   __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 109, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_CgIdx = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "algnPAR2.pyx":115
+  /* "algnPAR3.pyx":116
  *   cdef char *cgBUFFER
  * 
  *   ptBUFFER = <char *> malloc(sizeof(char)*vTOT)             # <<<<<<<<<<<<<<
@@ -3519,7 +3413,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
   __pyx_v_ptBUFFER = ((char *)malloc(((sizeof(char)) * __pyx_v_vTOT)));
 
-  /* "algnPAR2.pyx":116
+  /* "algnPAR3.pyx":117
  * 
  *   ptBUFFER = <char *> malloc(sizeof(char)*vTOT)
  *   txBUFFER = <char *> malloc(sizeof(char)*hTOT)             # <<<<<<<<<<<<<<
@@ -3528,7 +3422,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
   __pyx_v_txBUFFER = ((char *)malloc(((sizeof(char)) * __pyx_v_hTOT)));
 
-  /* "algnPAR2.pyx":117
+  /* "algnPAR3.pyx":118
  *   ptBUFFER = <char *> malloc(sizeof(char)*vTOT)
  *   txBUFFER = <char *> malloc(sizeof(char)*hTOT)
  *   cgBUFFER = <char *> malloc(sizeof(char)*(vTOT+hTOT+N))             # <<<<<<<<<<<<<<
@@ -3537,26 +3431,26 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
   __pyx_v_cgBUFFER = ((char *)malloc(((sizeof(char)) * ((__pyx_v_vTOT + __pyx_v_hTOT) + __pyx_v_N))));
 
-  /* "algnPAR2.pyx":119
+  /* "algnPAR3.pyx":120
  *   cgBUFFER = <char *> malloc(sizeof(char)*(vTOT+hTOT+N))
  * 
  *   infile        = open(in_filename)             # <<<<<<<<<<<<<<
  * 
  *   pattern, text = infile.readline(), infile.readline()
  */
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_open, __pyx_v_in_filename); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_open, __pyx_v_in_filename); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF_SET(__pyx_v_infile, __pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "algnPAR2.pyx":121
+  /* "algnPAR3.pyx":122
  *   infile        = open(in_filename)
  * 
  *   pattern, text = infile.readline(), infile.readline()             # <<<<<<<<<<<<<<
  *   vsz, hsz      = len(pattern), len(text)
  *   vPos, hPos    = 0, 0
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
@@ -3570,10 +3464,10 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   }
   __pyx_t_5 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 121, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_12 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -3587,7 +3481,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   }
   __pyx_t_7 = (__pyx_t_12) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_12) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 121, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF_SET(__pyx_v_pattern, __pyx_t_5);
@@ -3595,19 +3489,19 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __Pyx_DECREF_SET(__pyx_v_text, __pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "algnPAR2.pyx":122
+  /* "algnPAR3.pyx":123
  * 
  *   pattern, text = infile.readline(), infile.readline()
  *   vsz, hsz      = len(pattern), len(text)             # <<<<<<<<<<<<<<
  *   vPos, hPos    = 0, 0
  *   for i in range(N):
  */
-  __pyx_t_8 = PyObject_Length(__pyx_v_pattern); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 122, __pyx_L1_error)
-  __pyx_t_9 = PyObject_Length(__pyx_v_text); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_8 = PyObject_Length(__pyx_v_pattern); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_9 = PyObject_Length(__pyx_v_text); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 123, __pyx_L1_error)
   __pyx_v_vsz = __pyx_t_8;
   __pyx_v_hsz = __pyx_t_9;
 
-  /* "algnPAR2.pyx":123
+  /* "algnPAR3.pyx":124
  *   pattern, text = infile.readline(), infile.readline()
  *   vsz, hsz      = len(pattern), len(text)
  *   vPos, hPos    = 0, 0             # <<<<<<<<<<<<<<
@@ -3619,7 +3513,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __pyx_v_vPos = __pyx_t_4;
   __pyx_v_hPos = __pyx_t_3;
 
-  /* "algnPAR2.pyx":124
+  /* "algnPAR3.pyx":125
  *   vsz, hsz      = len(pattern), len(text)
  *   vPos, hPos    = 0, 0
  *   for i in range(N):             # <<<<<<<<<<<<<<
@@ -3631,16 +3525,16 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_4; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "algnPAR2.pyx":125
+    /* "algnPAR3.pyx":126
  *   vPos, hPos    = 0, 0
  *   for i in range(N):
  *     copyString( pattern[1:].encode(), ptBUFFER+vPos, vsz-1)             # <<<<<<<<<<<<<<
  *     copyString( text[1:].encode(),    txBUFFER+hPos, hsz-1)
  *     PattIdx[i], TextIdx[i] = vPos, hPos
  */
-    __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_v_pattern, 1, 0, NULL, NULL, &__pyx_slice__2, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_v_pattern, 1, 0, NULL, NULL, &__pyx_slice__2, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_encode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_encode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -3655,23 +3549,23 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     }
     __pyx_t_7 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_14 = __Pyx_PyObject_AsWritableString(__pyx_t_7); if (unlikely((!__pyx_t_14) && PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L1_error)
-    __pyx_f_8algnPAR2_copyString(__pyx_t_14, (__pyx_v_ptBUFFER + __pyx_v_vPos), (__pyx_v_vsz - 1));
+    __pyx_t_14 = __Pyx_PyObject_AsWritableString(__pyx_t_7); if (unlikely((!__pyx_t_14) && PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_f_8algnPAR3_copyString(__pyx_t_14, (__pyx_v_ptBUFFER + __pyx_v_vPos), (__pyx_v_vsz - 1));
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "algnPAR2.pyx":126
+    /* "algnPAR3.pyx":127
  *   for i in range(N):
  *     copyString( pattern[1:].encode(), ptBUFFER+vPos, vsz-1)
  *     copyString( text[1:].encode(),    txBUFFER+hPos, hsz-1)             # <<<<<<<<<<<<<<
  *     PattIdx[i], TextIdx[i] = vPos, hPos
  *     vPos, hPos  = vPos + vsz, hPos + hsz
  */
-    __pyx_t_6 = __Pyx_PyObject_GetSlice(__pyx_v_text, 1, 0, NULL, NULL, &__pyx_slice__2, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetSlice(__pyx_v_text, 1, 0, NULL, NULL, &__pyx_slice__2, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_encode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_encode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = NULL;
@@ -3686,14 +3580,14 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     }
     __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 126, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_14 = __Pyx_PyObject_AsWritableString(__pyx_t_7); if (unlikely((!__pyx_t_14) && PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L1_error)
-    __pyx_f_8algnPAR2_copyString(__pyx_t_14, (__pyx_v_txBUFFER + __pyx_v_hPos), (__pyx_v_hsz - 1));
+    __pyx_t_14 = __Pyx_PyObject_AsWritableString(__pyx_t_7); if (unlikely((!__pyx_t_14) && PyErr_Occurred())) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_f_8algnPAR3_copyString(__pyx_t_14, (__pyx_v_txBUFFER + __pyx_v_hPos), (__pyx_v_hsz - 1));
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "algnPAR2.pyx":127
+    /* "algnPAR3.pyx":128
  *     copyString( pattern[1:].encode(), ptBUFFER+vPos, vsz-1)
  *     copyString( text[1:].encode(),    txBUFFER+hPos, hsz-1)
  *     PattIdx[i], TextIdx[i] = vPos, hPos             # <<<<<<<<<<<<<<
@@ -3707,7 +3601,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     __pyx_t_18 = __pyx_v_i;
     *((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_TextIdx.data) + __pyx_t_18)) )) = __pyx_t_16;
 
-    /* "algnPAR2.pyx":128
+    /* "algnPAR3.pyx":129
  *     copyString( text[1:].encode(),    txBUFFER+hPos, hsz-1)
  *     PattIdx[i], TextIdx[i] = vPos, hPos
  *     vPos, hPos  = vPos + vsz, hPos + hsz             # <<<<<<<<<<<<<<
@@ -3719,14 +3613,14 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     __pyx_v_vPos = __pyx_t_16;
     __pyx_v_hPos = __pyx_t_15;
 
-    /* "algnPAR2.pyx":129
+    /* "algnPAR3.pyx":130
  *     PattIdx[i], TextIdx[i] = vPos, hPos
  *     vPos, hPos  = vPos + vsz, hPos + hsz
  *     pattern, text = infile.readline(), infile.readline()             # <<<<<<<<<<<<<<
  *     vsz, hsz      = len(pattern), len(text)
  * 
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3740,10 +3634,10 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     }
     __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_readline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_12 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
@@ -3757,7 +3651,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     }
     __pyx_t_5 = (__pyx_t_12) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_12) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF_SET(__pyx_v_pattern, __pyx_t_7);
@@ -3765,20 +3659,20 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
     __Pyx_DECREF_SET(__pyx_v_text, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "algnPAR2.pyx":130
+    /* "algnPAR3.pyx":131
  *     vPos, hPos  = vPos + vsz, hPos + hsz
  *     pattern, text = infile.readline(), infile.readline()
  *     vsz, hsz      = len(pattern), len(text)             # <<<<<<<<<<<<<<
  * 
  *   PattIdx[N], TextIdx[N] = vPos, hPos
  */
-    __pyx_t_9 = PyObject_Length(__pyx_v_pattern); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 130, __pyx_L1_error)
-    __pyx_t_8 = PyObject_Length(__pyx_v_text); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_9 = PyObject_Length(__pyx_v_pattern); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_8 = PyObject_Length(__pyx_v_text); if (unlikely(__pyx_t_8 == ((Py_ssize_t)-1))) __PYX_ERR(0, 131, __pyx_L1_error)
     __pyx_v_vsz = __pyx_t_9;
     __pyx_v_hsz = __pyx_t_8;
   }
 
-  /* "algnPAR2.pyx":132
+  /* "algnPAR3.pyx":133
  *     vsz, hsz      = len(pattern), len(text)
  * 
  *   PattIdx[N], TextIdx[N] = vPos, hPos             # <<<<<<<<<<<<<<
@@ -3792,7 +3686,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __pyx_t_20 = __pyx_v_N;
   *((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_TextIdx.data) + __pyx_t_20)) )) = __pyx_t_4;
 
-  /* "algnPAR2.pyx":134
+  /* "algnPAR3.pyx":135
  *   PattIdx[N], TextIdx[N] = vPos, hPos
  * 
  *   if (vPos<>vTOT or hPos<>hTOT):  # sanity check             # <<<<<<<<<<<<<<
@@ -3810,18 +3704,18 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __pyx_L12_bool_binop_done:;
   if (__pyx_t_10) {
 
-    /* "algnPAR2.pyx":135
+    /* "algnPAR3.pyx":136
  * 
  *   if (vPos<>vTOT or hPos<>hTOT):  # sanity check
  *     print("ERROR")             # <<<<<<<<<<<<<<
  * 
  *   infile.close()
  */
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "algnPAR2.pyx":134
+    /* "algnPAR3.pyx":135
  *   PattIdx[N], TextIdx[N] = vPos, hPos
  * 
  *   if (vPos<>vTOT or hPos<>hTOT):  # sanity check             # <<<<<<<<<<<<<<
@@ -3830,14 +3724,14 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
   }
 
-  /* "algnPAR2.pyx":137
+  /* "algnPAR3.pyx":138
  *     print("ERROR")
  * 
  *   infile.close()             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_close); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_infile, __pyx_n_s_close); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
@@ -3851,114 +3745,17 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   }
   __pyx_t_5 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "algnPAR2.pyx":143
- *   ## Allocate memory for Dynamic Programming Matrix and perform the N alignments
+  /* "algnPAR3.pyx":143
+ *   cdef int * DP
  * 
- *   cdef int[:,::1] dp = np.empty( (vMAX,hMAX), dtype= np.intc )             # <<<<<<<<<<<<<<
- * 
- *   for v in range(vMAX):
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_empty); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_vMAX); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_hMAX); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_GIVEREF(__pyx_t_5);
-  PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_6);
-  __pyx_t_5 = 0;
-  __pyx_t_6 = 0;
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_12);
-  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_12);
-  __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_intc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_dtype, __pyx_t_1) < 0) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_6, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_21 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_int(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_21.memview)) __PYX_ERR(0, 143, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_dp = __pyx_t_21;
-  __pyx_t_21.memview = NULL;
-  __pyx_t_21.data = NULL;
-
-  /* "algnPAR2.pyx":145
- *   cdef int[:,::1] dp = np.empty( (vMAX,hMAX), dtype= np.intc )
- * 
- *   for v in range(vMAX):             # <<<<<<<<<<<<<<
- *     dp[v,0] = v
- * 
- */
-  __pyx_t_4 = __pyx_v_vMAX;
-  __pyx_t_3 = __pyx_t_4;
-  for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_3; __pyx_t_2+=1) {
-    __pyx_v_v = __pyx_t_2;
-
-    /* "algnPAR2.pyx":146
- * 
- *   for v in range(vMAX):
- *     dp[v,0] = v             # <<<<<<<<<<<<<<
- * 
- *   for h in range(hMAX):
- */
-    __pyx_t_22 = __pyx_v_v;
-    __pyx_t_23 = 0;
-    *((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_22 * __pyx_v_dp.strides[0]) )) + __pyx_t_23)) )) = __pyx_v_v;
-  }
-
-  /* "algnPAR2.pyx":148
- *     dp[v,0] = v
- * 
- *   for h in range(hMAX):             # <<<<<<<<<<<<<<
- *     dp[0,h] = h
- * 
- */
-  __pyx_t_4 = __pyx_v_hMAX;
-  __pyx_t_3 = __pyx_t_4;
-  for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_3; __pyx_t_2+=1) {
-    __pyx_v_h = __pyx_t_2;
-
-    /* "algnPAR2.pyx":149
- * 
- *   for h in range(hMAX):
- *     dp[0,h] = h             # <<<<<<<<<<<<<<
- * 
- *   with nogil:
- */
-    __pyx_t_24 = 0;
-    __pyx_t_25 = __pyx_v_h;
-    *((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_dp.data + __pyx_t_24 * __pyx_v_dp.strides[0]) )) + __pyx_t_25)) )) = __pyx_v_h;
-  }
-
-  /* "algnPAR2.pyx":151
- *     dp[0,h] = h
- * 
- *   with nogil:             # <<<<<<<<<<<<<<
- *     for i in prange(N):
- *       vPos, hPos = PattIdx[i], TextIdx[i]
+ *   with nogil, parallel():             # <<<<<<<<<<<<<<
+ *     DP = <int *> malloc ((vMAX*hMAX)*sizeof(int))
+ *     for v in range(vMAX):
  */
   {
       #ifdef WITH_THREAD
@@ -3967,16 +3764,6 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
       __Pyx_FastGIL_Remember();
       #endif
       /*try:*/ {
-
-        /* "algnPAR2.pyx":152
- * 
- *   with nogil:
- *     for i in prange(N):             # <<<<<<<<<<<<<<
- *       vPos, hPos = PattIdx[i], TextIdx[i]
- *       vsz,  hsz  = PattIdx[i+1]-vPos, TextIdx[i+1]-hPos
- */
-        __pyx_t_4 = __pyx_v_N;
-        if (1 == 0) abort();
         {
             #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
                 #undef likely
@@ -3984,62 +3771,131 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
                 #define likely(x)   (x)
                 #define unlikely(x) (x)
             #endif
-            __pyx_t_2 = (__pyx_t_4 - 0 + 1 - 1/abs(1)) / 1;
-            if (__pyx_t_2 > 0)
+            #ifdef _OPENMP
+            #pragma omp parallel private(__pyx_v_DP, __pyx_v_h, __pyx_v_v) private(__pyx_t_15, __pyx_t_16, __pyx_t_2, __pyx_t_21, __pyx_t_22, __pyx_t_23, __pyx_t_24, __pyx_t_25, __pyx_t_3, __pyx_t_4)
+            #endif /* _OPENMP */
             {
-                #ifdef _OPENMP
-                #pragma omp parallel private(__pyx_t_15, __pyx_t_16, __pyx_t_26, __pyx_t_27, __pyx_t_28, __pyx_t_29, __pyx_t_30)
-                #endif /* _OPENMP */
-                {
-                    #ifdef _OPENMP
-                    #pragma omp for lastprivate(__pyx_v_hPos) lastprivate(__pyx_v_hsz) firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) lastprivate(__pyx_v_vPos) lastprivate(__pyx_v_vsz)
-                    #endif /* _OPENMP */
-                    for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3++){
-                        {
-                            __pyx_v_i = (int)(0 + 1 * __pyx_t_3);
-                            /* Initialize private variables to invalid values */
-                            __pyx_v_hPos = ((int)0xbad0bad0);
-                            __pyx_v_hsz = ((int)0xbad0bad0);
-                            __pyx_v_vPos = ((int)0xbad0bad0);
-                            __pyx_v_vsz = ((int)0xbad0bad0);
+                /* Initialize private variables to invalid values */
+                __pyx_v_DP = ((int *)1);
+                __pyx_v_h = ((int)0xbad0bad0);
+                __pyx_v_v = ((int)0xbad0bad0);
 
-                            /* "algnPAR2.pyx":153
- *   with nogil:
+                /* "algnPAR3.pyx":144
+ * 
+ *   with nogil, parallel():
+ *     DP = <int *> malloc ((vMAX*hMAX)*sizeof(int))             # <<<<<<<<<<<<<<
+ *     for v in range(vMAX):
+ *       DP[v*hMAX] = v
+ */
+                __pyx_v_DP = ((int *)malloc(((__pyx_v_vMAX * __pyx_v_hMAX) * (sizeof(int)))));
+
+                /* "algnPAR3.pyx":145
+ *   with nogil, parallel():
+ *     DP = <int *> malloc ((vMAX*hMAX)*sizeof(int))
+ *     for v in range(vMAX):             # <<<<<<<<<<<<<<
+ *       DP[v*hMAX] = v
+ *     for h in range(hMAX):
+ */
+                __pyx_t_4 = __pyx_v_vMAX;
+                __pyx_t_3 = __pyx_t_4;
+                for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_3; __pyx_t_2+=1) {
+                  __pyx_v_v = __pyx_t_2;
+
+                  /* "algnPAR3.pyx":146
+ *     DP = <int *> malloc ((vMAX*hMAX)*sizeof(int))
+ *     for v in range(vMAX):
+ *       DP[v*hMAX] = v             # <<<<<<<<<<<<<<
+ *     for h in range(hMAX):
+ *       DP[h] = h
+ */
+                  (__pyx_v_DP[(__pyx_v_v * __pyx_v_hMAX)]) = __pyx_v_v;
+                }
+
+                /* "algnPAR3.pyx":147
+ *     for v in range(vMAX):
+ *       DP[v*hMAX] = v
+ *     for h in range(hMAX):             # <<<<<<<<<<<<<<
+ *       DP[h] = h
+ * 
+ */
+                __pyx_t_4 = __pyx_v_hMAX;
+                __pyx_t_3 = __pyx_t_4;
+                for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_3; __pyx_t_2+=1) {
+                  __pyx_v_h = __pyx_t_2;
+
+                  /* "algnPAR3.pyx":148
+ *       DP[v*hMAX] = v
+ *     for h in range(hMAX):
+ *       DP[h] = h             # <<<<<<<<<<<<<<
+ * 
+ *     for i in prange(N):
+ */
+                  (__pyx_v_DP[__pyx_v_h]) = __pyx_v_h;
+                }
+
+                /* "algnPAR3.pyx":150
+ *       DP[h] = h
+ * 
+ *     for i in prange(N):             # <<<<<<<<<<<<<<
+ *       vPos, hPos = PattIdx[i], TextIdx[i]
+ *       vsz,  hsz  = PattIdx[i+1]-vPos, TextIdx[i+1]-hPos
+ */
+                __pyx_t_4 = __pyx_v_N;
+                if (1 == 0) abort();
+                {
+                    __pyx_t_2 = (__pyx_t_4 - 0 + 1 - 1/abs(1)) / 1;
+                    if (__pyx_t_2 > 0)
+                    {
+                        #ifdef _OPENMP
+                        #pragma omp for lastprivate(__pyx_v_hPos) lastprivate(__pyx_v_hsz) firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) lastprivate(__pyx_v_vPos) lastprivate(__pyx_v_vsz)
+                        #endif /* _OPENMP */
+                        for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3++){
+                            {
+                                __pyx_v_i = (int)(0 + 1 * __pyx_t_3);
+                                /* Initialize private variables to invalid values */
+                                __pyx_v_hPos = ((int)0xbad0bad0);
+                                __pyx_v_hsz = ((int)0xbad0bad0);
+                                __pyx_v_vPos = ((int)0xbad0bad0);
+                                __pyx_v_vsz = ((int)0xbad0bad0);
+
+                                /* "algnPAR3.pyx":151
+ * 
  *     for i in prange(N):
  *       vPos, hPos = PattIdx[i], TextIdx[i]             # <<<<<<<<<<<<<<
  *       vsz,  hsz  = PattIdx[i+1]-vPos, TextIdx[i+1]-hPos
- *       CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, dp, cgBUFFER+vPos+hPos+i )
+ *       CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, DP, hMAX, cgBUFFER+vPos+hPos+i )
  */
-                            __pyx_t_26 = __pyx_v_i;
-                            __pyx_t_15 = (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_PattIdx.data) + __pyx_t_26)) )));
-                            __pyx_t_27 = __pyx_v_i;
-                            __pyx_t_16 = (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_TextIdx.data) + __pyx_t_27)) )));
-                            __pyx_v_vPos = __pyx_t_15;
-                            __pyx_v_hPos = __pyx_t_16;
+                                __pyx_t_21 = __pyx_v_i;
+                                __pyx_t_15 = (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_PattIdx.data) + __pyx_t_21)) )));
+                                __pyx_t_22 = __pyx_v_i;
+                                __pyx_t_16 = (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_TextIdx.data) + __pyx_t_22)) )));
+                                __pyx_v_vPos = __pyx_t_15;
+                                __pyx_v_hPos = __pyx_t_16;
 
-                            /* "algnPAR2.pyx":154
+                                /* "algnPAR3.pyx":152
  *     for i in prange(N):
  *       vPos, hPos = PattIdx[i], TextIdx[i]
  *       vsz,  hsz  = PattIdx[i+1]-vPos, TextIdx[i+1]-hPos             # <<<<<<<<<<<<<<
- *       CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, dp, cgBUFFER+vPos+hPos+i )
+ *       CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, DP, hMAX, cgBUFFER+vPos+hPos+i )
  * 
  */
-                            __pyx_t_28 = (__pyx_v_i + 1);
-                            __pyx_t_16 = ((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_PattIdx.data) + __pyx_t_28)) ))) - __pyx_v_vPos);
-                            __pyx_t_29 = (__pyx_v_i + 1);
-                            __pyx_t_15 = ((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_TextIdx.data) + __pyx_t_29)) ))) - __pyx_v_hPos);
-                            __pyx_v_vsz = __pyx_t_16;
-                            __pyx_v_hsz = __pyx_t_15;
+                                __pyx_t_23 = (__pyx_v_i + 1);
+                                __pyx_t_16 = ((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_PattIdx.data) + __pyx_t_23)) ))) - __pyx_v_vPos);
+                                __pyx_t_24 = (__pyx_v_i + 1);
+                                __pyx_t_15 = ((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_TextIdx.data) + __pyx_t_24)) ))) - __pyx_v_hPos);
+                                __pyx_v_vsz = __pyx_t_16;
+                                __pyx_v_hsz = __pyx_t_15;
 
-                            /* "algnPAR2.pyx":155
+                                /* "algnPAR3.pyx":153
  *       vPos, hPos = PattIdx[i], TextIdx[i]
  *       vsz,  hsz  = PattIdx[i+1]-vPos, TextIdx[i+1]-hPos
- *       CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, dp, cgBUFFER+vPos+hPos+i )             # <<<<<<<<<<<<<<
+ *       CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, DP, hMAX, cgBUFFER+vPos+hPos+i )             # <<<<<<<<<<<<<<
  * 
- *   free(ptBUFFER) ## free the memory allocated previously
+ *   free(ptBUFFER)
  */
-                            __pyx_t_30 = __pyx_v_i;
-                            *((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_CgIdx.data) + __pyx_t_30)) )) = __pyx_f_8algnPAR2_align_edit_distance((__pyx_v_ptBUFFER + __pyx_v_vPos), (__pyx_v_txBUFFER + __pyx_v_hPos), __pyx_v_vsz, __pyx_v_hsz, __pyx_v_dp, (((__pyx_v_cgBUFFER + __pyx_v_vPos) + __pyx_v_hPos) + __pyx_v_i));
+                                __pyx_t_25 = __pyx_v_i;
+                                *((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_CgIdx.data) + __pyx_t_25)) )) = __pyx_f_8algnPAR3_align_edit_distance((__pyx_v_ptBUFFER + __pyx_v_vPos), (__pyx_v_txBUFFER + __pyx_v_hPos), __pyx_v_vsz, __pyx_v_hsz, __pyx_v_DP, __pyx_v_hMAX, (((__pyx_v_cgBUFFER + __pyx_v_vPos) + __pyx_v_hPos) + __pyx_v_i));
+                            }
                         }
                     }
                 }
@@ -4053,12 +3909,12 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
         #endif
       }
 
-      /* "algnPAR2.pyx":151
- *     dp[0,h] = h
+      /* "algnPAR3.pyx":143
+ *   cdef int * DP
  * 
- *   with nogil:             # <<<<<<<<<<<<<<
- *     for i in prange(N):
- *       vPos, hPos = PattIdx[i], TextIdx[i]
+ *   with nogil, parallel():             # <<<<<<<<<<<<<<
+ *     DP = <int *> malloc ((vMAX*hMAX)*sizeof(int))
+ *     for v in range(vMAX):
  */
       /*finally:*/ {
         /*normal exit:*/{
@@ -4066,52 +3922,52 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
           __Pyx_FastGIL_Forget();
           Py_BLOCK_THREADS
           #endif
-          goto __pyx_L20;
+          goto __pyx_L16;
         }
-        __pyx_L20:;
+        __pyx_L16:;
       }
   }
 
-  /* "algnPAR2.pyx":157
- *       CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, dp, cgBUFFER+vPos+hPos+i )
+  /* "algnPAR3.pyx":155
+ *       CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, DP, hMAX, cgBUFFER+vPos+hPos+i )
  * 
- *   free(ptBUFFER) ## free the memory allocated previously             # <<<<<<<<<<<<<<
+ *   free(ptBUFFER)             # <<<<<<<<<<<<<<
  *   free(txBUFFER)
  * 
  */
   free(__pyx_v_ptBUFFER);
 
-  /* "algnPAR2.pyx":158
+  /* "algnPAR3.pyx":156
  * 
- *   free(ptBUFFER) ## free the memory allocated previously
+ *   free(ptBUFFER)
  *   free(txBUFFER)             # <<<<<<<<<<<<<<
  * 
- * 
+ *   outfile = open(out_filename, 'w')
  */
   free(__pyx_v_txBUFFER);
 
-  /* "algnPAR2.pyx":163
+  /* "algnPAR3.pyx":158
+ *   free(txBUFFER)
  * 
- *   ## Write cigars to file and then close file and free memory
  *   outfile = open(out_filename, 'w')             # <<<<<<<<<<<<<<
  * 
  *   for i in range(N):
  */
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_v_out_filename);
   __Pyx_GIVEREF(__pyx_v_out_filename);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_out_filename);
+  PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_out_filename);
   __Pyx_INCREF(__pyx_n_u_w);
   __Pyx_GIVEREF(__pyx_n_u_w);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_n_u_w);
-  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_1, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 163, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_outfile = __pyx_t_12;
-  __pyx_t_12 = 0;
+  PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_n_u_w);
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_5, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_v_outfile = __pyx_t_7;
+  __pyx_t_7 = 0;
 
-  /* "algnPAR2.pyx":165
+  /* "algnPAR3.pyx":160
  *   outfile = open(out_filename, 'w')
  * 
  *   for i in range(N):             # <<<<<<<<<<<<<<
@@ -4123,99 +3979,99 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "algnPAR2.pyx":166
+    /* "algnPAR3.pyx":161
  * 
  *   for i in range(N):
  *     outfile.write ( str(i) + "\t" )             # <<<<<<<<<<<<<<
  *     vPos, hPos = PattIdx[i], TextIdx[i]
  *     write_cigar( cgBUFFER+vPos+hPos+i, CgIdx[i], outfile )
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_outfile, __pyx_n_s_write); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_outfile, __pyx_n_s_write); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 161, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 166, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_12 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyUnicode_Concat(__pyx_t_7, __pyx_kp_u__4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyUnicode_Concat(__pyx_t_12, __pyx_kp_u__4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 161, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
-      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_1);
-      if (likely(__pyx_t_7)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-        __Pyx_INCREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    __pyx_t_12 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+      __pyx_t_12 = PyMethod_GET_SELF(__pyx_t_5);
+      if (likely(__pyx_t_12)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+        __Pyx_INCREF(__pyx_t_12);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_1, function);
+        __Pyx_DECREF_SET(__pyx_t_5, function);
       }
     }
-    __pyx_t_12 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_6);
-    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __pyx_t_7 = (__pyx_t_12) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_12, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 166, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_12);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "algnPAR2.pyx":167
+    /* "algnPAR3.pyx":162
  *   for i in range(N):
  *     outfile.write ( str(i) + "\t" )
  *     vPos, hPos = PattIdx[i], TextIdx[i]             # <<<<<<<<<<<<<<
  *     write_cigar( cgBUFFER+vPos+hPos+i, CgIdx[i], outfile )
  * 
  */
-    __pyx_t_31 = __pyx_v_i;
-    __pyx_t_15 = (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_PattIdx.data) + __pyx_t_31)) )));
-    __pyx_t_32 = __pyx_v_i;
-    __pyx_t_16 = (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_TextIdx.data) + __pyx_t_32)) )));
+    __pyx_t_26 = __pyx_v_i;
+    __pyx_t_15 = (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_PattIdx.data) + __pyx_t_26)) )));
+    __pyx_t_27 = __pyx_v_i;
+    __pyx_t_16 = (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_TextIdx.data) + __pyx_t_27)) )));
     __pyx_v_vPos = __pyx_t_15;
     __pyx_v_hPos = __pyx_t_16;
 
-    /* "algnPAR2.pyx":168
+    /* "algnPAR3.pyx":163
  *     outfile.write ( str(i) + "\t" )
  *     vPos, hPos = PattIdx[i], TextIdx[i]
  *     write_cigar( cgBUFFER+vPos+hPos+i, CgIdx[i], outfile )             # <<<<<<<<<<<<<<
  * 
  *   outfile.close()
  */
-    __pyx_t_33 = __pyx_v_i;
-    __pyx_f_8algnPAR2_write_cigar((((__pyx_v_cgBUFFER + __pyx_v_vPos) + __pyx_v_hPos) + __pyx_v_i), (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_CgIdx.data) + __pyx_t_33)) ))), __pyx_v_outfile);
+    __pyx_t_28 = __pyx_v_i;
+    __pyx_f_8algnPAR3_write_cigar((((__pyx_v_cgBUFFER + __pyx_v_vPos) + __pyx_v_hPos) + __pyx_v_i), (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_CgIdx.data) + __pyx_t_28)) ))), __pyx_v_outfile);
   }
 
-  /* "algnPAR2.pyx":170
+  /* "algnPAR3.pyx":165
  *     write_cigar( cgBUFFER+vPos+hPos+i, CgIdx[i], outfile )
  * 
  *   outfile.close()             # <<<<<<<<<<<<<<
  *   free(cgBUFFER)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_outfile, __pyx_n_s_close); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_outfile, __pyx_n_s_close); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_1);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
     if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_1, function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
     }
   }
-  __pyx_t_12 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
+  __pyx_t_7 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 170, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "algnPAR2.pyx":171
+  /* "algnPAR3.pyx":166
  * 
  *   outfile.close()
  *   free(cgBUFFER)             # <<<<<<<<<<<<<<
  */
   free(__pyx_v_cgBUFFER);
 
-  /* "algnPAR2.pyx":82
+  /* "algnPAR3.pyx":83
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def align(in_filename, out_filename):             # <<<<<<<<<<<<<<
@@ -4233,8 +4089,7 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_12);
   __PYX_XDEC_MEMVIEW(&__pyx_t_13, 1);
-  __PYX_XDEC_MEMVIEW(&__pyx_t_21, 1);
-  __Pyx_AddTraceback("algnPAR2.align", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("algnPAR3.align", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_infile);
@@ -4243,7 +4098,6 @@ static PyObject *__pyx_pf_8algnPAR2_align(CYTHON_UNUSED PyObject *__pyx_self, Py
   __PYX_XDEC_MEMVIEW(&__pyx_v_PattIdx, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_v_TextIdx, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_v_CgIdx, 1);
-  __PYX_XDEC_MEMVIEW(&__pyx_v_dp, 1);
   __Pyx_XDECREF(__pyx_v_outfile);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -17146,7 +17000,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "algnPAR2.array", /*tp_name*/
+  "algnPAR3.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -17254,7 +17108,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "algnPAR2.Enum", /*tp_name*/
+  "algnPAR3.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -17504,7 +17358,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "algnPAR2.memoryview", /*tp_name*/
+  "algnPAR3.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -17631,7 +17485,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "algnPAR2._memoryviewslice", /*tp_name*/
+  "algnPAR3._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -17702,17 +17556,17 @@ static PyMethodDef __pyx_methods[] = {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_algnPAR2(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_algnPAR3(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_algnPAR2},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_algnPAR3},
   {0, NULL}
 };
 #endif
 
 static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
-    "algnPAR2",
+    "algnPAR3",
     0, /* m_doc */
   #if CYTHON_PEP489_MULTI_PHASE_INIT
     0, /* m_size */
@@ -17751,6 +17605,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
   {&__pyx_n_s_CgIdx, __pyx_k_CgIdx, sizeof(__pyx_k_CgIdx), 0, 0, 1, 1},
   {&__pyx_n_u_D, __pyx_k_D, sizeof(__pyx_k_D), 0, 1, 0, 1},
+  {&__pyx_n_s_DP, __pyx_k_DP, sizeof(__pyx_k_DP), 0, 0, 1, 1},
   {&__pyx_n_u_ERROR, __pyx_k_ERROR, sizeof(__pyx_k_ERROR), 0, 1, 0, 1},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
@@ -17776,8 +17631,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_View_MemoryView, __pyx_k_View_MemoryView, sizeof(__pyx_k_View_MemoryView), 0, 0, 1, 1},
   {&__pyx_n_u_X, __pyx_k_X, sizeof(__pyx_k_X), 0, 1, 0, 1},
   {&__pyx_kp_u__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 1, 0, 0},
-  {&__pyx_n_s_algnPAR2, __pyx_k_algnPAR2, sizeof(__pyx_k_algnPAR2), 0, 0, 1, 1},
-  {&__pyx_kp_s_algnPAR2_pyx, __pyx_k_algnPAR2_pyx, sizeof(__pyx_k_algnPAR2_pyx), 0, 0, 1, 0},
+  {&__pyx_n_s_algnPAR3, __pyx_k_algnPAR3, sizeof(__pyx_k_algnPAR3), 0, 0, 1, 1},
+  {&__pyx_kp_s_algnPAR3_pyx, __pyx_k_algnPAR3_pyx, sizeof(__pyx_k_algnPAR3_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_align, __pyx_k_align, sizeof(__pyx_k_align), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
@@ -17790,7 +17645,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
-  {&__pyx_n_s_dp, __pyx_k_dp, sizeof(__pyx_k_dp), 0, 0, 1, 1},
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
   {&__pyx_n_s_empty, __pyx_k_empty, sizeof(__pyx_k_empty), 0, 0, 1, 1},
@@ -17877,9 +17731,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 12, __pyx_L1_error)
-  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 88, __pyx_L1_error)
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 136, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 133, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 148, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 151, __pyx_L1_error)
@@ -17896,25 +17750,25 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "algnPAR2.pyx":125
+  /* "algnPAR3.pyx":126
  *   vPos, hPos    = 0, 0
  *   for i in range(N):
  *     copyString( pattern[1:].encode(), ptBUFFER+vPos, vsz-1)             # <<<<<<<<<<<<<<
  *     copyString( text[1:].encode(),    txBUFFER+hPos, hsz-1)
  *     PattIdx[i], TextIdx[i] = vPos, hPos
  */
-  __pyx_slice__2 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__2)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_slice__2 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__2)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__2);
   __Pyx_GIVEREF(__pyx_slice__2);
 
-  /* "algnPAR2.pyx":135
+  /* "algnPAR3.pyx":136
  * 
  *   if (vPos<>vTOT or hPos<>hTOT):  # sanity check
  *     print("ERROR")             # <<<<<<<<<<<<<<
  * 
  *   infile.close()
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_ERROR); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_ERROR); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
@@ -18110,17 +17964,17 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "algnPAR2.pyx":82
+  /* "algnPAR3.pyx":83
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def align(in_filename, out_filename):             # <<<<<<<<<<<<<<
  * 
  *   cdef int vsz, hsz, v, h, vMAX, hMAX, vTOT, hTOT
  */
-  __pyx_tuple__23 = PyTuple_Pack(25, __pyx_n_s_in_filename, __pyx_n_s_out_filename, __pyx_n_s_vsz, __pyx_n_s_hsz, __pyx_n_s_v, __pyx_n_s_h, __pyx_n_s_vMAX, __pyx_n_s_hMAX, __pyx_n_s_vTOT, __pyx_n_s_hTOT, __pyx_n_s_i, __pyx_n_s_N, __pyx_n_s_vPos, __pyx_n_s_hPos, __pyx_n_s_infile, __pyx_n_s_pattern, __pyx_n_s_text, __pyx_n_s_PattIdx, __pyx_n_s_TextIdx, __pyx_n_s_CgIdx, __pyx_n_s_ptBUFFER, __pyx_n_s_txBUFFER, __pyx_n_s_cgBUFFER, __pyx_n_s_dp, __pyx_n_s_outfile); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(25, __pyx_n_s_in_filename, __pyx_n_s_out_filename, __pyx_n_s_vsz, __pyx_n_s_hsz, __pyx_n_s_v, __pyx_n_s_h, __pyx_n_s_vMAX, __pyx_n_s_hMAX, __pyx_n_s_vTOT, __pyx_n_s_hTOT, __pyx_n_s_i, __pyx_n_s_N, __pyx_n_s_vPos, __pyx_n_s_hPos, __pyx_n_s_infile, __pyx_n_s_pattern, __pyx_n_s_text, __pyx_n_s_PattIdx, __pyx_n_s_TextIdx, __pyx_n_s_CgIdx, __pyx_n_s_ptBUFFER, __pyx_n_s_txBUFFER, __pyx_n_s_cgBUFFER, __pyx_n_s_DP, __pyx_n_s_outfile); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algnPAR2_pyx, __pyx_n_s_align, 82, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algnPAR3_pyx, __pyx_n_s_align, 83, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 83, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name
@@ -18343,11 +18197,11 @@ static int __Pyx_modinit_function_import_code(void) {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initalgnPAR2(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initalgnPAR2(void)
+__Pyx_PyMODINIT_FUNC initalgnPAR3(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC initalgnPAR3(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_algnPAR2(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_algnPAR2(void)
+__Pyx_PyMODINIT_FUNC PyInit_algnPAR3(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_algnPAR3(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -18414,7 +18268,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_algnPAR2(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_algnPAR3(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -18424,7 +18278,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_algnPAR2(PyObject *__pyx_pyinit_mo
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'algnPAR2' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'algnPAR3' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -18439,7 +18293,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_algnPAR2(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_algnPAR3(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -18478,7 +18332,7 @@ if (!__Pyx_RefNanny) {
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("algnPAR2", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("algnPAR3", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -18497,14 +18351,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_algnPAR2) {
+  if (__pyx_module_is_main_algnPAR3) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "algnPAR2")) {
-      if (unlikely(PyDict_SetItemString(modules, "algnPAR2", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "algnPAR3")) {
+      if (unlikely(PyDict_SetItemString(modules, "algnPAR3", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -18525,32 +18379,32 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "algnPAR2.pyx":1
+  /* "algnPAR3.pyx":1
  * import numpy as np             # <<<<<<<<<<<<<<
  * import cython
- * from cython.parallel import prange
+ * 
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "algnPAR2.pyx":82
+  /* "algnPAR3.pyx":83
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def align(in_filename, out_filename):             # <<<<<<<<<<<<<<
  * 
  *   cdef int vsz, hsz, v, h, vMAX, hMAX, vTOT, hTOT
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8algnPAR2_1align, NULL, __pyx_n_s_algnPAR2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8algnPAR3_1align, NULL, __pyx_n_s_algnPAR3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_align, __pyx_t_1) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_align, __pyx_t_1) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "algnPAR2.pyx":1
+  /* "algnPAR3.pyx":1
  * import numpy as np             # <<<<<<<<<<<<<<
  * import cython
- * from cython.parallel import prange
+ * 
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -18717,11 +18571,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init algnPAR2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init algnPAR3", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_CLEAR(__pyx_m);
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init algnPAR2");
+    PyErr_SetString(PyExc_ImportError, "init algnPAR3");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -22539,29 +22393,6 @@ no_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 1,
-                                                 &__Pyx_TypeInfo_int, stack,
-                                                 &result, obj);
-    if (unlikely(retcode == -1))
-        goto __pyx_fail;
-    return result;
-__pyx_fail:
-    result.memview = NULL;
-    result.data = NULL;
-    return result;
-}
-
-/* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_int(PyObject *obj, int writable_flag) {
-    __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
-    __Pyx_BufFmt_StackElem stack[1];
-    int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
-    int retcode;
-    if (obj == Py_None) {
-        result.memview = (struct __pyx_memoryview_obj *) Py_None;
-        return result;
-    }
-    retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
-                                                 (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 2,
                                                  &__Pyx_TypeInfo_int, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
