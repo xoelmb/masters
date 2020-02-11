@@ -2,7 +2,7 @@ import random
 import math
 import time
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from progress.bar import Bar
 
 
@@ -63,6 +63,7 @@ class InvWeed:
 
 
 def grid_search(function, pars, npars):
+    print("started")
     bar = Bar('Processing', max=npars)
     results = []
     for pi in pars['initial_size']:
@@ -94,12 +95,12 @@ def grid_search(function, pars, npars):
 # }
 
 parameters = {
-    'initial_size': [5, 100, 1000],
-    'pmax': [200, 1000],
+    'initial_size': [5, 100, 500, 1000],
+    'pmax': [200, 500, 1000, 2000],
     'new_seeds': [20, 100, 500],
     'niter': [20, 100, 1000],
-    'delta': [1e-6, 1e-9],
-    'max_rep': [1, 5, 10]
+    'delta': [1e-3, 1e-6, 1e-9],
+    'max_rep': [1, 10, 50]
 }
 
 t0 = time.time()
@@ -107,9 +108,13 @@ t0 = time.time()
 
 best_parameters = grid_search(InvWeed, parameters, 324)
 # print(best_parameters)
+besties = []
 for r in best_parameters:
-    if r[0] < -18.550:
+    if r[0] < -18.0:
         print(r)
         print()
+        besties.append([r[0], r[1]])
+
+plt.plot(besties)
 
 print(time.time() - t0)
