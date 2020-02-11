@@ -1,6 +1,6 @@
 import numpy as np
 import cython
-
+from cython.parallel import prange
 from libc.stdlib cimport malloc, free
 
 @cython.boundscheck(False)
@@ -70,9 +70,10 @@ cdef void write_cigar( char * CIG, int pos, ofile ):
 @cython.wraparound(False)
 cdef void copyString( char *in_s, char *out_s, int Sz):
   cdef int i
-  for i in range(Sz):
-    out_s[i] = in_s[i]
-  out_s[Sz] = 0
+  with nogil:
+    for i in prange(Sz):
+      out_s[i] = in_s[i]
+    out_s[Sz] = 0
 
 
 
@@ -147,10 +148,11 @@ def align(in_filename, out_filename):
   for h in range(hMAX):
     dp[0,h] = h
 
-  for i in range(N):
-    vPos, hPos = PattIdx[i], TextIdx[i]
-    vsz,  hsz  = PattIdx[i+1]-vPos, TextIdx[i+1]-hPos
-    CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, dp, cgBUFFER+vPos+hPos+i )
+  with nogil:
+    for i in prange(N):
+      vPos, hPos = PattIdx[i], TextIdx[i]
+      vsz,  hsz  = PattIdx[i+1]-vPos, TextIdx[i+1]-hPos
+      CgIdx[i] = align_edit_distance( ptBUFFER+vPos, txBUFFER+hPos, vsz, hsz, dp, cgBUFFER+vPos+hPos+i )
 
   free(ptBUFFER) ## free the memory allocated previously
   free(txBUFFER)
