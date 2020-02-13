@@ -1,0 +1,3 @@
+404 sampleA.fastq
+408 sampleB.fastq
+412 sampleC.fastq
