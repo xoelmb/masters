@@ -1,13 +1,15 @@
 import random
-import math
 import time
 import numpy as np
 import matplotlib.pyplot as plt
 from progress.bar import Bar
+import cython
+from libc.math cimport sin, sqrt
 
 
-def eval_fitness(x, y):
-    return x * math.sin(4 * x) + 1.1 * y * math.sin(2 * y)
+
+cpdef float eval_fitness( float x, float y ):
+    return x * sin(4 * x) + 1.1 * y * sin(2 * y)
 
 
 class InvWeed:
@@ -22,6 +24,7 @@ class InvWeed:
         self.records = [self.pop[0][2]]
         self.runtime = time.time()
         self.niters = 0
+        self.parameters = [initial_size, pmax, new_seeds, niter, delta, max_rep]
         self.iterate(pmax, new_seeds, niter, delta, max_rep)
 
     def disperse(self, x, y, omega):
@@ -105,30 +108,30 @@ def grid_search(function, pars):
 #         print()
 #         besties.append(r[0])
 
-t0 = time.time()
-
-parameters = {
-    'initial_size': [5, 100],
-    'pmax': [200, 500, 1000],
-    'new_seeds': [20, 100],
-    'niter': [100, 1000],
-    'delta': [1e-6, 1e-9],
-    'max_rep': [1, 10]
-}
-
-best_parameters = grid_search(InvWeed, parameters)
-best_parameters.sort(key=lambda x: x[1])
-best_runtime = best_parameters[0][1]
-best_parameters.sort(key=lambda x: x[0])
-best_fitness = best_parameters[0][0]
-
-for c in best_parameters:
-    c.append(math.sqrt((c[0] - best_fitness) ** 2 + (c[1] - best_runtime) ** 2))
-
-with open('results.txt', 'wt') as file:
-    for c in sorted(best_parameters, key=lambda x: x[-1]):
-        file.write(str(c))
-        file.write("\n")
-
-
-print(time.time() - t0)
+def main():
+    t0 = time.time()
+    
+    parameters = {
+        'initial_size': [5, 100],
+        'pmax': [200, 500, 1000],
+        'new_seeds': [20, 100],
+        'niter': [100, 1000],
+        'delta': [1e-6, 1e-9],
+        'max_rep': [1, 10]
+    }
+    
+    best_parameters = grid_search(InvWeed, parameters)
+    best_parameters.sort(key=lambda x: x[1])
+    best_runtime = best_parameters[0][1]
+    best_parameters.sort(key=lambda x: x[0])
+    best_fitness = best_parameters[0][0]
+    
+    for c in best_parameters:
+        c.append(sqrt((c[0] - best_fitness) ** 2 + (c[1] - best_runtime) ** 2))
+        
+    with open('results.txt', 'wt') as file:
+        for c in sorted(best_parameters, key=lambda x: x[-1]):
+            file.write(str(c))
+            file.write("\n")
+    
+    print(time.time() - t0)

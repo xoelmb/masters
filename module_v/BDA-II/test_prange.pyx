@@ -1,10 +1,12 @@
 import random
-import math
 import time
 import numpy as np
 import matplotlib.pyplot as plt
 from progress.bar import Bar
-
+import cython
+import math
+from libc.math cimport sin, sqrt
+from cython.parallel import parallel, prange 
 
 def eval_fitness(x, y):
     return x * math.sin(4 * x) + 1.1 * y * math.sin(2 * y)
@@ -22,6 +24,7 @@ class InvWeed:
         self.records = [self.pop[0][2]]
         self.runtime = time.time()
         self.niters = 0
+        self.parameters = [initial_size, pmax, new_seeds, niter, delta, max_rep]
         self.iterate(pmax, new_seeds, niter, delta, max_rep)
 
     def disperse(self, x, y, omega):
@@ -65,27 +68,27 @@ class InvWeed:
 
 def grid_search(function, pars):
     print("started")
+    cdef int npars
     npars = 1
     for x in pars.values():
         npars *= len(x)
-    bar = Bar('Processing', max=npars)
-    results = []
+    cdef int[::1] par_list = []
+    
     for pi in pars['initial_size']:
         for pmax in pars['pmax']:
             for new_seeds in pars['new_seeds']:
                 for niter in pars['niter']:
                     for delta in pars['delta']:
                         for max_rep in pars['max_rep']:
-                            model = function(pi, pmax, new_seeds, niter, delta, max_rep)
-                            results.append([model.records[-1], model.runtime, model.niters,
-                                            [pi, pmax, new_seeds, niter, delta, max_rep]])
-                            # plt.plot(model.records)
-                            # plt.ylabel('Cost function')
-                            # plt.xlabel('# Generation')
-                            # plt.title(str([pi, pmax, new_seeds, niter, delta, max_rep]))
-                            # plt.show()
-                            bar.next()
-    bar.finish()
+                            par_list.append([pi, pmax, new_seeds, niter, delta, max_rep])
+    
+    cdef int[::1] models  = np.empty( npars,   dtype= float )
+    results = []
+    with nogil, parallel():
+        for i in prange(npars):
+            models[i]=function(par_list[i][0], par_list[i][1], par_list[i][2], par_list[i][3], par_list[i][4], par_list[i][5])
+    for model in models:
+        results.append([model.records[-1], model.runtime, model.niters, model.parameters])
     return results
 
 
@@ -123,8 +126,8 @@ best_parameters.sort(key=lambda x: x[0])
 best_fitness = best_parameters[0][0]
 
 for c in best_parameters:
-    c.append(math.sqrt((c[0] - best_fitness) ** 2 + (c[1] - best_runtime) ** 2))
-
+    c.append(sqrt((c[0] - best_fitness) ** 2 + (c[1] - best_runtime) ** 2))
+    
 with open('results.txt', 'wt') as file:
     for c in sorted(best_parameters, key=lambda x: x[-1]):
         file.write(str(c))

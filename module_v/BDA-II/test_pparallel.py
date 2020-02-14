@@ -1,9 +1,9 @@
-import random
 import math
 import time
 import numpy as np
+import multiprocessing
+import random
 import matplotlib.pyplot as plt
-from progress.bar import Bar
 
 
 def eval_fitness(x, y):
@@ -22,6 +22,7 @@ class InvWeed:
         self.records = [self.pop[0][2]]
         self.runtime = time.time()
         self.niters = 0
+        self.parameters = [initial_size, pmax, new_seeds, niter, delta, max_rep]
         self.iterate(pmax, new_seeds, niter, delta, max_rep)
 
     def disperse(self, x, y, omega):
@@ -63,51 +64,55 @@ class InvWeed:
         self.runtime = time.time() - self.runtime
 
 
-def grid_search(function, pars):
+def grid_search(function, pars, reps=3):
     print("started")
-    npars = 1
-    for x in pars.values():
-        npars *= len(x)
-    bar = Bar('Processing', max=npars)
-    results = []
+    h = 1
+    for i in pars.values():
+        h *= len(i)
+    print(h, "combinations to test")
+    pool = multiprocessing.Pool(processes=8)
+    par_list = []
     for pi in pars['initial_size']:
         for pmax in pars['pmax']:
             for new_seeds in pars['new_seeds']:
                 for niter in pars['niter']:
                     for delta in pars['delta']:
                         for max_rep in pars['max_rep']:
-                            model = function(pi, pmax, new_seeds, niter, delta, max_rep)
-                            results.append([model.records[-1], model.runtime, model.niters,
-                                            [pi, pmax, new_seeds, niter, delta, max_rep]])
-                            # plt.plot(model.records)
-                            # plt.ylabel('Cost function')
-                            # plt.xlabel('# Generation')
-                            # plt.title(str([pi, pmax, new_seeds, niter, delta, max_rep]))
-                            # plt.show()
-                            bar.next()
-    bar.finish()
+                            for _ in range(reps):
+                                par_list.append([pi, pmax, new_seeds, niter, delta, max_rep])
+
+    models = [pool.apply_async(function, args=(x[0], x[1], x[2], x[3], x[4], x[5],)) for x in par_list]
+    results = []
+    dict_help = {}
+    for p in models:
+        if not tuple(p.get().parameters) in dict_help.keys():
+            dict_help[tuple(p.get().parameters)] = [[p.get().records[-1], p.get().runtime, p.get().niters]]
+        else:
+            dict_help[tuple(p.get().parameters)].append([p.get().records[-1], p.get().runtime, p.get().niters])
+    for k in dict_help.keys():
+        rec = 0
+        runt = 0
+        nit = 0
+        for r in dict_help[k]:
+            rec += r[0] / reps
+            runt += r[1] / reps
+            nit += r[2] / reps
+        results.append([rec, runt, nit, list(k)])
     return results
 
 
-# parameters = {
-#     'initial_size': [5, 10, 100, 1000],
-#     'pmax': [100, 500, 1000, 5000],
-#     'new_seeds': [20, 50, 100, 500],
-#     'niter': [20, 100, 500, 10000],
-#     'delta': [1e-3, 1e-6, 1e-9],
-#     'max_rep': [5, 10, 20, 50]
-# }
-# my_model = InvWeed()
-# print(best_parameters)
-# for r in best_parameters:
-#     if r[0] < -18.0:
-#         print(r)
-#         print()
-#         besties.append(r[0])
-
 t0 = time.time()
 
-parameters = {
+parameters_large = {
+    'initial_size': [5, 10, 100, 1000],
+    'pmax': [100, 500, 1000],
+    'new_seeds': [20, 100, 200],
+    'niter': [20, 100, 500, 1000],
+    'delta': [1e-3, 1e-6, 1e-9],
+    'max_rep': [5, 10, 20, 50]
+}
+
+parameters_short = {
     'initial_size': [5, 100],
     'pmax': [200, 500, 1000],
     'new_seeds': [20, 100],
@@ -116,19 +121,27 @@ parameters = {
     'max_rep': [1, 10]
 }
 
-best_parameters = grid_search(InvWeed, parameters)
-best_parameters.sort(key=lambda x: x[1])
-best_runtime = best_parameters[0][1]
-best_parameters.sort(key=lambda x: x[0])
-best_fitness = best_parameters[0][0]
+best_parameters = grid_search(InvWeed, parameters_short, 5)
+
+best_fitness = min([x[0] for x in best_parameters])
+best_runtime = min([x[1] for x in best_parameters])
 
 for c in best_parameters:
     c.append(math.sqrt((c[0] - best_fitness) ** 2 + (c[1] - best_runtime) ** 2))
 
+best_parameters.sort(key=lambda x: x[-1])
+
 with open('results.txt', 'wt') as file:
-    for c in sorted(best_parameters, key=lambda x: x[-1]):
+    for c in best_parameters:
         file.write(str(c))
         file.write("\n")
 
-
+fitnesses = [x[0] for x in best_parameters]
+runtimes = [x[1] for x in best_parameters]
+parameters = [x[2] for x in best_parameters]
+plt.scatter(runtimes, fitnesses)
+plt.xlabel('Runtime (s)')
+plt.ylabel('Fitness value')
+plt.title('Grid search results')
+plt.show()
 print(time.time() - t0)
