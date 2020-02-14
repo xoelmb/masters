@@ -3,11 +3,11 @@ import math
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-from progress.bar import Bar
+import cython
+from cython.parallel import prange
 
-
-class InvWeed:
-    def __init__(self, initial_size=75, pmax=1000, new_seeds=200, niter=1000, delta=1e-6, max_rep=10):
+cdef class InvWeed:
+    cdef void __init__(self, int * initial_size=75, int * pmax=1000, int * new_seeds=200, int * niter=1000, float * delta=1e-6, int * max_rep=10):
         self.pop = []
         for i in range(initial_size):
             x = random.uniform(0, 10)
@@ -62,19 +62,20 @@ class InvWeed:
         self.runtime = time.time() - self.runtime
 
 
-def grid_search(function, pars):
+cpdef grid_search(function, pars) nogil:
     print("started")
     npars = 1
     for x in pars.values():
         npars *= len(x)
-    bar = Bar('Processing', max=npars)
-    results = []
+    cdef int pi, pmax, new_seeds, niter, delta, max_rep
     for pi in pars['initial_size']:
         for pmax in pars['pmax']:
             for new_seeds in pars['new_seeds']:
                 for niter in pars['niter']:
                     for delta in pars['delta']:
-                        for max_rep in pars['max_rep']:
+                        for i in prange(len(pars['max_rep'])):
+                        # for max_rep in pars['max_rep']:
+                            max_rep = pars['max_rep'][i]
                             model = function(pi, pmax, new_seeds, niter, delta, max_rep)
                             results.append([model.records[-1], model.runtime, model.niters,
                                             [pi, pmax, new_seeds, niter, delta, max_rep]])
@@ -84,27 +85,26 @@ def grid_search(function, pars):
                             # plt.title(str([pi, pmax, new_seeds, niter, delta, max_rep]))
                             # plt.show()
                             bar.next()
-    bar.finish()
-    return results
-
-
-# parameters = {
-#     'initial_size': [5, 10, 100, 1000],
-#     'pmax': [100, 500, 1000, 5000],
-#     'new_seeds': [20, 50, 100, 500],
-#     'niter': [20, 100, 500, 10000],
-#     'delta': [1e-3, 1e-6, 1e-9],
-#     'max_rep': [5, 10, 20, 50]
-# }
+    
+results = []
 
 parameters = {
-    'initial_size': [5, 100, 500, 1000],
-    'pmax': [200, 500, 1000, 2000],
-    'new_seeds': [20, 100, 500],
-    'niter': [20, 100, 1000],
-    'delta': [1e-3, 1e-6, 1e-9],
-    'max_rep': [1, 10, 50]
+    'initial_size': [5,100],
+    'pmax': [500, 1000],
+    'new_seeds': [20, 500],
+    'niter': [100, 500],
+    'delta': [1e-6, 1e-9],
+    'max_rep': [10, 50]
 }
+
+# parameters = {
+#     'initial_size': [5, 100, 500, 1000],
+#     'pmax': [200, 500, 1000, 2000],
+#     'new_seeds': [20, 100, 500],
+#     'niter': [20, 100, 1000],
+#     'delta': [1e-3, 1e-6, 1e-9],
+#     'max_rep': [1, 10, 50]
+# }
 
 t0 = time.time()
 # my_model = InvWeed()
@@ -116,13 +116,13 @@ for r in best_parameters:
     if r[0] < -18.0:
         print(r)
         print()
-        besties.append(r[0])
+        best.append(r[0])
 
 with open('results.txt', 'wt') as file:
     for c in best_parameters:
         file.write(str(c))
 
 
-plt.plot(besties)
+plt.plot(best)
 
 print(time.time() - t0)

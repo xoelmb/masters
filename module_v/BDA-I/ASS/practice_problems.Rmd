@@ -105,6 +105,8 @@ gradient_descent <- function(f, x, delta){
     while(lambda > delta){
         df <- grad(f,x,delta)
         x2 <- x - lambda * df
+        print(paste(f(x2),f(x)))
+
         if ((f(x2) >= f(x)) | is.nan(f(x2)) ){
             lambda <- lambda / 2
             next
