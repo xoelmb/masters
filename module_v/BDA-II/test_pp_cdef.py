@@ -11,7 +11,7 @@ from fitness_func import eval_fitness
 
 
 class InvWeed:
-    def __init__(self, initial_size=75, pmax=1000, new_seeds=200, niter=1000, delta=1e-6, max_rep=10):
+    def __init__(self, initial_size=5, pmax=200, new_seeds=100, niter=100, delta=1e-6, max_rep=10):
         self.pop = []
         for i in range(initial_size):
             x = random.uniform(0, 10)
@@ -24,6 +24,7 @@ class InvWeed:
         self.niters = 0
         self.parameters = [initial_size, pmax, new_seeds, niter, delta, max_rep]
         self.iterate(pmax, new_seeds, niter, delta, max_rep)
+        self.best_plant = [self.pop[0][0], self.pop[0][1]]
 
     def disperse(self, x, y, omega):
         new_x = random.gauss(x, omega)
@@ -36,7 +37,7 @@ class InvWeed:
 
     def reproduce(self, seeds_gen):
         all_fitness = [x[2] * -1 + self.pop[-1][2] for x in self.pop]
-        sd_iterator = iter(list(np.linspace(0.5, 2, seeds_gen)))
+        sd_iterator = iter(list(np.linspace(0.4, 2, seeds_gen)))
         for plant in sorted(random.choices(self.pop, weights=[x / max(all_fitness) for x in all_fitness], k=seeds_gen),
                             key=lambda x: x[2]):
             self.pop.append(self.disperse(plant[0], plant[1], next(sd_iterator)))
@@ -121,8 +122,7 @@ parameters_short = {
     'max_rep': [1, 10]
 }
 
-best_parameters = grid_search(InvWeed, parameters_large, 3)
-
+best_parameters = grid_search(InvWeed, parameters_short, 3)
 best_fitness = min([x[0] for x in best_parameters])
 best_runtime = min([x[1] for x in best_parameters])
 
@@ -136,10 +136,8 @@ with open('results.txt', 'wt') as file:
         file.write(str(c))
         file.write("\n")
 
-fitnesses = [x[0] for x in best_parameters]
-runtimes = [x[1] for x in best_parameters]
-parameters = [x[2] for x in best_parameters]
-plt.scatter(runtimes, fitnesses)
+
+plt.scatter([x[1] for x in best_parameters], [x[0] for x in best_parameters])
 plt.xlabel('Runtime (s)')
 plt.ylabel('Fitness value')
 plt.title('Grid search results')
